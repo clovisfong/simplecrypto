@@ -12,12 +12,13 @@ function App() {
   }
 
 
+
   const deployLink = 'https://simplecrypto.vercel.app/'
 
   return (
     <div className="App">
       <h1>Simple Crypto</h1>
-      <h3>{count}</h3>
+      <h3>{count.result}</h3>
       <button onClick={handleClick}>click</button>
     </div>
   )
