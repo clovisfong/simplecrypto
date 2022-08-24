@@ -17,9 +17,24 @@ const TransactionList = () => {
     const ethTransfer = ''
     const otherErc20Transfer = 'transfer(address _to, uint256 _value)'
 
+    const handleWalletAdd = (wallet) => () => {
+        navigator.clipboard.writeText(wallet)
+    }
+
+    const convertTime = (timestamp) => {
+        const num = Number(timestamp) * 1000
+        const date = new Date(num)
+
+        const formattedDate = (date.toLocaleString("en-US", { day: "numeric" }) + " " + date.toLocaleString("en-US", { month: "short" }) + " " + date.toLocaleString("en-US", { year: "numeric" }))
+        return (formattedDate)
+    }
+
+
+
 
     return (
         <div>
+            <button onClick={() => { navigator.clipboard.writeText('happy') }}>hey</button>
             <table>
                 <thead>
                     <tr>
@@ -49,12 +64,15 @@ const TransactionList = () => {
                                                                     trans.functionName === otherErc20Transfer ? 'Other ERC20 Transfer' :
                                                                         trans.functionName.toLowerCase().includes('cancelorder') ? 'Opensea Order Cancelled' :
                                                                             'Other Transactions'}</td>
-                            <td>{trans.timeStamp}</td>
+                            <td>{convertTime(trans.timeStamp)}</td>
 
-                            <td>{(trans.value / 1000000000000000000).toFixed(2)}</td>
+                            <td>{(trans.value / 1000000000000000000).toFixed(2)} ETH</td>
                             <td>{trans.isError === '0' ? 'Success' : 'Fail'}</td>
-                            <td>{trans.from == walletAdd.toLowerCase() ? "My Wallet" : trans.from}</td>
-                            <td>{trans.to}</td>
+                            <td onClick={handleWalletAdd(trans.from)} style={{ cursor: 'pointer' }}>
+                                {trans.from === walletAdd.toLowerCase() ? "My Wallet" : trans.from.substring(0, 8)}
+                            </td>
+                            <td onClick={handleWalletAdd(trans.to)} style={{ cursor: 'pointer' }}>
+                                {trans.to === walletAdd.toLowerCase() ? 'My Wallet' : trans.to.substring(0, 8)}</td>
                         </tr>
                     )}
                 </tbody>
