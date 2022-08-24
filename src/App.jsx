@@ -1,26 +1,28 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import WalletTransactions from './pages/WalletTransactions'
+import TransactionList from './components/TransactionList'
 
+const deployLink = 'https://simplecrypto.vercel.app/'
 function App() {
-  const [count, setCount] = useState(0)
 
-  const handleClick = () => {
-    fetch('https://api.etherscan.io/api?module=account&action=balance&address=0x55B3206EDF167f5C7c6c143f1B299409835A5777&tag=latest&apikey=F6FCNKMHH6SHM35Z3H399A1VDB9S3H24WA')
-      .then((response) => response.json())
-      .then((data) => setCount(data));
-  }
-
-
-
-  const deployLink = 'https://simplecrypto.vercel.app/'
 
   return (
-    <div className="App">
-      <h1>Simple Crypto</h1>
-      <h3>{count.result}</h3>
-      <button onClick={handleClick}>click</button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/home' element={<Home />} />
+        <Route index element={<Home />} />
+        <Route path='/wallet-transactions' element={<WalletTransactions />}>
+          <Route path=':address' element={<TransactionList />} />
+        </Route>
+
+
+      </Routes>
+
+    </BrowserRouter>
   )
 }
 
