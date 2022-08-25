@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import Multiselect from "multiselect-react-dropdown"
+import SortTransactions from "./SortTransactions"
 
 const TransactionList = () => {
     const [walletTx, setWalletTx] = useState([])
@@ -42,14 +43,21 @@ const TransactionList = () => {
 
 
 
+    const sortOptions = {
+        value: [{ key: 'Low-High' }, { key: 'High-Low' }, { key: 'Default' }],
+        status: [{ key: 'Success' }, { key: 'Fail' }, { key: 'Default' }]
+    }
+
     const handleValue = (event) => {
 
-        if (event[0].key === 'Low-High') {
+        console.log(event[0])
+
+        if (event[0].key === sortOptions.value[0].key) {
             const sortArrByLowestVal = [...walletTx]
             sortArrByLowestVal.sort((a, b) => a?.value - b?.value)
             setWalletTx(sortArrByLowestVal)
 
-        } else if (event[0].key === 'High-Low') {
+        } else if (event[0].key === sortOptions.value[1].key) {
             const sortArrByHighestVal = [...walletTx]
             sortArrByHighestVal.sort((a, b) => b?.value - a?.value)
             setWalletTx(sortArrByHighestVal)
@@ -59,40 +67,42 @@ const TransactionList = () => {
         }
     }
 
+    const handleStatus = (event) => {
+
+
+        if (event[0].key === sortOptions.status[0].key) {
+            const sortArrBySuccess = [...walletTx]
+            sortArrBySuccess.sort((a, b) => a?.isError - b?.isError)
+            setWalletTx(sortArrBySuccess)
+
+        } else if (event[0].key === sortOptions.status[1].key) {
+            const sortArrByFail = [...walletTx]
+            sortArrByFail.sort((a, b) => b?.isError - a?.isError)
+            setWalletTx(sortArrByFail)
+        } else {
+            setWalletTx(defaultTx)
+
+        }
+    }
+
+
+
+
+
+
+
+
     return (
         <div>
-            <Multiselect
-                displayValue="key"
-                onKeyPressFn={function noRefCheck() { }}
-                // onRemove={(event) => { console.log('hi') }}
-                // onSearch={(event) => console.log(event)}
-                onSelect={handleValue}
-                options={[
-                    { key: 'Low-High' },
-                    { key: 'High-Low' },
-                    { key: 'Default' }
-                ]}
-                singleSelect
-                style={{
-                    searchBox: {
-                        width: '100px',
-                    },
-                    optionContainer: {
-                        width: '100px'
-                    }
-
-
-                }}
-
-            />
+            <button onClick={handleStatus}>status</button>
             <table>
                 <thead>
                     <tr>
                         <th>Hash</th>
                         <th>Method</th>
                         <th>Time</th>
-                        <th>Value<button onClick={handleValue}>?</button></th>
-                        <th>Status</th>
+                        <th>Value<SortTransactions handleClick={handleValue} sortOptions={sortOptions.value} /></th>
+                        <th>Status<SortTransactions handleClick={handleStatus} sortOptions={sortOptions.status} /></th>
                         <th>From</th>
                         <th>To</th>
                     </tr>
