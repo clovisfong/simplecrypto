@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
+import Multiselect from "multiselect-react-dropdown"
 
 const TransactionList = () => {
     const [walletTx, setWalletTx] = useState([])
+    const [defaultTx, setDefaultTx] = useState([])
 
     const { address } = useParams()
     const walletAdd = address
@@ -12,8 +14,14 @@ const TransactionList = () => {
     useEffect(() => {
         fetch(walletTxUrl)
             .then((response) => response.json())
-            .then((data) => setWalletTx(data.result))
+            .then((data) => {
+                return (
+                    setWalletTx(data.result),
+                    setDefaultTx(data.result)
+                )
+            })
     }, [])
+
 
 
     const nft = 'atomicMatch_(address[14] addrs, uint256[18] uints, uint8[8] feeMethodsSidesKindsHowToCalls, bytes calldataBuy, bytes calldataSell, bytes replacementPatternBuy, bytes replacementPatternSell, bytes staticExtradataBuy, bytes staticExtradataSell, uint8[2] vs, bytes32[5] rssMetadata)'
@@ -34,16 +42,56 @@ const TransactionList = () => {
 
 
 
+    const handleValue = (event) => {
+
+        if (event[0].key === 'Low-High') {
+            const sortArrByLowestVal = [...walletTx]
+            sortArrByLowestVal.sort((a, b) => a?.value - b?.value)
+            setWalletTx(sortArrByLowestVal)
+
+        } else if (event[0].key === 'High-Low') {
+            const sortArrByHighestVal = [...walletTx]
+            sortArrByHighestVal.sort((a, b) => b?.value - a?.value)
+            setWalletTx(sortArrByHighestVal)
+        } else {
+            setWalletTx(defaultTx)
+
+        }
+    }
 
     return (
         <div>
+            <Multiselect
+                displayValue="key"
+                onKeyPressFn={function noRefCheck() { }}
+                // onRemove={(event) => { console.log('hi') }}
+                // onSearch={(event) => console.log(event)}
+                onSelect={handleValue}
+                options={[
+                    { key: 'Low-High' },
+                    { key: 'High-Low' },
+                    { key: 'Default' }
+                ]}
+                singleSelect
+                style={{
+                    searchBox: {
+                        width: '100px',
+                    },
+                    optionContainer: {
+                        width: '100px'
+                    }
+
+
+                }}
+
+            />
             <table>
                 <thead>
                     <tr>
                         <th>Hash</th>
                         <th>Method</th>
                         <th>Time</th>
-                        <th>Value</th>
+                        <th>Value<button onClick={handleValue}>?</button></th>
                         <th>Status</th>
                         <th>From</th>
                         <th>To</th>
