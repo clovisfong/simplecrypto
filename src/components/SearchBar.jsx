@@ -9,8 +9,8 @@ const SearchBar = () => {
     const inputRef = useRef()
 
     const handleClick = () => {
-        console.log(inputRef.current.value)
-        navigateToWalletTx('/wallet-transactions')
+        const inputAdd = inputRef.current.value
+        navigateToWalletTx(`/wallet-transactions/${inputAdd}`)
     }
 
 

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
+import { useParams } from 'react-router-dom'
 
 const TransactionList = () => {
     const [walletTx, setWalletTx] = useState([])
-    const walletAdd = '0xCDc7ba99391F3BE7E5Dc0e49cC8361B537cfC29b'
+
+    const { address } = useParams()
+    const walletAdd = address
     const walletTxUrl = `https://api.etherscan.io/api?module=account&action=txlist&address=${walletAdd}&startblock=0&endblock=99999999&sort=desc&apikey=F6FCNKMHH6SHM35Z3H399A1VDB9S3H24WA`
 
 
@@ -34,7 +37,6 @@ const TransactionList = () => {
 
     return (
         <div>
-            <button onClick={() => { navigator.clipboard.writeText('happy') }}>hey</button>
             <table>
                 <thead>
                     <tr>
