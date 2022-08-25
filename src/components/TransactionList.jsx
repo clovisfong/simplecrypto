@@ -45,7 +45,8 @@ const TransactionList = () => {
 
     const sortOptions = {
         value: [{ key: 'Low-High' }, { key: 'High-Low' }, { key: 'Default' }],
-        status: [{ key: 'Success' }, { key: 'Fail' }, { key: 'Default' }]
+        status: [{ key: 'Success' }, { key: 'Fail' }, { key: 'Default' }],
+        time: [{ key: 'Earliest' }, { key: 'Latest' }, { key: 'Default' }]
     }
 
     const handleValue = (event) => {
@@ -85,6 +86,23 @@ const TransactionList = () => {
         }
     }
 
+    const handleTime = (event) => {
+
+
+        if (event[0].key === sortOptions.time[0].key) {
+            const sortArrByEarliest = [...walletTx]
+            sortArrByEarliest.sort((a, b) => a?.timeStamp - b?.timeStamp)
+            setWalletTx(sortArrByEarliest)
+
+        } else if (event[0].key === sortOptions.time[1].key) {
+            const sortArrByLatest = [...walletTx]
+            sortArrByLatest.sort((a, b) => b?.timeStamp - a?.timeStamp)
+            setWalletTx(sortArrByLatest)
+        } else {
+            setWalletTx(defaultTx)
+
+        }
+    }
 
 
 
@@ -94,13 +112,12 @@ const TransactionList = () => {
 
     return (
         <div>
-            <button onClick={handleStatus}>status</button>
             <table>
                 <thead>
                     <tr>
                         <th>Hash</th>
                         <th>Method</th>
-                        <th>Time</th>
+                        <th>Time<SortTransactions handleClick={handleTime} sortOptions={sortOptions.time} /></th>
                         <th>Value<SortTransactions handleClick={handleValue} sortOptions={sortOptions.value} /></th>
                         <th>Status<SortTransactions handleClick={handleStatus} sortOptions={sortOptions.status} /></th>
                         <th>From</th>
