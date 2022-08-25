@@ -1,5 +1,5 @@
 import Multiselect from "multiselect-react-dropdown"
-const SortTransactions = ({ handleClick, sortOptions }) => {
+const SortTransactions = ({ handleClick, sortOptions, select }) => {
 
     return (
         <>
@@ -21,7 +21,7 @@ const SortTransactions = ({ handleClick, sortOptions }) => {
 
 
                 }}
-
+                select
             />
         </>
     )
