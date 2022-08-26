@@ -1,14 +1,36 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
+import SortMethodByCheckbox from "./SortMethodByCheckbox"
 import SortTransactions from "./SortTransactions"
+import Multiselect from "multiselect-react-dropdown"
 
 const TransactionList = () => {
     const [walletTx, setWalletTx] = useState([])
     const [defaultTx, setDefaultTx] = useState([])
+    const [filteredMethods, setFilteredMethods] = useState([])
 
     const { address } = useParams()
     const walletAdd = address
     const walletTxUrl = `https://api.etherscan.io/api?module=account&action=txlist&address=${walletAdd}&startblock=0&endblock=99999999&sort=desc&apikey=F6FCNKMHH6SHM35Z3H399A1VDB9S3H24WA`
+
+
+    const methodTable = {
+        ethTransfer: { contain: '', replace: 'ETH Transfer' },
+        otherErc20Transfer: { contain: 'transfer(address _to, uint256 _value)', replace: 'Other ERC20 Transfer' },
+        deposit: { contain: 'deposit', replace: 'Deposit' },
+        multicall: { contain: 'multicall', replace: 'Crypto Swap' },
+        swap: { contain: 'swap', replace: 'Crypto Swap' },
+        mint: { contain: 'mint', replace: 'Mint' },
+        nftTransfer: { contain: 'transferfrom', replace: 'NFT Transfer' },
+        nftPurchase: { contain: 'atomicMatch_(address[14] addrs, uint256[18] uints, uint8[8] feeMethodsSidesKindsHowToCalls, bytes calldataBuy, bytes calldataSell, bytes replacementPatternBuy, bytes replacementPatternSell, bytes staticExtradataBuy, bytes staticExtradataSell, uint8[2] vs, bytes32[5] rssMetadata)', replace: 'Opensea Purchase' },
+        cancelOrder: { contain: 'cancelorder', replace: 'Opensea Order Cancelled' },
+        approval: { contain: 'approv', replace: 'Approval' },
+        stake: { contain: 'stake', replace: 'Stake' },
+        claim: { contain: 'claim', replace: 'Claim' },
+        otherTransactions: { replace: 'Other Transactions' }
+    }
+
+
 
 
     useEffect(() => {
@@ -21,6 +43,8 @@ const TransactionList = () => {
                 )
             })
     }, [])
+
+
 
 
 
@@ -39,21 +63,9 @@ const TransactionList = () => {
     }
 
 
-    const methodTable = {
-        ethTransfer: { contain: '', replace: 'ETH Transfer' },
-        otherErc20Transfer: { contain: 'transfer(address _to, uint256 _value)', replace: 'Other ERC20 Transfer' },
-        deposit: { contain: 'deposit', replace: 'Deposit' },
-        multicall: { contain: 'multicall', replace: 'Crypto Swap' },
-        swap: { contain: 'swap', replace: 'Crypto Swap' },
-        mint: { contain: 'mint', replace: 'Mint' },
-        nftTransfer: { contain: 'transferfrom', replace: 'NFT Transfer' },
-        nftPurchase: { contain: 'atomicMatch_(address[14] addrs, uint256[18] uints, uint8[8] feeMethodsSidesKindsHowToCalls, bytes calldataBuy, bytes calldataSell, bytes replacementPatternBuy, bytes replacementPatternSell, bytes staticExtradataBuy, bytes staticExtradataSell, uint8[2] vs, bytes32[5] rssMetadata)', replace: 'Opensea Purchase' },
-        cancelOrder: { contain: 'cancelorder', replace: 'Opensea Order Cancelled' },
-        approval: { contain: 'approv', replace: 'Approval' },
-        stake: { contain: 'stake', replace: 'Stake' },
-        claim: { contain: 'claim', replace: 'Claim' },
-        otherTransactions: { replace: 'Other Transactions' }
-    }
+
+
+
 
     const sortOptions = {
         method: [
@@ -76,13 +88,23 @@ const TransactionList = () => {
         status: [{ key: 'Success' }, { key: 'Fail' }, { key: 'Default' }],
     }
 
+    const handleSelectMethod = (event) => {
 
+        const selectedMethodsArr = event.map((item) => item.key)
+        const methodDataArr = Object.values(methodTable)
 
-    const handleMethod = (event) => {
+        const methodsToFilter = methodDataArr.filter((method) => selectedMethodsArr.some((select) => select === method.replace)).map(method => method.contain)
+        console.log(methodsToFilter)
+        setWalletTx(
+            defaultTx.filter((tx) => methodsToFilter.some(
 
-
-
+                (methodType) => tx.functionName === methodType ||
+                    ((methodType !== methodTable.ethTransfer.contain) && tx.functionName.toLowerCase().includes(methodType))
+            )
+            ))
     }
+
+
 
 
     const handleTime = (event) => {
@@ -143,22 +165,65 @@ const TransactionList = () => {
 
 
 
+    const groupMethod = (funcName) => {
+        return (
+            funcName === methodTable.ethTransfer.contain ? methodTable.ethTransfer.replace :
+                funcName === methodTable.otherErc20Transfer.contain ? methodTable.otherErc20Transfer.replace :
+                    funcName.toLowerCase().includes(methodTable.deposit.contain) ? methodTable.deposit.replace :
+                        funcName.toLowerCase().includes(methodTable.multicall.contain) ? methodTable.multicall.replace :
+                            funcName.toLowerCase().includes(methodTable.swap.contain) ? methodTable.swap.replace :
+                                funcName.toLowerCase().includes(methodTable.mint.contain) ? methodTable.mint.replace :
+                                    funcName.toLowerCase().includes(methodTable.nftTransfer.contain) ? methodTable.nftTransfer.replace :
+                                        funcName === methodTable.nftPurchase.contain ? methodTable.nftPurchase.replace :
+                                            funcName.toLowerCase().includes(methodTable.cancelOrder.contain) ? methodTable.cancelOrder.replace :
+                                                funcName.toLowerCase().includes(methodTable.approval.contain) ? methodTable.approval.replace :
+                                                    funcName.toLowerCase().includes(methodTable.stake.contain) ? methodTable.stake.replace :
+                                                        funcName.toLowerCase().includes(methodTable.claim.contain) ? methodTable.claim.replace :
+                                                            methodTable.otherTransactions.replace
+
+        )
+    }
 
 
+    const handleRemoveMethod = (event) => {
+        console.log(event)
+    }
 
 
 
     return (
         <div>
+            <Multiselect
+                displayValue="key"
+                onKeyPressFn={function noRefCheck() { }}
+                onRemove={handleSelectMethod}
+                onSearch={function noRefCheck() { }}
+                onSelect={handleSelectMethod}
+                options={[
+                    { key: methodTable.ethTransfer.replace },
+                    { key: methodTable.otherErc20Transfer.replace },
+                    { key: methodTable.deposit.replace },
+                    { key: methodTable.multicall.replace },
+                    { key: methodTable.mint.replace }
+                ]}
+                showCheckbox
+            />
+
+
+
             <table>
                 <thead>
                     <tr>
                         <th>Hash</th>
-                        <th>Method</th>
-                        <th>Time<SortTransactions handleClick={handleTime} sortOptions={sortOptions.time} select={'singleSelect'} /></th>
-                        <th>Value<SortTransactions handleClick={handleValue} sortOptions={sortOptions.value} select={'singleSelect'} /></th>
-                        <th>Status<SortTransactions handleClick={handleStatus} sortOptions={sortOptions.status} select={'singleSelect'} /></th>
-                        <th>From</th>
+                        <th>Method<SortMethodByCheckbox handleClick={handleSelectMethod} sortOptions={sortOptions.method} /></th>
+                        <th>Time<SortTransactions handleClick={handleTime} sortOptions={sortOptions.time} /></th>
+                        <th>Value<SortTransactions handleClick={handleValue} sortOptions={sortOptions.value} /></th>
+                        <th>Status<SortTransactions handleClick={handleStatus} sortOptions={sortOptions.status} /></th>
+                        <th>From<select onChange={(e) => console.log(e.target.value)}>
+                            <option value='Low-High'>Low to High</option>
+                            <option value='High-Low'>High to Low</option>
+
+                        </select></th>
                         <th>To</th>
                     </tr>
                 </thead>
@@ -166,19 +231,7 @@ const TransactionList = () => {
                     {walletTx.map(trans =>
                         <tr key={trans.hash}>
                             <td><a href={`https://etherscan.io/tx/${trans.hash}`}>{trans.hash.substring(0, 8)}...</a></td>
-                            <td>{trans.functionName === methodTable.ethTransfer.contain ? methodTable.ethTransfer.replace :
-                                trans.functionName === methodTable.otherErc20Transfer.contain ? methodTable.otherErc20Transfer.replace :
-                                    trans.functionName.toLowerCase().includes(methodTable.deposit.contain) ? methodTable.deposit.replace :
-                                        trans.functionName.toLowerCase().includes(methodTable.multicall.contain) ? methodTable.multicall.replace :
-                                            trans.functionName.toLowerCase().includes(methodTable.swap.contain) ? methodTable.swap.replace :
-                                                trans.functionName.toLowerCase().includes(methodTable.mint.contain) ? methodTable.mint.replace :
-                                                    trans.functionName.toLowerCase().includes(methodTable.nftTransfer.contain) ? methodTable.nftTransfer.replace :
-                                                        trans.functionName === methodTable.nftPurchase.contain ? methodTable.nftPurchase.replace :
-                                                            trans.functionName.toLowerCase().includes(methodTable.cancelOrder.contain) ? methodTable.cancelOrder.replace :
-                                                                trans.functionName.toLowerCase().includes(methodTable.approval.contain) ? methodTable.approval.replace :
-                                                                    trans.functionName.toLowerCase().includes(methodTable.stake.contain) ? methodTable.stake.replace :
-                                                                        trans.functionName.toLowerCase().includes(methodTable.claim.contain) ? methodTable.claim.replace :
-                                                                            methodTable.otherTransactions.replace}</td>
+                            <td>{groupMethod(trans.functionName)}</td>
                             <td>{convertTime(trans.timeStamp)}</td>
 
                             <td>{(trans.value / 1000000000000000000).toFixed(2)} ETH</td>
