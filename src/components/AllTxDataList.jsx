@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import SortMethodByCheckbox from "./SortMethodByCheckbox"
 import SortTransactions from "./SortTransactions"
-import Multiselect from "multiselect-react-dropdown"
 import methodTable from "../data/methodTable"
 
-const TransactionList = () => {
+
+const AllTxDataList = () => {
     const [walletTx, setWalletTx] = useState([])
     const [defaultTx, setDefaultTx] = useState([])
 
@@ -224,4 +224,4 @@ const TransactionList = () => {
     )
 }
 
-export default TransactionList
+export default AllTxDataList

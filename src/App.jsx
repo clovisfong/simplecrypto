@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import WalletTransactions from './pages/WalletTransactions'
-import TransactionList from './components/TransactionList'
+import NftDashboard from './components/NftDashboard'
+import AllTxDashboard from './components/AllTxDashboard'
 
 const deployLink = 'https://simplecrypto.vercel.app/'
 function App() {
@@ -16,9 +15,9 @@ function App() {
       <Routes>
         <Route path='/home' element={<Home />} />
         <Route index element={<Home />} />
-        <Route path='/wallet-transactions' element={<WalletTransactions />}>
-          <Route path=':address' element={<TransactionList />} />
-        </Route>
+        <Route path='/wallet-transactions/:address' element={<WalletTransactions />} />
+        <Route path='/wallet-transactions/:address/all' element={<AllTxDashboard />} />
+        <Route path='/wallet-transactions/:address/nft' element={<NftDashboard />} />
 
 
       </Routes>
