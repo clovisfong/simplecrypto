@@ -30,6 +30,8 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
     }
 
 
+
+
     const sortOptions = {
         time: [{ key: 'Earliest' }, { key: 'Latest' }, { key: 'Default' }],
         value: [{ key: 'Low-High' }, { key: 'High-Low' }, { key: 'Default' }],
@@ -70,6 +72,10 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
 
     }
 
+
+
+
+
     return (
         <div>
             <table>
@@ -79,6 +85,7 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
                         <th>Token<MultiselectCheckBox handleClick={handleSelect} sortOptions={uniqueTokenNamesObj} /></th>
                         <th>ID</th>
                         <th>Time<SingleSelect handleClick={handleTime} sortOptions={sortOptions.time} /></th>
+                        <th>Method</th>
                         <th>From</th>
                         <th>To</th>
                     </tr>
@@ -91,6 +98,11 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
                                 <td>{tx.tokenName}</td>
                                 <td>{tx.tokenID}</td>
                                 <td>{convertTime(tx.timeStamp)}</td>
+                                <td>{tx.from === address.toLowerCase() && tx.to !== address.toLowerCase() ? 'Sale/Transfer Out' :
+                                    tx.from === '0x0000000000000000000000000000000000000000' && tx.to === address.toLowerCase() ? 'Mint' :
+                                        tx.from !== address.toLowerCase() && tx.to === address.toLowerCase() ? 'Purchase/Transfer In' : 'Others'
+                                }
+                                </td>
                                 <td onClick={handleWalletAdd(tx.from)} style={{ cursor: 'pointer' }}>
                                     {tx.from === address.toLowerCase() ? "My Wallet" : tx.from.substring(2, 8)}
                                 </td>
