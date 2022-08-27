@@ -6,24 +6,7 @@ import SingleSelect from "./SingleSelect"
 
 
 
-const NftDataList = () => {
-
-    const [nftTx, setNftTx] = useState()
-    const [defaultTx, setDefaultTx] = useState([])
-
-    const { address } = useParams()
-    const nftTxUrl = `https://api.etherscan.io/api?module=account&action=tokennfttx&address=${address}&startblock=0&endblock=27025780&sort=desc&apikey=F6FCNKMHH6SHM35Z3H399A1VDB9S3H24WA`
-
-    useEffect(() => {
-        fetch(nftTxUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                return (
-                    setNftTx(data.result),
-                    setDefaultTx(data.result)
-                )
-            });
-    }, [])
+const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
 
 
     const tokenNamesData = defaultTx.map((tx) => tx.tokenName)
@@ -46,25 +29,28 @@ const NftDataList = () => {
         navigator.clipboard.writeText(wallet)
     }
 
+
     const sortOptions = {
         time: [{ key: 'Earliest' }, { key: 'Latest' }, { key: 'Default' }],
         value: [{ key: 'Low-High' }, { key: 'High-Low' }, { key: 'Default' }],
         status: [{ key: 'Success' }, { key: 'Fail' }, { key: 'Default' }],
     }
 
+
+
     const handleTime = (event) => {
 
         if (event[0].key === sortOptions.time[0].key) {
             const sortArrByEarliest = [...nftTx]
             sortArrByEarliest.sort((a, b) => a?.timeStamp - b?.timeStamp)
-            setNftTx(sortArrByEarliest)
+            updateNftTx(sortArrByEarliest)
 
         } else if (event[0].key === sortOptions.time[1].key) {
             const sortArrByLatest = [...nftTx]
             sortArrByLatest.sort((a, b) => b?.timeStamp - a?.timeStamp)
-            setNftTx(sortArrByLatest)
+            updateNftTx(sortArrByLatest)
         } else {
-            setNftTx(defaultTx)
+            updateNftTx(defaultTx)
 
         }
     }
@@ -75,9 +61,9 @@ const NftDataList = () => {
         const selectedTokens = event.map((token) => token.key)
 
         if (selectedTokens.length === 0) {
-            setNftTx(defaultTx)
+            updateNftTx(defaultTx)
         } else {
-            setNftTx(defaultTx.filter((tx) =>
+            updateNftTx(defaultTx.filter((tx) =>
                 selectedTokens.some(
                     (token) => token === tx?.tokenName)))
         }
