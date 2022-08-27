@@ -1,12 +1,15 @@
 import WalletTransactions from "../pages/WalletTransactions"
 import NavBar from "./NavBar"
+import NftDataList from "./NftDataList"
 
 const NftDashboard = () => {
+
     return (
         <div>
             <WalletTransactions />
             <NavBar />
-            <h1>hi</h1>
+            <NftDataList />
+
         </div>
     )
 }
