@@ -1,6 +1,6 @@
-import Multiselect from "multiselect-react-dropdown"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import MultiselectCheckBox from "./MultiselectCheckBox"
 import SingleSelect from "./SingleSelect"
 
 
@@ -33,7 +33,6 @@ const NftDataList = () => {
             key: token
         }
     })
-
 
 
     const convertTime = (timestamp) => {
@@ -71,26 +70,28 @@ const NftDataList = () => {
         }
     }
 
-    const handleSelect = () => {
-        console.log('test')
+
+
+    const handleSelect = (event) => {
+        const selectedTokens = event.map((token) => token.key)
+
+        if (selectedTokens.length === 0) {
+            setNftTx(defaultTx)
+        } else {
+            setNftTx(defaultTx.filter((tx) =>
+                selectedTokens.some(
+                    (token) => token === tx?.tokenName)))
+        }
+
     }
 
     return (
         <div>
-            <Multiselect
-                displayValue="key"
-                onKeyPressFn={function noRefCheck() { }}
-                onRemove={handleSelect}
-                onSearch={function noRefCheck() { }}
-                onSelect={handleSelect}
-                options={uniqueTokenNamesObj}
-                showCheckbox
-            />
             <table>
                 <thead>
                     <tr>
                         <th>Hash</th>
-                        <th>Token</th>
+                        <th>Token<MultiselectCheckBox handleClick={handleSelect} sortOptions={uniqueTokenNamesObj} /></th>
                         <th>ID</th>
                         <th>Time<SingleSelect handleClick={handleTime} sortOptions={sortOptions.time} /></th>
                         <th>From</th>
