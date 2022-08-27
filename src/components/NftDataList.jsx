@@ -1,6 +1,7 @@
+import Multiselect from "multiselect-react-dropdown"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import SortTransactions from "./SortTransactions"
+import SingleSelect from "./SingleSelect"
 
 
 
@@ -11,7 +12,6 @@ const NftDataList = () => {
     const [defaultTx, setDefaultTx] = useState([])
 
     const { address } = useParams()
-    console.log(address)
     const nftTxUrl = `https://api.etherscan.io/api?module=account&action=tokennfttx&address=${address}&startblock=0&endblock=27025780&sort=desc&apikey=F6FCNKMHH6SHM35Z3H399A1VDB9S3H24WA`
 
     useEffect(() => {
@@ -24,6 +24,15 @@ const NftDataList = () => {
                 )
             });
     }, [])
+
+
+    const tokenNamesData = defaultTx.map((tx) => tx.tokenName)
+    const uniqueTokenNames = [...new Set(tokenNamesData)] //remove duplicates in array
+    const uniqueTokenNamesObj = uniqueTokenNames.map((token) => {
+        return {
+            key: token
+        }
+    })
 
 
 
@@ -62,15 +71,28 @@ const NftDataList = () => {
         }
     }
 
+    const handleSelect = () => {
+        console.log('test')
+    }
+
     return (
         <div>
+            <Multiselect
+                displayValue="key"
+                onKeyPressFn={function noRefCheck() { }}
+                onRemove={handleSelect}
+                onSearch={function noRefCheck() { }}
+                onSelect={handleSelect}
+                options={uniqueTokenNamesObj}
+                showCheckbox
+            />
             <table>
                 <thead>
                     <tr>
                         <th>Hash</th>
                         <th>Token</th>
                         <th>ID</th>
-                        <th>Time<SortTransactions handleClick={handleTime} sortOptions={sortOptions.time} /></th>
+                        <th>Time<SingleSelect handleClick={handleTime} sortOptions={sortOptions.time} /></th>
                         <th>From</th>
                         <th>To</th>
                     </tr>

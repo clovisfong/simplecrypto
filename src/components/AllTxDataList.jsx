@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
-import SortMethodByCheckbox from "./SortMethodByCheckbox"
-import SortTransactions from "./SortTransactions"
+import MultiselectCheckBox from "./MultiselectCheckBox"
+import SingleSelect from "./SingleSelect"
 import methodTable from "../data/methodTable"
 
 
@@ -180,10 +180,10 @@ const AllTxDataList = () => {
                 <thead>
                     <tr>
                         <th>Hash</th>
-                        <th>Method<SortMethodByCheckbox handleClick={handleSelectMethod} sortOptions={sortOptions.method} /></th>
-                        <th>Time<SortTransactions handleClick={handleTime} sortOptions={sortOptions.time} /></th>
-                        <th>Value<SortTransactions handleClick={handleValue} sortOptions={sortOptions.value} /></th>
-                        <th>Status<SortTransactions handleClick={handleStatus} sortOptions={sortOptions.status} /></th>
+                        <th>Method<MultiselectCheckBox handleClick={handleSelectMethod} sortOptions={sortOptions.method} /></th>
+                        <th>Time<SingleSelect handleClick={handleTime} sortOptions={sortOptions.time} /></th>
+                        <th>Value<SingleSelect handleClick={handleValue} sortOptions={sortOptions.value} /></th>
+                        <th>Status<SingleSelect handleClick={handleStatus} sortOptions={sortOptions.status} /></th>
                         <th>From<select onChange={(e) => console.log(e.target.value)}>
                             <option value='Low-High'>Low to High</option>
                             <option value='High-Low'>High to Low</option>

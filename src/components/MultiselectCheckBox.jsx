@@ -1,5 +1,5 @@
 import Multiselect from "multiselect-react-dropdown"
-const SortMethodByCheckbox = ({ handleClick, sortOptions }) => {
+const MultiselectCheckBox = ({ handleClick, sortOptions }) => {
 
 
     return (
@@ -15,4 +15,4 @@ const SortMethodByCheckbox = ({ handleClick, sortOptions }) => {
     )
 }
 
-export default SortMethodByCheckbox
+export default MultiselectCheckBox

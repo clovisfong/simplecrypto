@@ -2,7 +2,7 @@ import Multiselect from "multiselect-react-dropdown"
 import { Popover } from "react-tiny-popover"
 import { useState } from "react"
 
-const SortTransactions = ({ handleClick, sortOptions }) => {
+const SingleSelect = ({ handleClick, sortOptions }) => {
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false)
 
@@ -60,4 +60,4 @@ const SortTransactions = ({ handleClick, sortOptions }) => {
     )
 }
 
-export default SortTransactions
+export default SingleSelect
