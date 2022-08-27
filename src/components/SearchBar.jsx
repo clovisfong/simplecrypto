@@ -11,7 +11,7 @@ const SearchBar = () => {
     const handleClick = () => {
         const inputAdd = inputRef.current.value
         if (inputAdd.substring(0, 2) === '0x')
-            navigateToWalletTx(`/wallet-transactions/${inputAdd}/overview`)
+            navigateToWalletTx(`/wallet-transactions/${inputAdd}/all`)
     }
 
 
