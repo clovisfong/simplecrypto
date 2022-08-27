@@ -27,7 +27,7 @@ const TransactionList = () => {
         approval: { contain: 'approv', replace: 'Approval' },
         stake: { contain: 'stake', replace: 'Stake' },
         claim: { contain: 'claim', replace: 'Claim' },
-        otherTransactions: { replace: 'Other Transactions' }
+        otherTransactions: { contain: 'Other Transactions', replace: 'Other Transactions' }
     }
 
 
@@ -77,7 +77,7 @@ const TransactionList = () => {
             { key: methodTable.mint.replace },
             { key: methodTable.nftTransfer.replace },
             { key: methodTable.nftPurchase.replace },
-            { key: methodTable.cancelOrder.otherTransactions },
+            { key: methodTable.cancelOrder.replace },
             { key: methodTable.approval.replace },
             { key: methodTable.stake.replace },
             { key: methodTable.claim.replace },
@@ -92,17 +92,35 @@ const TransactionList = () => {
 
         const selectedMethodsArr = event.map((item) => item.key)
         const methodDataArr = Object.values(methodTable)
-
+        console.log(methodDataArr.map((test) => test.contain))
         const methodsToFilter = methodDataArr.filter((method) => selectedMethodsArr.some((select) => select === method.replace)).map(method => method.contain)
-        console.log(methodsToFilter)
-        setWalletTx(
-            defaultTx.filter((tx) => methodsToFilter.some(
+        if (methodsToFilter.length === 0) {
+            setWalletTx(defaultTx)
+        } else {
+            setWalletTx(
+                defaultTx.filter((tx) => methodsToFilter.some(
+                    (methodType) => {
+                        if (methodType !== methodTable.otherTransactions.contain) {
+                            return (
+                                tx.functionName === methodType ||
+                                ((methodType !== methodTable.ethTransfer.contain) && tx.functionName.toLowerCase().includes(methodType))
+                            )
+                        } else if (methodType === methodTable.otherTransactions.contain) { //Other functions
+                            return (
+                                groupMethod(tx.functionName) === methodType
+                            )
+                        }
+                    }
 
-                (methodType) => tx.functionName === methodType ||
-                    ((methodType !== methodTable.ethTransfer.contain) && tx.functionName.toLowerCase().includes(methodType))
-            )
-            ))
+                )))
+
+        }
+
     }
+
+
+
+
 
 
 
@@ -203,8 +221,20 @@ const TransactionList = () => {
                     { key: methodTable.ethTransfer.replace },
                     { key: methodTable.otherErc20Transfer.replace },
                     { key: methodTable.deposit.replace },
-                    { key: methodTable.multicall.replace },
-                    { key: methodTable.mint.replace }
+                    { key: methodTable.multicall.replace }, //same as methodTable.swap.replace
+                    { key: methodTable.mint.replace },
+                    { key: methodTable.nftTransfer.replace },
+                    { key: methodTable.nftPurchase.replace },
+                    { key: methodTable.cancelOrder.replace },
+                    { key: methodTable.approval.replace },
+                    { key: methodTable.stake.replace },
+                    { key: methodTable.claim.replace },
+                    { key: methodTable.otherTransactions.replace }
+
+
+
+
+
                 ]}
                 showCheckbox
             />

@@ -20,7 +20,6 @@ const WalletTransactions = () => {
             .then((response) => response.json())
             .then((data) => setWalletBal(data.result))
 
-
         // fetch(ethCurrentPrice)
         //     .then((response) => response.json())
         //     .then((data) => setEthPrice(data.result.ethusd))
