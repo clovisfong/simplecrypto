@@ -34,7 +34,6 @@ const NftDataList = () => {
         }
     })
 
-
     const convertTime = (timestamp) => {
         const num = Number(timestamp) * 1000
         const date = new Date(num)
