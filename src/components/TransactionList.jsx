@@ -186,10 +186,6 @@ const TransactionList = () => {
 
     return (
         <div>
-
-
-
-
             <table>
                 <thead>
                     <tr>
@@ -209,17 +205,16 @@ const TransactionList = () => {
                 <tbody>
                     {walletTx.map(trans =>
                         <tr key={trans.hash}>
-                            <td><a href={`https://etherscan.io/tx/${trans.hash}`}>{trans.hash.substring(0, 8)}...</a></td>
+                            <td><a href={`https://etherscan.io/tx/${trans.hash}`}>{trans.hash.substring(2, 8)}...</a></td>
                             <td>{groupMethod(trans.functionName)}</td>
                             <td>{convertTime(trans.timeStamp)}</td>
-
                             <td>{(trans.value / 1000000000000000000).toFixed(2)} ETH</td>
                             <td>{trans.isError === '0' ? 'Success' : 'Fail'}</td>
                             <td onClick={handleWalletAdd(trans.from)} style={{ cursor: 'pointer' }}>
-                                {trans.from === walletAdd.toLowerCase() ? "My Wallet" : trans.from.substring(0, 8)}
+                                {trans.from === walletAdd.toLowerCase() ? "My Wallet" : trans.from.substring(2, 8)}
                             </td>
                             <td onClick={handleWalletAdd(trans.to)} style={{ cursor: 'pointer' }}>
-                                {trans.to === walletAdd.toLowerCase() ? 'My Wallet' : trans.to.substring(0, 8)}</td>
+                                {trans.to === walletAdd.toLowerCase() ? 'My Wallet' : trans.to.substring(2, 8)}</td>
                         </tr>
                     )}
                 </tbody>
