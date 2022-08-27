@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
 import MultiselectCheckBox from "./MultiselectCheckBox"
 import SingleSelect from "./SingleSelect"
 
@@ -34,11 +32,30 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
 
     const sortOptions = {
         time: [{ key: 'Earliest' }, { key: 'Latest' }, { key: 'Default' }],
-        value: [{ key: 'Low-High' }, { key: 'High-Low' }, { key: 'Default' }],
-        status: [{ key: 'Success' }, { key: 'Fail' }, { key: 'Default' }],
+        method: [{ key: 'Sale/Transfer Out' }, { key: 'Mint' }, { key: 'Purchase/Transfer In' }, { key: 'Others' }, { key: 'Default' }]
+    }
+
+    const assignTxMethod = (txFrom, txTo) => {
+        return (
+            txFrom === address.toLowerCase() && txTo !== address.toLowerCase() ? sortOptions.method[0].key :
+                txFrom === '0x0000000000000000000000000000000000000000' && txTo === address.toLowerCase() ? sortOptions.method[1].key :
+                    txFrom !== address.toLowerCase() && txTo === address.toLowerCase() ? sortOptions.method[2].key : sortOptions.method[3].key
+        )
     }
 
 
+
+    const handleSelect = (event) => {
+        const selectedTokens = event.map((token) => token.key)
+
+        if (selectedTokens.length === 0) {
+            updateNftTx(defaultTx)
+        } else {
+            updateNftTx(defaultTx.filter((tx) =>
+                selectedTokens.some(
+                    (token) => token === tx?.tokenName)))
+        }
+    }
 
     const handleTime = (event) => {
 
@@ -57,21 +74,14 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
         }
     }
 
-
-
-    const handleSelect = (event) => {
-        const selectedTokens = event.map((token) => token.key)
-
-        if (selectedTokens.length === 0) {
-            updateNftTx(defaultTx)
-        } else {
+    const handleMethod = (event) => {
+        if (event[0].key !== sortOptions.method[4].key) {
             updateNftTx(defaultTx.filter((tx) =>
-                selectedTokens.some(
-                    (token) => token === tx?.tokenName)))
+                assignTxMethod(tx.from, tx.to) === event[0].key))
+        } else {
+            updateNftTx(defaultTx)
         }
-
     }
-
 
 
 
@@ -85,7 +95,7 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
                         <th>Token<MultiselectCheckBox handleClick={handleSelect} sortOptions={uniqueTokenNamesObj} /></th>
                         <th>ID</th>
                         <th>Time<SingleSelect handleClick={handleTime} sortOptions={sortOptions.time} /></th>
-                        <th>Method</th>
+                        <th>Method<SingleSelect handleClick={handleMethod} sortOptions={sortOptions.method} /></th>
                         <th>From</th>
                         <th>To</th>
                     </tr>
@@ -98,10 +108,7 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
                                 <td>{tx.tokenName}</td>
                                 <td>{tx.tokenID}</td>
                                 <td>{convertTime(tx.timeStamp)}</td>
-                                <td>{tx.from === address.toLowerCase() && tx.to !== address.toLowerCase() ? 'Sale/Transfer Out' :
-                                    tx.from === '0x0000000000000000000000000000000000000000' && tx.to === address.toLowerCase() ? 'Mint' :
-                                        tx.from !== address.toLowerCase() && tx.to === address.toLowerCase() ? 'Purchase/Transfer In' : 'Others'
-                                }
+                                <td>{assignTxMethod(tx.from, tx.to)}
                                 </td>
                                 <td onClick={handleWalletAdd(tx.from)} style={{ cursor: 'pointer' }}>
                                     {tx.from === address.toLowerCase() ? "My Wallet" : tx.from.substring(2, 8)}
