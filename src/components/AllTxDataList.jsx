@@ -63,6 +63,7 @@ const AllTxDataList = () => {
     }
 
 
+
     const handleSelectMethod = (event) => {
 
         const selectedMethodsArr = event.map((item) => item.key)
@@ -91,11 +92,6 @@ const AllTxDataList = () => {
         }
 
     }
-
-
-
-
-
 
 
 
@@ -175,12 +171,6 @@ const AllTxDataList = () => {
 
         )
     }
-
-
-    const handleRemoveMethod = (event) => {
-        console.log(event)
-    }
-
 
 
 
