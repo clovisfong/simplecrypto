@@ -17,6 +17,7 @@ const MostTransactedNftTokens = ({ defaultTx }) => {
 
 
 
+
     return (
         <div>
 
@@ -24,7 +25,6 @@ const MostTransactedNftTokens = ({ defaultTx }) => {
             <ul>
                 {topFiveTransactedNft}
             </ul>
-
 
         </div>
 

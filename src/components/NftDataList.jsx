@@ -1,5 +1,6 @@
 import MultiselectCheckBox from "./MultiselectCheckBox"
 import SingleSelect from "./SingleSelect"
+import sortOptions from "../data/nftMethodTable"
 
 
 
@@ -30,10 +31,7 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
 
 
 
-    const sortOptions = {
-        time: [{ key: 'Earliest' }, { key: 'Latest' }, { key: 'Default' }],
-        method: [{ key: 'Sale/Transfer Out' }, { key: 'Mint' }, { key: 'Purchase/Transfer In' }, { key: 'Others' }, { key: 'Default' }]
-    }
+
 
     const assignTxMethod = (txFrom, txTo) => {
         return (
