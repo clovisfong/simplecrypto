@@ -1,7 +1,12 @@
-const NftOverview = () => {
+import MostTransactedNftTokens from "./MostTransactedNftTokens"
+
+const NftOverview = ({ defaultTx }) => {
 
     return (
-        <h3>nft overview</h3>
+        <div>
+            <h3>NFT overview</h3>
+            <MostTransactedNftTokens defaultTx={defaultTx} />
+        </div>
     )
 }
 

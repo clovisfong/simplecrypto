@@ -31,7 +31,7 @@ const NftDashboard = () => {
     return (
         <div>
             <WalletTransactions />
-            <NftOverview />
+            <NftOverview defaultTx={defaultTx} />
             <NavBar />
             <NftDataList nftTx={nftTx} updateNftTx={updateNftTx} defaultTx={defaultTx} address={address} />
 
