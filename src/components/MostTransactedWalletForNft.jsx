@@ -16,12 +16,29 @@ const MostTransactedWalletForNft = ({ defaultTx, address }) => {
         .sort((a, b) => b[1] - a[1])
         .map((add) => ({ ['name']: add[0], ['count']: add[1] }))
 
-    console.log(addressRankings)
 
-    const topFiveAddRankings =
-        addressRankings.slice(0, 5).map((token, index) => {
+    const topFiveAddRankings = addressRankings.slice(0, 5)
+
+
+
+    const fromTxOfTopFive = defaultTx.filter((tx) => topFiveAddRankings.some((add) => add.name === tx.from.toLowerCase())).map((tx) => tx.from)
+    const NumOfTxPerFromAdd = {}
+    fromTxOfTopFive.forEach((add) => NumOfTxPerFromAdd[add] = (NumOfTxPerFromAdd[add] || 0) + 1)
+    console.log(NumOfTxPerFromAdd)
+
+    const toTxOfTopFive = defaultTx.filter((tx) => topFiveAddRankings.some((add) => add.name === tx.to.toLowerCase())).map((tx) => tx.to)
+    const NumOfTxPerToAdd = {}
+    toTxOfTopFive.forEach((add) => NumOfTxPerToAdd[add] = (NumOfTxPerToAdd[add] || 0) + 1)
+    console.log(NumOfTxPerToAdd)
+
+
+
+
+
+    const displaytopFiveAdd =
+        topFiveAddRankings.map((token, index) => {
             return (
-                <li key={index}> {token.name}  -  {token.count}</li>
+                <li key={index}> {token.name}  - Total {token.count} - Outflow {NumOfTxPerFromAdd[token.name] || 0} - Inflow {NumOfTxPerToAdd[token.name] || 0}  </li>
             )
         })
 
@@ -30,7 +47,7 @@ const MostTransactedWalletForNft = ({ defaultTx, address }) => {
         <div>
             <h4>Top 5 Transacted Wallet</h4>
             <ul>
-                {topFiveAddRankings}
+                {displaytopFiveAdd}
             </ul>
 
 

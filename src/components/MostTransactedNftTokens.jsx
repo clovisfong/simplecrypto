@@ -8,8 +8,10 @@ const MostTransactedNftTokens = ({ defaultTx }) => {
         .map((token) => ({ ['name']: token[0], ['count']: token[1] })) //turn arr of arrs into an arr of objects
 
 
-    const topFiveTransactedNft =
-        tokenRankings.slice(0, 5).map((token, index) => {
+    const topFiveTransactedNft = tokenRankings.slice(0, 5)
+
+    const displayTopFiveNft =
+        topFiveTransactedNft.map((token, index) => {
             return (
                 <li key={index}> {token.name}  -  {token.count}</li>
             )
@@ -23,7 +25,7 @@ const MostTransactedNftTokens = ({ defaultTx }) => {
 
             <h4>Top 5 Transacted NFTs</h4>
             <ul>
-                {topFiveTransactedNft}
+                {displayTopFiveNft}
             </ul>
 
         </div>
