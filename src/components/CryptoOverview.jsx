@@ -3,7 +3,7 @@ const CryptoOverview = ({ defaultTx, address }) => {
 
     return (
         <div>
-            <h3>NFT overview</h3>
+            <h3>Crypto overview</h3>
 
         </div>
     )
