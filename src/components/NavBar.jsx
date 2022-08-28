@@ -8,6 +8,7 @@ const NavBar = () => {
         <div>
             <Link to={`/wallet-transactions/${walletAdd}/all`}>All</Link>
             <Link to={`/wallet-transactions/${walletAdd}/nft`}>NFT</Link>
+            <Link to={`/wallet-transactions/${walletAdd}/crypto`}>Crypto</Link>
         </div>
 
     )
