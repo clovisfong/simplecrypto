@@ -16,7 +16,14 @@ const NftBalDashBoard = () => {
             .then((response) => response.json())
             .then((data) => {
                 const nftData = data.data.items.filter((token) => token.type === 'nft')
-                setWalletNftBalance(nftData)
+                const conciseNftInfo = []
+                nftData.forEach((token) => (
+                    token.balance == 1 ?
+                        conciseNftInfo.push({ ['name']: token.contract_name, ['data']: token.nft_data[0], ['contract_address']: token.contract_address }) :
+                        token.nft_data.forEach((data) =>
+                            conciseNftInfo.push({ ['name']: token.contract_name, ['data']: data, ['contract_address']: token.contract_address }))))
+
+                setWalletNftBalance(conciseNftInfo)
             })
     }, [])
 
