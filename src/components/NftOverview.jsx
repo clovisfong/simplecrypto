@@ -1,5 +1,6 @@
 import MostTransactedNftTokens from "./MostTransactedNftTokens"
 import MostTransactedWalletForNft from "./MostTransactedWalletForNft"
+import NftHoldingPeriod from "./NftHoldingPeriod"
 import NftMethodWeightage from "./NftMethodWeightage"
 
 const NftOverview = ({ defaultTx, address }) => {
@@ -10,6 +11,7 @@ const NftOverview = ({ defaultTx, address }) => {
             <MostTransactedNftTokens defaultTx={defaultTx} />
             <NftMethodWeightage defaultTx={defaultTx} address={address} />
             <MostTransactedWalletForNft defaultTx={defaultTx} address={address} />
+            <NftHoldingPeriod defaultTx={defaultTx} address={address} />
         </div>
     )
 }
