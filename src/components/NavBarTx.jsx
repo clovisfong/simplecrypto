@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-const NavBar = () => {
+const NavBarTx = () => {
 
     const { address } = useParams()
     const walletAdd = address
@@ -14,4 +14,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar
+export default NavBarTx

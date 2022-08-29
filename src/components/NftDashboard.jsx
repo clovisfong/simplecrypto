@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import WalletTransactions from "../pages/WalletTransactions"
-import NavBar from "./NavBar"
+import NavBarTx from "./NavBarTx"
+import NavBar from "./NavBarTx"
 import NftDataList from "./NftDataList"
 import NftOverview from "./NftOverview"
 
@@ -31,7 +32,7 @@ const NftDashboard = () => {
     return (
         <div>
             <WalletTransactions />
-            <NavBar />
+            <NavBarTx />
             <NftOverview defaultTx={defaultTx} address={address} />
             <NftDataList nftTx={nftTx} updateNftTx={updateNftTx} defaultTx={defaultTx} address={address} />
 

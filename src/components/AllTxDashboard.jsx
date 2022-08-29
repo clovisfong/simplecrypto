@@ -1,13 +1,14 @@
 import WalletTransactions from "../pages/WalletTransactions"
-import NavBar from "./NavBar"
+import NavBar from "./NavBarTx"
 import AllTxDataList from "./AllTxDataList"
+import NavBarTx from "./NavBarTx"
 
 const AllTxDashboard = () => {
 
     return (
         <div>
             <WalletTransactions />
-            <NavBar />
+            <NavBarTx />
             <AllTxDataList />
 
         </div>

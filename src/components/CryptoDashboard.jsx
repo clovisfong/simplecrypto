@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom"
 import WalletTransactions from "../pages/WalletTransactions"
 import CryptoDataList from "./CryptoDataList"
 import CryptoOverview from "./CryptoOverview"
-import NavBar from "./NavBar"
+import NavBarTx from "./NavBarTx"
+import NavBar from "./NavBarTx"
 
 const CryptoDashboard = () => {
 
@@ -32,7 +33,7 @@ const CryptoDashboard = () => {
     return (
         <div>
             <WalletTransactions />
-            <NavBar />
+            <NavBarTx />
             <CryptoOverview defaultTx={defaultTx} address={address} />
             <CryptoDataList cryptoTx={cryptoTx} updateCryptoTx={updateCryptoTx} defaultTx={defaultTx} address={address} />
         </div>
