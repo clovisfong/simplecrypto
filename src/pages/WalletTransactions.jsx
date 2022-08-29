@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 const wallettest = '0xCDc7ba99391F3BE7E5Dc0e49cC8361B537cfC29b'
@@ -30,10 +30,19 @@ const WalletTransactions = () => {
     const ethBal = (walletBal / 1000000000000000000).toFixed(2)
     // const usdBal = (ethBal * ethPrice).toFixed(2)
 
+    const switchToBalPage = useNavigate()
+
+
+    const handleSwitchPage = () => {
+        switchToBalPage(`/wallet-balance/${address}/crypto`)
+    }
+
     return (
         <div>
             <h1>My transactions</h1>
             <h3>Wallet ETH Balance:  {ethBal} ETH </h3>
+            <button onClick={handleSwitchPage}>View Tokens</button>
+
 
 
         </div>

@@ -17,7 +17,7 @@ const CryptoBalDashboard = () => {
             <WalletBalance values={values} />
             <NavBarBal />
             <CryptoBalance getTokenValues={getTokenValues} />
-            <p></p>
+
 
         </div>
 

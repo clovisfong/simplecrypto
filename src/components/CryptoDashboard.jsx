@@ -4,7 +4,7 @@ import WalletTransactions from "../pages/WalletTransactions"
 import CryptoDataList from "./CryptoDataList"
 import CryptoOverview from "./CryptoOverview"
 import NavBarTx from "./NavBarTx"
-import NavBar from "./NavBarTx"
+
 
 const CryptoDashboard = () => {
 
