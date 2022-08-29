@@ -8,6 +8,7 @@ import CryptoDashboard from './components/CryptoDashboard'
 import WalletBalance from './pages/WalletBalance'
 import CryptoBalance from './components/CryptoBalance'
 import CryptoBalDashboard from './components/CryptoBalDashboard'
+import NftBalDashBoard from './components/NftBalDashboard'
 
 const deployLink = 'https://simplecrypto.vercel.app/'
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path='/wallet-transactions/:address/crypto' element={<CryptoDashboard />} />
         <Route path='/wallet-balance/:address/' element={<WalletBalance />} />
         <Route path='/wallet-balance/:address/crypto' element={<CryptoBalDashboard />} />
+        <Route path='/wallet-balance/:address/nft' element={<NftBalDashBoard />} />
 
 
       </Routes>

@@ -1,27 +1,7 @@
-import { useParams } from "react-router-dom"
-import { useState, useEffect } from "react"
 
-const CryptoBalance = ({ getTokenValues }) => {
-
-    const [walletBalance, setWalletBalance] = useState([])
-
-    const { address } = useParams()
-    const walletAdd = address
-    const CryptoBalUrl = `https://api.covalenthq.com/v1/1/address/${address}/balances_v2/?quote-currency=USD&format=JSON&nft=false&no-nft-fetch=false&key=ckey_0d22e1b516814092ba7eced6e14`
+const CryptoBalance = ({ walletBalance }) => {
 
 
-    useEffect(() => {
-        fetch(CryptoBalUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                const walletBalance = data.data.items
-                const quantifiableTokens = walletBalance.filter((token) => (token.balance / 1000000000000000000) > 0.0099 ? token.balance : false)
-                const tokenValues = quantifiableTokens.map((token) => (token.balance * token.quote_rate / 1000000000000000000).toFixed(2))
-                getTokenValues(tokenValues);
-
-                setWalletBalance(data.data.items)
-            })
-    }, [])
 
     const quantifiableTokens = walletBalance.filter((token) => (token.balance / 1000000000000000000) > 0.0099 ? token.balance : false)
 
