@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import WalletTransactions from "../pages/WalletTransactions"
+import WalletTransactions from "../../pages/WalletTransactions"
 import AllTxDataList from "./AllTxDataList"
-import AllTxOverview from "./AllTxOverview"
-import NavBarTx from "./NavBarTx"
+import AllTxOverview from "../AllTxOverview"
+import NavBarTx from "../NavBarTx"
 
 const AllTxDashboard = () => {
 

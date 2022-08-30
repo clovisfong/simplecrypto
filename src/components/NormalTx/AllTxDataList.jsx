@@ -1,6 +1,6 @@
-import MultiselectCheckBox from "./MultiselectCheckBox"
-import SingleSelect from "./SingleSelect"
-import methodTable from "../data/methodTable"
+import MultiselectCheckBox from "../MultiselectCheckBox"
+import SingleSelect from "../SingleSelect"
+import methodTable from "../../data/methodTable"
 import { useSearchParams } from "react-router-dom"
 
 
