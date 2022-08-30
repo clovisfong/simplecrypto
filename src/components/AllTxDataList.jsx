@@ -2,11 +2,14 @@ import MultiselectCheckBox from "./MultiselectCheckBox"
 import SingleSelect from "./SingleSelect"
 import methodTable from "../data/methodTable"
 import { useState } from "react"
+import { Link, useSearchParams } from "react-router-dom"
 
 
 const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
     const [page, setPage] = useState(10)
+    let [searchParams, setSearchParams] = useSearchParams();
+
 
 
     const handleWalletAdd = (wallet) => () => {
@@ -163,7 +166,10 @@ const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
     }
 
     const handlePage = (event) => {
+
         setPage(event.target.value * 10)
+        setSearchParams({ page: event.target.value })
+
     }
 
 
