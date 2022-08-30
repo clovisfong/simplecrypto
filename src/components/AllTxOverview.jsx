@@ -1,13 +1,15 @@
+import AllTxTotalFlow from "./AllTxTotalFlow"
+import AllTxWalletByTxFreq from "./AllTxWalletByTxFreq"
 
-const AllTxOverview = () => {
+const AllTxOverview = ({ walletTx, address }) => {
 
     return (
         <div>
             <h3>All Tx overview</h3>
-            {/* <MostTransactedNftTokens defaultTx={defaultTx} />
-            <NftMethodWeightage defaultTx={defaultTx} address={address} />
-            <MostTransactedWalletForNft defaultTx={defaultTx} address={address} />
-            <NftHoldingPeriod defaultTx={defaultTx} address={address} /> */}
+            <AllTxTotalFlow walletTx={walletTx} address={address} />
+            <AllTxWalletByTxFreq walletTx={walletTx} address={address} />
+
+
         </div>
     )
 }
