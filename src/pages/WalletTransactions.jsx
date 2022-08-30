@@ -22,8 +22,6 @@ const WalletTransactions = () => {
         // fetch(ethCurrentPrice)
         //     .then((response) => response.json())
         //     .then((data) => setEthPrice(data.result.ethusd))
-
-
     }, [])
 
 

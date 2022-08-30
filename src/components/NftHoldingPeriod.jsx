@@ -43,7 +43,7 @@ const NftHoldingPeriod = ({ defaultTx, address }) => {
         sortHighToLow.slice(0, 5).map((token) => {
             return (
                 <li key={token.name + token.id}>
-                    {token.name} - {displayTimeDifference(token.holding_period)}</li>
+                    {token.name} - {displayTimeDifference(token.holding_period)} - {token.status}</li>
             )
         })
 

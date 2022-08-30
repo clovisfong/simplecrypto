@@ -5,26 +5,26 @@ import SingleSelect from "./SingleSelect"
 import methodTable from "../data/methodTable"
 
 
-const AllTxDataList = () => {
-    const [walletTx, setWalletTx] = useState([])
-    const [defaultTx, setDefaultTx] = useState([])
+const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
+    // const [walletTx, setWalletTx] = useState([])
+    // const [defaultTx, setDefaultTx] = useState([])
 
-    const { address } = useParams()
-    const walletAdd = address
-    const walletTxUrl = `https://api.etherscan.io/api?module=account&action=txlist&address=${walletAdd}&startblock=0&endblock=99999999&sort=desc&apikey=F6FCNKMHH6SHM35Z3H399A1VDB9S3H24WA`
+    // const { address } = useParams()
+    // const walletAdd = address
+    // const walletTxUrl = `https://api.etherscan.io/api?module=account&action=txlist&address=${walletAdd}&startblock=0&endblock=99999999&sort=desc&apikey=F6FCNKMHH6SHM35Z3H399A1VDB9S3H24WA`
 
 
 
-    useEffect(() => {
-        fetch(walletTxUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                return (
-                    setWalletTx(data.result),
-                    setDefaultTx(data.result)
-                )
-            })
-    }, [])
+    // useEffect(() => {
+    //     fetch(walletTxUrl)
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             return (
+    //                 setWalletTx(data.result),
+    //                 setDefaultTx(data.result)
+    //             )
+    //         })
+    // }, [])
 
 
 
@@ -70,9 +70,9 @@ const AllTxDataList = () => {
         const methodDataArr = Object.values(methodTable)
         const methodsToFilter = methodDataArr.filter((method) => selectedMethodsArr.some((select) => select === method.replace)).map(method => method.contain)
         if (methodsToFilter.length === 0) {
-            setWalletTx(defaultTx)
+            updateWalletTx(defaultTx)
         } else {
-            setWalletTx(
+            updateWalletTx(
                 defaultTx.filter((tx) => methodsToFilter.some(
                     (methodType) => {
                         if (methodType !== methodTable.otherTransactions.contain) {
@@ -100,14 +100,14 @@ const AllTxDataList = () => {
         if (event[0].key === sortOptions.time[0].key) {
             const sortArrByEarliest = [...walletTx]
             sortArrByEarliest.sort((a, b) => a?.timeStamp - b?.timeStamp)
-            setWalletTx(sortArrByEarliest)
+            updateWalletTx(sortArrByEarliest)
 
         } else if (event[0].key === sortOptions.time[1].key) {
             const sortArrByLatest = [...walletTx]
             sortArrByLatest.sort((a, b) => b?.timeStamp - a?.timeStamp)
-            setWalletTx(sortArrByLatest)
+            updateWalletTx(sortArrByLatest)
         } else {
-            setWalletTx(defaultTx)
+            updateWalletTx(defaultTx)
 
         }
     }
@@ -120,14 +120,14 @@ const AllTxDataList = () => {
         if (event[0].key === sortOptions.value[0].key) {
             const sortArrByLowestVal = [...walletTx]
             sortArrByLowestVal.sort((a, b) => a?.value - b?.value)
-            setWalletTx(sortArrByLowestVal)
+            updateWalletTx(sortArrByLowestVal)
 
         } else if (event[0].key === sortOptions.value[1].key) {
             const sortArrByHighestVal = [...walletTx]
             sortArrByHighestVal.sort((a, b) => b?.value - a?.value)
-            setWalletTx(sortArrByHighestVal)
+            updateWalletTx(sortArrByHighestVal)
         } else {
-            setWalletTx(defaultTx)
+            updateWalletTx(defaultTx)
 
         }
     }
@@ -138,14 +138,14 @@ const AllTxDataList = () => {
         if (event[0].key === sortOptions.status[0].key) {
             const sortArrBySuccess = [...walletTx]
             sortArrBySuccess.sort((a, b) => a?.isError - b?.isError)
-            setWalletTx(sortArrBySuccess)
+            updateWalletTx(sortArrBySuccess)
 
         } else if (event[0].key === sortOptions.status[1].key) {
             const sortArrByFail = [...walletTx]
             sortArrByFail.sort((a, b) => b?.isError - a?.isError)
-            setWalletTx(sortArrByFail)
+            updateWalletTx(sortArrByFail)
         } else {
-            setWalletTx(defaultTx)
+            updateWalletTx(defaultTx)
 
         }
     }
@@ -201,10 +201,10 @@ const AllTxDataList = () => {
                             <td>{(trans.value / 1000000000000000000).toFixed(2)} ETH</td>
                             <td>{trans.isError === '0' ? 'Success' : 'Fail'}</td>
                             <td onClick={handleWalletAdd(trans.from)} style={{ cursor: 'pointer' }}>
-                                {trans.from === walletAdd.toLowerCase() ? "My Wallet" : trans.from.substring(2, 8)}
+                                {trans.from === address.toLowerCase() ? "My Wallet" : trans.from.substring(2, 8)}
                             </td>
                             <td onClick={handleWalletAdd(trans.to)} style={{ cursor: 'pointer' }}>
-                                {trans.to === walletAdd.toLowerCase() ? 'My Wallet' : trans.to.substring(2, 8)}</td>
+                                {trans.to === address.toLowerCase() ? 'My Wallet' : trans.to.substring(2, 8)}</td>
                         </tr>
                     )}
                 </tbody>
