@@ -28,7 +28,7 @@ function App() {
         <Route path='/wallet-balance/:address/crypto' element={<CryptoBalDashboard />} />
         <Route path='/wallet-balance/:address/nft' element={<NftBalDashBoard />} />
 
-
+        {/* <Route path='/wallet-balance/:address/transaction-history/:wallet' element={<NftBalDashBoard />} /> */}
       </Routes>
 
     </BrowserRouter>

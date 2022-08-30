@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const AllTxWalletByTotalTxValue = ({ defaultTx, address }) => {
 
 
@@ -32,8 +34,8 @@ const AllTxWalletByTotalTxValue = ({ defaultTx, address }) => {
     const displaytopFiveFromAdd = (topFiveAdd) =>
         topFiveAdd.map((token, index) => {
             return (
-                <li key={index}>
-                    {token.name}  - {token.value} ETH
+                <li key={index}><Link to={`/wallet-transactions/${address}/transaction-history/${token.name}`}>
+                    {token.name}</Link>  - {token.value} ETH
 
                 </li>
             )

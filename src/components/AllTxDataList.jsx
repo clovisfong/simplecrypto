@@ -1,9 +1,12 @@
 import MultiselectCheckBox from "./MultiselectCheckBox"
 import SingleSelect from "./SingleSelect"
 import methodTable from "../data/methodTable"
+import { useState } from "react"
 
 
 const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
+
+    const [page, setPage] = useState(10)
 
 
     const handleWalletAdd = (wallet) => () => {
@@ -152,8 +155,24 @@ const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
 
 
+    const totalPages = Math.ceil(walletTx.length / 10)
+    const pageNumArr = []
+
+    for (let i = 1; i <= totalPages; i++) {
+        pageNumArr.push(i)
+    }
+
+    const handlePage = (event) => {
+        setPage(event.target.value * 10)
+    }
+
+
+
+
     return (
         <div>
+            {pageNumArr.map((page) =>
+                <button onClick={handlePage} value={page} key={page}>{page}</button>)}
             <table>
                 <thead>
                     <tr>
@@ -171,7 +190,7 @@ const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {walletTx.map(trans =>
+                    {walletTx.slice(page - 10, page).map(trans =>
                         <tr key={trans.hash}>
                             <td><a href={`https://etherscan.io/tx/${trans.hash}`}>{trans.hash.substring(2, 8)}...</a></td>
                             <td>{groupMethod(trans.functionName)}</td>
