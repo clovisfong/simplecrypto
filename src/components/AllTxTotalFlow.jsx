@@ -1,10 +1,10 @@
-const AllTxTotalFlow = ({ walletTx, address }) => {
+const AllTxTotalFlow = ({ defaultTx, address }) => {
 
-    const outflowWallets = walletTx.filter((tx) => tx.from === address.toLowerCase() && tx.isError == 0)
+    const outflowWallets = defaultTx.filter((tx) => tx.from === address.toLowerCase() && tx.isError == 0)
     const totalEthOutflow = (outflowWallets.reduce((acc, tx) => acc + Number(tx.value), 0) / 1000000000000000000).toFixed(2)
 
 
-    const inflowWallets = walletTx.filter((tx) => tx.to === address.toLowerCase() && tx.isError == 0)
+    const inflowWallets = defaultTx.filter((tx) => tx.to === address.toLowerCase() && tx.isError == 0)
     console.log(inflowWallets)
     const totalEthInflow = (inflowWallets.reduce((acc, tx) => acc + Number(tx.value), 0) / 1000000000000000000).toFixed(2)
 

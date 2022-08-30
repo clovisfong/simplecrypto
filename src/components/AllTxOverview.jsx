@@ -1,13 +1,13 @@
 import AllTxTotalFlow from "./AllTxTotalFlow"
 import AllTxWalletByTxFreq from "./AllTxWalletByTxFreq"
 
-const AllTxOverview = ({ walletTx, address }) => {
+const AllTxOverview = ({ defaultTx, address }) => {
 
     return (
         <div>
             <h3>All Tx overview</h3>
-            <AllTxTotalFlow walletTx={walletTx} address={address} />
-            <AllTxWalletByTxFreq walletTx={walletTx} address={address} />
+            <AllTxTotalFlow defaultTx={defaultTx} address={address} />
+            <AllTxWalletByTxFreq defaultTx={defaultTx} address={address} />
 
 
         </div>

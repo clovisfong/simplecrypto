@@ -35,7 +35,7 @@ const AllTxDashboard = () => {
         <div>
             <WalletTransactions />
             <NavBarTx />
-            <AllTxOverview walletTx={walletTx} address={address} />
+            <AllTxOverview defaultTx={defaultTx} address={address} />
             <AllTxDataList walletTx={walletTx} updateWalletTx={updateWalletTx} defaultTx={defaultTx} address={address} />
 
         </div>
