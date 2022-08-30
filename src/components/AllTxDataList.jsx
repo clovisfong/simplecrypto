@@ -1,14 +1,15 @@
 import MultiselectCheckBox from "./MultiselectCheckBox"
 import SingleSelect from "./SingleSelect"
 import methodTable from "../data/methodTable"
-import { useState } from "react"
-import { Link, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 
 const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
-    const [page, setPage] = useState(10)
-    let [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams(1);
+
+
+    const pageNum = searchParams.get('page')
 
 
 
@@ -74,7 +75,6 @@ const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                 )))
 
         }
-
     }
 
 
@@ -167,7 +167,6 @@ const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
     const handlePage = (event) => {
 
-        setPage(event.target.value * 10)
         setSearchParams({ page: event.target.value })
 
     }
@@ -196,7 +195,7 @@ const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {walletTx.slice(page - 10, page).map(trans =>
+                    {walletTx.slice((pageNum * 10) - 10, pageNum * 10).map(trans =>
                         <tr key={trans.hash}>
                             <td><a href={`https://etherscan.io/tx/${trans.hash}`}>{trans.hash.substring(2, 8)}...</a></td>
                             <td>{groupMethod(trans.functionName)}</td>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const AllTxWalletByTotalTxValue = ({ defaultTx, address }) => {
 
 
-    const fromAddresses = defaultTx.filter((tx) => (tx.to === address.toLowerCase()))
+    const fromAddresses = defaultTx.filter((tx) => (tx.to === address.toLowerCase() && tx.isError == 0))
 
     const txPerFromAdd = {}
     fromAddresses.forEach((add) => txPerFromAdd[add.from] = (txPerFromAdd[add.from] === undefined ? Number(add.value) : txPerFromAdd[add.from] + Number(add.value)))
@@ -17,7 +17,7 @@ const AllTxWalletByTotalTxValue = ({ defaultTx, address }) => {
 
 
 
-    const toAddresses = defaultTx.filter((tx) => (tx.from === address.toLowerCase()))
+    const toAddresses = defaultTx.filter((tx) => (tx.from === address.toLowerCase() && tx.isError == 0))
 
     const txPerToAdd = {}
     toAddresses.forEach((add) => txPerToAdd[add.to] = (txPerToAdd[add.to] === undefined ? Number(add.value) : txPerToAdd[add.to] + Number(add.value)))
@@ -49,11 +49,11 @@ const AllTxWalletByTotalTxValue = ({ defaultTx, address }) => {
         <div>
             <h4>Top 5 Transacted Wallet</h4>
             <ul>
-                Outflow
+                Inflow From
                 {displaytopFiveFromAdd(topFiveFromAdd)}
             </ul>
             <ul>
-                Inflow
+                Outflow To
                 {displaytopFiveFromAdd(topFiveToAdd)}
             </ul>
 
