@@ -1,5 +1,5 @@
 const cryptoBalSortOptions = {
-    // time: [{ key: 'Earliest' }, { key: 'Latest' }, { key: 'Default' }],
+    value: [{ key: 'Lowest' }, { key: 'Highest' }, { key: 'Default' }],
     type: [{ key: 'cryptocurrency' }, { key: 'stablecoin' }, { key: 'dust' }, { key: 'Default' }]
 }
 

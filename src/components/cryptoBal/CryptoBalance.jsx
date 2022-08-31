@@ -6,7 +6,8 @@ const CryptoBalance = ({ walletBalance, defaultBal, updateWalletBalance }) => {
 
     const quantifiableTokens = walletBalance.filter((token) => (token.balance / 1000000000000000000) > 0.0099 ? token.balance : false)
 
-    console.log(walletBalance.map((tx) => tx.type))
+    console.log('thus', defaultBal.map((tx) => tx.quote_rate))
+
 
     const handleType = (event) => {
         if (event[0].key !== cryptoBalSortOptions.type[3].key) {
@@ -15,8 +16,27 @@ const CryptoBalance = ({ walletBalance, defaultBal, updateWalletBalance }) => {
         } else {
             updateWalletBalance(defaultBal)
         }
+    }
+
+    const handleValue = (event) => {
+        if (event[0].key === cryptoBalSortOptions.value[0].key) {
+            const sortArrByLowest = defaultBal.sort((a, b) => Number(a?.quote_rate) - Number(b?.quote_rate))
+            console.log(sortArrByLowest)
+            updateWalletBalance([...sortArrByLowest])
+
+        } else if (event[0].key === cryptoBalSortOptions.value[1].key) {
+            const sortArrByHighest = defaultBal.sort((a, b) => Number(b?.quote_rate) - Number(a?.quote_rate))
+            updateWalletBalance([...sortArrByHighest])
+
+        } else {
+            updateWalletBalance(defaultBal)
+
+        }
+
 
     }
+
+
 
     return (
         <div>
@@ -26,7 +46,7 @@ const CryptoBalance = ({ walletBalance, defaultBal, updateWalletBalance }) => {
                         <th>Tokens</th>
                         <th>Type<SingleSelect handleClick={handleType} sortOptions={cryptoBalSortOptions.type} /></th>
                         <th>Quantity</th>
-                        <th>Total Value</th>
+                        <th>Total Value<SingleSelect handleClick={handleValue} sortOptions={cryptoBalSortOptions.value} /></th>
                     </tr>
                 </thead>
 
