@@ -7,8 +7,7 @@ import AllTxDashboard from './components/normalTx/AllTxDashboard'
 import CryptoDashboard from './components/cryptoTx/CryptoDashboard'
 import WalletBalance from './pages/WalletBalance'
 import CryptoBalDashboard from './components/cryptoBal/CryptoBalDashboard'
-import NftBalDashBoard from './components/NftBalDashboard'
-import { useEffect, useState } from 'react'
+import NftBalDashBoard from './components/nftBal/NftBalDashboard'
 import TxHistoryWithAdd from './pages/TxHistoryWithAdd'
 
 
