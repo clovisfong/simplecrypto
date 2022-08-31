@@ -1,14 +1,14 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
-import Home from './pages/Home'
-import WalletTransactions from './pages/WalletTransactions'
-import NftDashboard from './components/nftTx/NftDashboard'
-import CryptoDashboard from './components/cryptoTx/CryptoDashboard'
-import WalletBalance from './pages/WalletBalance'
-import CryptoBalDashboard from './components/cryptoBal/CryptoBalDashboard'
-import NftBalDashBoard from './components/nftBal/NftBalDashboard'
+import HomePage from './pages/HomePage'
+import TxHeader from './components/headers/TxHeader'
+import NftTxPage from './pages/NftTxPage'
+import CryptoTxPage from './pages/CryptoTxPage'
+import BalHeader from './components/headers/BalHeader'
+import NftBalPage from './pages/NftBalPage'
 import TxHistoryWithAdd from './pages/TxHistoryWithAdd'
-import NormalTxDashBoard from './components/normalTx/NormalTxDashBoard'
+import AllTxPage from './pages/AllTxPage'
+import CryptoBalPage from './pages/CryptoBalPage'
 
 
 
@@ -21,15 +21,14 @@ function App() {
     <BrowserRouter>
 
       <Routes>
-        <Route path='/home' element={<Home />} />
-        <Route index element={<Home />} />
-        <Route path='/wallet-transactions/:address' element={<WalletTransactions />} />
-        <Route path='/wallet-transactions/:address/all' element={<NormalTxDashBoard />} />
-        <Route path='/wallet-transactions/:address/nft' element={<NftDashboard />} />
-        <Route path='/wallet-transactions/:address/crypto' element={<CryptoDashboard />} />
-        <Route path='/wallet-balance/:address/' element={<WalletBalance />} />
-        <Route path='/wallet-balance/:address/crypto' element={<CryptoBalDashboard />} />
-        <Route path='/wallet-balance/:address/nft' element={<NftBalDashBoard />} />
+        <Route path='/home' element={<HomePage />} />
+        <Route index element={<HomePage />} />
+        <Route path='/wallet-transactions/:address/all' element={<AllTxPage />} />
+        <Route path='/wallet-transactions/:address/nft' element={<NftTxPage />} />
+        <Route path='/wallet-transactions/:address/crypto' element={<CryptoTxPage />} />
+        <Route path='/wallet-balance/:address/' element={<BalHeader />} />
+        <Route path='/wallet-balance/:address/crypto' element={<CryptoBalPage />} />
+        <Route path='/wallet-balance/:address/nft' element={<NftBalPage />} />
         <Route path='/wallet-transactions/:address/transaction-history/:wallet' element={< TxHistoryWithAdd />} />
       </Routes>
 

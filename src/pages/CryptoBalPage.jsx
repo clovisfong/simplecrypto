@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import WalletBalance from "../../pages/WalletBalance"
-import CryptoBalance from "./CryptoBalance"
-import NavBarBal from "../tools/NavBarBal"
+import BalHeader from "../components/headers/BalHeader"
+import NavBarBal from "../components/tools/NavBarBal"
+import CryptoBalance from '../components/cryptoBal/CryptoBalance'
 
-const CryptoBalDashboard = () => {
+const CryptoBalPage = () => {
 
 
     const [walletBalance, setWalletBalance] = useState([])
@@ -25,7 +25,7 @@ const CryptoBalDashboard = () => {
 
     return (
         <div>
-            <WalletBalance walletBalance={walletBalance} />
+            <BalHeader walletBalance={walletBalance} />
             <NavBarBal />
             <CryptoBalance walletBalance={walletBalance} />
 
@@ -35,4 +35,4 @@ const CryptoBalDashboard = () => {
     )
 }
 
-export default CryptoBalDashboard
+export default CryptoBalPage

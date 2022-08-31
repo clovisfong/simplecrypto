@@ -8,7 +8,6 @@ const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
     const [searchParams, setSearchParams] = useSearchParams(1);
 
-
     const pageNum = searchParams.get('page')
 
 

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import WalletTransactions from "../../pages/WalletTransactions"
-import NavBarTx from "../tools/NavBarTx"
-import NftDataList from "./NftDataList"
-import NftOverview from "./NftOverview"
+import TxHeader from "../components/headers/TxHeader"
+import NavBarTx from "../components/tools/NavBarTx"
+import NftDataList from "../components/nftTx/NftDataList"
+import NftOverview from "../components/nftTx/NftOverview"
 
-const NftDashboard = () => {
+const NftTxPage = () => {
 
     const [nftTx, setNftTx] = useState()
     const [defaultTx, setDefaultTx] = useState([])
@@ -30,7 +30,7 @@ const NftDashboard = () => {
 
     return (
         <div>
-            <WalletTransactions />
+            <TxHeader />
             <NavBarTx />
             <NftOverview defaultTx={defaultTx} address={address} />
             <NftDataList nftTx={nftTx} updateNftTx={updateNftTx} defaultTx={defaultTx} address={address} />
@@ -39,4 +39,4 @@ const NftDashboard = () => {
     )
 }
 
-export default NftDashboard
+export default NftTxPage

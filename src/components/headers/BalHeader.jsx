@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 
-const WalletBalance = ({ walletBalance }) => {
+const BalHeader = ({ walletBalance }) => {
 
     const quantifiableTokens = walletBalance.filter((token) => (token.balance / 1000000000000000000) > 0.0099 ? token.balance : false)
     const tokenValues = quantifiableTokens.map((token) => (token.balance * token.quote_rate / 1000000000000000000).toFixed(2))
@@ -26,4 +26,4 @@ const WalletBalance = ({ walletBalance }) => {
     )
 }
 
-export default WalletBalance
+export default BalHeader

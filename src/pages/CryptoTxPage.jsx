@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import CryptoDataList from "./CryptoDataList"
-import CryptoOverview from "./CryptoOverview"
-import NavBarTx from "../tools/NavBarTx"
-import WalletTransactions from "../../pages/WalletTransactions"
+import CryptoDataList from "../components/cryptoTx/CryptoDataList"
+import CryptoOverview from "../components/cryptoTx/CryptoOverview"
+import NavBarTx from "../components/tools/NavBarTx"
+import TxHeader from "../components/headers/TxHeader"
 
 
-const CryptoDashboard = () => {
+const CryptoTxPage = () => {
 
     const [cryptoTx, setCryptoTx] = useState()
     const [defaultTx, setDefaultTx] = useState([])
@@ -32,7 +32,7 @@ const CryptoDashboard = () => {
 
     return (
         <div>
-            <WalletTransactions />
+            <TxHeader />
             <NavBarTx />
             <CryptoOverview defaultTx={defaultTx} address={address} />
             <CryptoDataList cryptoTx={cryptoTx} updateCryptoTx={updateCryptoTx} defaultTx={defaultTx} address={address} />
@@ -40,4 +40,4 @@ const CryptoDashboard = () => {
     )
 }
 
-export default CryptoDashboard
+export default CryptoTxPage

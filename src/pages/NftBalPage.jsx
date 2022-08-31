@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import NavBarBal from "../tools/NavBarBal"
-import NftBalance from "./NftBalance"
+import NavBarBal from "../components/tools/NavBarBal"
+import NftBalance from "../components/nftBal/NftBalance"
 
-const NftBalDashBoard = () => {
+const NftBalPage = () => {
 
     const [walletNftBalance, setWalletNftBalance] = useState([])
 
@@ -38,4 +38,4 @@ const NftBalDashBoard = () => {
     )
 }
 
-export default NftBalDashBoard
+export default NftBalPage

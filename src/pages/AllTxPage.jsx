@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import WalletTransactions from "../../pages/WalletTransactions"
-import NavBarTx from "../tools/NavBarTx"
-import AllTxDataList from "./AllTxDataList"
-import AllTxOverview from "./AllTxOverview"
+import TxHeader from "../components/headers/TxHeader"
+import NavBarTx from "../components/tools/NavBarTx"
+import AllTxDataList from "../components/normalTx/AllTxDataList"
+import AllTxOverview from "../components/normalTx/AllTxOverview"
 
-const NormalTxDashBoard = () => {
+const AllTxPage = () => {
 
     const [walletTx, setWalletTx] = useState([])
     const [defaultTx, setDefaultTx] = useState([])
@@ -33,7 +33,7 @@ const NormalTxDashBoard = () => {
 
     return (
         <div>
-            <WalletTransactions />
+            <TxHeader />
             <NavBarTx />
             <AllTxOverview defaultTx={defaultTx} address={address} />
             <AllTxDataList walletTx={walletTx} updateWalletTx={updateWalletTx} defaultTx={defaultTx} address={address} />
@@ -42,4 +42,4 @@ const NormalTxDashBoard = () => {
     )
 }
 
-export default NormalTxDashBoard
+export default AllTxPage

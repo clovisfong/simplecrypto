@@ -1,7 +1,7 @@
 import SearchBar from "../components/tools/SearchBar"
 import { useState, useEffect } from "react"
 
-const Home = () => {
+const HomePage = () => {
 
 
 
@@ -17,4 +17,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default HomePage

@@ -5,7 +5,7 @@ const wallettest = '0xCDc7ba99391F3BE7E5Dc0e49cC8361B537cfC29b'
 
 // const ethCurrentPrice = 'https://api.etherscan.io/api?module=stats&action=ethprice&apikey=F6FCNKMHH6SHM35Z3H399A1VDB9S3H24WA'
 
-const WalletTransactions = () => {
+const TxHeader = () => {
     const [walletBal, setWalletBal] = useState()
     // const [ethPrice, setEthPrice] = useState()
 
@@ -49,4 +49,4 @@ const WalletTransactions = () => {
     )
 }
 
-export default WalletTransactions
+export default TxHeader
