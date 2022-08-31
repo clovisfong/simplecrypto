@@ -1,4 +1,4 @@
-import SearchBar from "../components/SearchBar"
+import SearchBar from "../components/tools/SearchBar"
 import { useState, useEffect } from "react"
 
 const Home = () => {

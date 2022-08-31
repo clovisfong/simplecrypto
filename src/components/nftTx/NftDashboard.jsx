@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import WalletTransactions from "../../pages/WalletTransactions"
-import NavBarTx from "../NavBarTx"
-
+import NavBarTx from "../tools/NavBarTx"
 import NftDataList from "./NftDataList"
 import NftOverview from "./NftOverview"
 

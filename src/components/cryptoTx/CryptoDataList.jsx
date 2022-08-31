@@ -1,5 +1,5 @@
-import SingleSelect from "../SingleSelect"
-import MultiselectCheckBox from "../MultiselectCheckBox"
+import SingleSelect from "../tools/SingleSelect"
+import MultiselectCheckBox from "../tools/MultiselectCheckBox"
 import sortOptions from "../../data/cryptoMethodTable"
 
 const CryptoDataList = ({ cryptoTx, updateCryptoTx, defaultTx, address }) => {

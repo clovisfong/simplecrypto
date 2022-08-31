@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import WalletTransactions from "../../pages/WalletTransactions"
 import AllTxDataList from "./AllTxDataList"
 import AllTxOverview from "./AllTxOverview"
-import NavBarTx from "../NavBarTx"
+import NavBarTx from "../tools/NavBarTx"
 
 const AllTxDashboard = () => {
 

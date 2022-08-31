@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import NavBarBal from "../NavBarBal"
+import NavBarBal from "../tools/NavBarBal"
 import NftBalance from "./NftBalance"
 
 const NftBalDashBoard = () => {

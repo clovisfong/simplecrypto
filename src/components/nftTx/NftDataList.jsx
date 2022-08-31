@@ -1,5 +1,5 @@
-import MultiselectCheckBox from "../MultiselectCheckBox"
-import SingleSelect from "../SingleSelect"
+import MultiselectCheckBox from "../tools/MultiselectCheckBox"
+import SingleSelect from "../tools/SingleSelect"
 import sortOptions from "../../data/cryptoMethodTable"
 
 
