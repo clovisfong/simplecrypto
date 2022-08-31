@@ -1,4 +1,4 @@
-const MostTransactedWalletForNft = ({ defaultTx, address }) => {
+const CryptoTxFlowByAdd = ({ defaultTx, address }) => {
 
 
     const fromAddresses = defaultTx.filter((tx) => ((tx.from !== address.toLowerCase() && tx.from !== '0x0000000000000000000000000000000000000000') && tx.from))
@@ -55,4 +55,4 @@ const MostTransactedWalletForNft = ({ defaultTx, address }) => {
     )
 }
 
-export default MostTransactedWalletForNft
+export default CryptoTxFlowByAdd

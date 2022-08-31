@@ -1,4 +1,4 @@
-const CryptoWalletByTxFreq = ({ defaultTx, address }) => {
+const NftTxFlowByAdd = ({ defaultTx, address }) => {
 
 
     const fromAddresses = defaultTx.filter((tx) => ((tx.from !== address.toLowerCase() && tx.from !== '0x0000000000000000000000000000000000000000') && tx.from))
@@ -55,4 +55,4 @@ const CryptoWalletByTxFreq = ({ defaultTx, address }) => {
     )
 }
 
-export default CryptoWalletByTxFreq
+export default NftTxFlowByAdd

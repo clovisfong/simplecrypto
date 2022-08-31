@@ -1,4 +1,4 @@
-const CryptoTxByTxCount = ({ defaultTx }) => {
+const CryptoTxCountByToken = ({ defaultTx }) => {
 
     const numOfTxPerToken = {}
     const tokenNamesArr = defaultTx.map((token) => token.tokenName)
@@ -39,4 +39,4 @@ const CryptoTxByTxCount = ({ defaultTx }) => {
     )
 }
 
-export default CryptoTxByTxCount
+export default CryptoTxCountByToken

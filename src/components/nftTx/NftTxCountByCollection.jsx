@@ -1,4 +1,4 @@
-const MostTransactedNftTokens = ({ defaultTx }) => {
+const NftTxCountByCollection = ({ defaultTx }) => {
 
     const numOfTxPerToken = {}
     const tokenNamesArr = defaultTx.map((token) => token.tokenName)
@@ -23,7 +23,7 @@ const MostTransactedNftTokens = ({ defaultTx }) => {
     return (
         <div>
 
-            <h4>Top 5 Transacted NFTs</h4>
+            <h4>Top 5 NFT Collections by Wallet Transactions</h4>
             <ul>
                 {displayTopFiveNft}
             </ul>
@@ -33,4 +33,4 @@ const MostTransactedNftTokens = ({ defaultTx }) => {
     )
 }
 
-export default MostTransactedNftTokens
+export default NftTxCountByCollection

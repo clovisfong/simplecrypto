@@ -1,6 +1,6 @@
 import CryptoMethodWeightage from "./CryptoMethodWeightage"
-import CryptoTxByTxCount from "./CryptoTxByTxCount"
-import CryptoWalletByTxFreq from "./CryptoWalletByTxFreq"
+import CryptoTxCountByToken from "./CryptoTxCountByToken"
+import CryptoTxFlowByAdd from "./CryptoTxFlowByAdd"
 
 
 const CryptoOverview = ({ defaultTx, address }) => {
@@ -8,9 +8,9 @@ const CryptoOverview = ({ defaultTx, address }) => {
     return (
         <div>
             <h3>Crypto overview</h3>
-            <CryptoTxByTxCount defaultTx={defaultTx} />
+            <CryptoTxCountByToken defaultTx={defaultTx} />
             <CryptoMethodWeightage defaultTx={defaultTx} address={address} />
-            <CryptoWalletByTxFreq defaultTx={defaultTx} address={address} />
+            <CryptoTxFlowByAdd defaultTx={defaultTx} address={address} />
 
         </div>
     )
