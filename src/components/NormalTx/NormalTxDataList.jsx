@@ -15,7 +15,6 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
     const pageNum = searchParams.get('page')
 
 
-
     const handleSelectMethod = (event) => {
 
         const selectedMethodsArr = event.map((item) => item.key)

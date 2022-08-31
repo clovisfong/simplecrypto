@@ -9,6 +9,7 @@ import NftBalPage from './pages/NftBalPage'
 import TxHistoryWithAdd from './pages/TxHistoryWithAdd'
 import AllTxPage from './pages/AllTxPage'
 import CryptoBalPage from './pages/CryptoBalPage'
+import NftTxHistoryWithAdd from './pages/NftTxHistoryWithAdd'
 
 
 
@@ -30,6 +31,8 @@ function App() {
         <Route path='/wallet-balance/:address/crypto' element={<CryptoBalPage />} />
         <Route path='/wallet-balance/:address/nft' element={<NftBalPage />} />
         <Route path='/wallet-transactions/:address/transaction-history/:wallet' element={< TxHistoryWithAdd />} />
+        <Route path='/wallet-transactions/:address/nft-transaction-history/:wallet' element={< NftTxHistoryWithAdd />} />
+
       </Routes>
 
     </BrowserRouter>

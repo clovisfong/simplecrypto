@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom"
+
 const TxFlowByAdd = ({ defaultTx, address }) => {
 
 
-    const fromAddresses = defaultTx.filter((tx) => ((tx.from !== address.toLowerCase() && tx.from !== '0x0000000000000000000000000000000000000000') && tx.from))
+    const fromAddresses = defaultTx.filter((tx) => ((tx.to === address.toLowerCase() && tx.from !== '0x0000000000000000000000000000000000000000') && tx.from))
         .map((tx) => tx.from)
 
-    const toAddresses = defaultTx.filter((tx) => ((tx.to !== address.toLowerCase() && tx.to !== '0x0000000000000000000000000000000000000000') && tx.to))
+    const toAddresses = defaultTx.filter((tx) => ((tx.from === address.toLowerCase() && tx.to !== '0x0000000000000000000000000000000000000000') && tx.to))
         .map((tx) => tx.to)
 
 
@@ -18,6 +20,7 @@ const TxFlowByAdd = ({ defaultTx, address }) => {
 
 
     const topFiveAddRankings = addressRankings.slice(0, 5)
+
 
 
 
@@ -37,9 +40,32 @@ const TxFlowByAdd = ({ defaultTx, address }) => {
 
     const displaytopFiveAdd =
         topFiveAddRankings.map((token, index) => {
-            return (
-                <li key={index}> {token.name}  - Total {token.count} - Outflow {NumOfTxPerFromAdd[token.name] || 0} - Inflow {NumOfTxPerToAdd[token.name] || 0}  </li>
-            )
+            if (defaultTx[0]?.isError === undefined) {
+                if (defaultTx[0]?.value === undefined) {
+                    return (
+                        <li key={index}>
+                            <Link to={`/wallet-transactions/${address}/nft-transaction-history/${token.name}`}>
+                                {token.name}</Link>
+                            - Total {token.count} - Outflow {NumOfTxPerFromAdd[token.name] || 0}
+                            - Inflow {NumOfTxPerToAdd[token.name] || 0}  </li>
+                    )
+                } else {
+
+                    return (
+                        <li key={index}>{token.name}
+                            - Total {token.count} - Outflow {NumOfTxPerFromAdd[token.name] || 0}
+                            - Inflow {NumOfTxPerToAdd[token.name] || 0}  </li>
+                    )
+                }
+            } else {
+                return (
+                    <li key={index}>
+                        <Link to={`/wallet-transactions/${address}/transaction-history/${token.name}`}>
+                            {token.name}</Link>
+                        - Total {token.count} - Outflow {NumOfTxPerFromAdd[token.name] || 0}
+                        - Inflow {NumOfTxPerToAdd[token.name] || 0}  </li>
+                )
+            }
         })
 
 

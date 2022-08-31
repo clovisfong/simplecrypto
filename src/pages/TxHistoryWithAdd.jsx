@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import allTxMethodReplaceTable from "../data/allTxMethodReplaceTable"
+import convertTimeStamp from "../components/tools/ConvertTimeStamp"
 
 const TxHistoryWithAdd = () => {
 
@@ -23,13 +24,6 @@ const TxHistoryWithAdd = () => {
     const inflowTx = walletTx.filter(tx => tx.from === wallet && tx.isError == 0)
 
 
-    const convertTime = (timestamp) => {
-        const num = Number(timestamp) * 1000
-        const date = new Date(num)
-
-        const formattedDate = (date.toLocaleString("en-US", { day: "numeric" }) + " " + date.toLocaleString("en-US", { month: "short" }) + " " + date.toLocaleString("en-US", { year: "numeric" }))
-        return (formattedDate)
-    }
 
     const groupMethod = (funcName) => {
         return (
@@ -82,7 +76,7 @@ const TxHistoryWithAdd = () => {
                         <tr key={tx.hash}>
                             <td><a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a></td>
                             <td>{groupMethod(tx.functionName)}</td>
-                            <td>{convertTime(tx.timeStamp)}</td>
+                            <td>{convertTimeStamp(tx.timeStamp)}</td>
                             <td>{(tx.value / 1000000000000000000).toFixed(2)} ETH</td>
                             <td>{tx.isError === '0' ? 'Success' : 'Fail'}</td>
                         </tr>
@@ -106,7 +100,7 @@ const TxHistoryWithAdd = () => {
                         <tr key={tx.hash}>
                             <td><a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a></td>
                             <td>{groupMethod(tx.functionName)}</td>
-                            <td>{convertTime(tx.timeStamp)}</td>
+                            <td>{convertTimeStamp(tx.timeStamp)}</td>
                             <td>{(tx.value / 1000000000000000000).toFixed(2)} ETH</td>
                             <td>{tx.isError === '0' ? 'Success' : 'Fail'}</td>
                         </tr>
