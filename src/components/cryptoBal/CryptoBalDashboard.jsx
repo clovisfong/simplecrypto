@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import WalletBalance from "../pages/WalletBalance"
+import WalletBalance from "../../pages/WalletBalance"
 import CryptoBalance from "./CryptoBalance"
-import NavBarBal from "./NavBarBal"
+import NavBarBal from "../NavBarBal"
 
 const CryptoBalDashboard = () => {
 
