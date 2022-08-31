@@ -6,6 +6,7 @@ const SingleSelect = ({ handleClick, sortOptions }) => {
 
     const [isPopoverOpen, setIsPopoverOpen] = useState(false)
 
+
     return (
         <>
             <Popover

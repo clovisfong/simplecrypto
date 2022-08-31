@@ -1,55 +1,25 @@
 import MultiselectCheckBox from "../tools/MultiselectCheckBox"
 import SingleSelect from "../tools/SingleSelect"
-import methodTable from "../../data/methodTable"
+import allTxMethodReplaceTable from "../../data/allTxMethodReplaceTable"
 import { useSearchParams } from "react-router-dom"
 import CopyOnClick from "../tools/CopyOnClick"
+import convertTimeStamp from "../tools/ConvertTimeStamp"
+import allTxSortOptions from "../../data/allTXSortOptions"
+
 
 
 const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
     const [searchParams, setSearchParams] = useSearchParams(1);
 
-
     const pageNum = searchParams.get('page')
-
-
-
-    const convertTime = (timestamp) => {
-        const num = Number(timestamp) * 1000
-        const date = new Date(num)
-
-        const formattedDate = (date.toLocaleString("en-US", { day: "numeric" }) + " " + date.toLocaleString("en-US", { month: "short" }) + " " + date.toLocaleString("en-US", { year: "numeric" }))
-        return (formattedDate)
-    }
-
-
-    const sortOptions = {
-        method: [
-            { key: methodTable.ethTransfer.replace },
-            { key: methodTable.otherErc20Transfer.replace },
-            { key: methodTable.deposit.replace },
-            { key: methodTable.multicall.replace },
-            { key: methodTable.swap.replace },
-            { key: methodTable.mint.replace },
-            { key: methodTable.nftTransfer.replace },
-            { key: methodTable.nftPurchase.replace },
-            { key: methodTable.cancelOrder.replace },
-            { key: methodTable.approval.replace },
-            { key: methodTable.stake.replace },
-            { key: methodTable.claim.replace },
-            { key: methodTable.otherTransactions.replace }
-        ],
-        time: [{ key: 'Earliest' }, { key: 'Latest' }, { key: 'Default' }],
-        value: [{ key: 'Low-High' }, { key: 'High-Low' }, { key: 'Default' }],
-        status: [{ key: 'Success' }, { key: 'Fail' }, { key: 'Default' }],
-    }
 
 
 
     const handleSelectMethod = (event) => {
 
         const selectedMethodsArr = event.map((item) => item.key)
-        const methodDataArr = Object.values(methodTable)
+        const methodDataArr = Object.values(allTxMethodReplaceTable)
         const methodsToFilter = methodDataArr.filter((method) => selectedMethodsArr.some((select) => select === method.replace)).map(method => method.contain)
         if (methodsToFilter.length === 0) {
             updateWalletTx(defaultTx)
@@ -57,12 +27,12 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
             updateWalletTx(
                 defaultTx.filter((tx) => methodsToFilter.some(
                     (methodType) => {
-                        if (methodType !== methodTable.otherTransactions.contain) {
+                        if (methodType !== allTxMethodReplaceTable.otherTransactions.contain) {
                             return (
                                 tx.functionName === methodType ||
-                                ((methodType !== methodTable.ethTransfer.contain) && tx.functionName.toLowerCase().includes(methodType))
+                                ((methodType !== allTxMethodReplaceTable.ethTransfer.contain) && tx.functionName.toLowerCase().includes(methodType))
                             )
-                        } else if (methodType === methodTable.otherTransactions.contain) {
+                        } else if (methodType === allTxMethodReplaceTable.otherTransactions.contain) {
                             return (
                                 groupMethod(tx.functionName) === methodType
                             )
@@ -76,79 +46,37 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
 
 
-    const handleTime = (event) => {
+    const handleFilter = (event, header, type) => {
 
-        if (event[0].key === sortOptions.time[0].key) {
-            const sortArrByEarliest = [...walletTx]
-            sortArrByEarliest.sort((a, b) => a?.timeStamp - b?.timeStamp)
-            updateWalletTx(sortArrByEarliest)
+        if (event[0].key === allTxSortOptions[header][0].key) {
+            const sortArrByEarliest = walletTx.sort((a, b) => a?.[type] - b?.[type])
+            updateWalletTx([...sortArrByEarliest])
 
-        } else if (event[0].key === sortOptions.time[1].key) {
-            const sortArrByLatest = [...walletTx]
-            sortArrByLatest.sort((a, b) => b?.timeStamp - a?.timeStamp)
-            updateWalletTx(sortArrByLatest)
+        } else if (event[0].key === allTxSortOptions[header][1].key) {
+            const sortArrByLatest = walletTx.sort((a, b) => b?.[type] - a?.[type])
+            updateWalletTx([...sortArrByLatest])
         } else {
             updateWalletTx(defaultTx)
-
         }
     }
-
-
-    const handleValue = (event) => {
-
-        console.log(event[0])
-
-        if (event[0].key === sortOptions.value[0].key) {
-            const sortArrByLowestVal = [...walletTx]
-            sortArrByLowestVal.sort((a, b) => a?.value - b?.value)
-            updateWalletTx(sortArrByLowestVal)
-
-        } else if (event[0].key === sortOptions.value[1].key) {
-            const sortArrByHighestVal = [...walletTx]
-            sortArrByHighestVal.sort((a, b) => b?.value - a?.value)
-            updateWalletTx(sortArrByHighestVal)
-        } else {
-            updateWalletTx(defaultTx)
-
-        }
-    }
-
-    const handleStatus = (event) => {
-
-
-        if (event[0].key === sortOptions.status[0].key) {
-            const sortArrBySuccess = [...walletTx]
-            sortArrBySuccess.sort((a, b) => a?.isError - b?.isError)
-            updateWalletTx(sortArrBySuccess)
-
-        } else if (event[0].key === sortOptions.status[1].key) {
-            const sortArrByFail = [...walletTx]
-            sortArrByFail.sort((a, b) => b?.isError - a?.isError)
-            updateWalletTx(sortArrByFail)
-        } else {
-            updateWalletTx(defaultTx)
-
-        }
-    }
-
 
 
 
     const groupMethod = (funcName) => {
         return (
-            funcName === methodTable.ethTransfer.contain ? methodTable.ethTransfer.replace :
-                funcName === methodTable.otherErc20Transfer.contain ? methodTable.otherErc20Transfer.replace :
-                    funcName.toLowerCase().includes(methodTable.deposit.contain) ? methodTable.deposit.replace :
-                        funcName.toLowerCase().includes(methodTable.multicall.contain) ? methodTable.multicall.replace :
-                            funcName.toLowerCase().includes(methodTable.swap.contain) ? methodTable.swap.replace :
-                                funcName.toLowerCase().includes(methodTable.mint.contain) ? methodTable.mint.replace :
-                                    funcName.toLowerCase().includes(methodTable.nftTransfer.contain) ? methodTable.nftTransfer.replace :
-                                        funcName === methodTable.nftPurchase.contain ? methodTable.nftPurchase.replace :
-                                            funcName.toLowerCase().includes(methodTable.cancelOrder.contain) ? methodTable.cancelOrder.replace :
-                                                funcName.toLowerCase().includes(methodTable.approval.contain) ? methodTable.approval.replace :
-                                                    funcName.toLowerCase().includes(methodTable.stake.contain) ? methodTable.stake.replace :
-                                                        funcName.toLowerCase().includes(methodTable.claim.contain) ? methodTable.claim.replace :
-                                                            methodTable.otherTransactions.replace
+            funcName === allTxMethodReplaceTable.ethTransfer.contain ? allTxMethodReplaceTable.ethTransfer.replace :
+                funcName === allTxMethodReplaceTable.otherErc20Transfer.contain ? allTxMethodReplaceTable.otherErc20Transfer.replace :
+                    funcName.toLowerCase().includes(allTxMethodReplaceTable.deposit.contain) ? allTxMethodReplaceTable.deposit.replace :
+                        funcName.toLowerCase().includes(allTxMethodReplaceTable.multicall.contain) ? allTxMethodReplaceTable.multicall.replace :
+                            funcName.toLowerCase().includes(allTxMethodReplaceTable.swap.contain) ? allTxMethodReplaceTable.swap.replace :
+                                funcName.toLowerCase().includes(allTxMethodReplaceTable.mint.contain) ? allTxMethodReplaceTable.mint.replace :
+                                    funcName.toLowerCase().includes(allTxMethodReplaceTable.nftTransfer.contain) ? allTxMethodReplaceTable.nftTransfer.replace :
+                                        funcName === allTxMethodReplaceTable.nftPurchase.contain ? allTxMethodReplaceTable.nftPurchase.replace :
+                                            funcName.toLowerCase().includes(allTxMethodReplaceTable.cancelOrder.contain) ? allTxMethodReplaceTable.cancelOrder.replace :
+                                                funcName.toLowerCase().includes(allTxMethodReplaceTable.approval.contain) ? allTxMethodReplaceTable.approval.replace :
+                                                    funcName.toLowerCase().includes(allTxMethodReplaceTable.stake.contain) ? allTxMethodReplaceTable.stake.replace :
+                                                        funcName.toLowerCase().includes(allTxMethodReplaceTable.claim.contain) ? allTxMethodReplaceTable.claim.replace :
+                                                            allTxMethodReplaceTable.otherTransactions.replace
 
         )
     }
@@ -169,18 +97,23 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
     }
 
 
+
+
+
+
     return (
         <div>
+
             {pageNumArr.map((page) =>
                 <button onClick={handlePage} value={page} key={page}>{page}</button>)}
             <table>
                 <thead>
                     <tr>
                         <th>Hash</th>
-                        <th>Method<MultiselectCheckBox handleClick={handleSelectMethod} sortOptions={sortOptions.method} /></th>
-                        <th>Time<SingleSelect handleClick={handleTime} sortOptions={sortOptions.time} /></th>
-                        <th>Value<SingleSelect handleClick={handleValue} sortOptions={sortOptions.value} /></th>
-                        <th>Status<SingleSelect handleClick={handleStatus} sortOptions={sortOptions.status} /></th>
+                        <th>Method<MultiselectCheckBox handleClick={handleSelectMethod} sortOptions={allTxSortOptions.method} /></th>
+                        <th>Time<SingleSelect handleClick={(e) => handleFilter(e, 'time', 'timeStamp')} sortOptions={allTxSortOptions.time} /></th>
+                        <th>Value<SingleSelect handleClick={(e) => handleFilter(e, 'value', 'value')} sortOptions={allTxSortOptions.value} /></th>
+                        <th>Status<SingleSelect handleClick={(e) => handleFilter(e, 'status', 'isError')} sortOptions={allTxSortOptions.status} /></th>
                         <th>From<select onChange={(e) => console.log(e.target.value)}>
                             <option value='Low-High'>Low to High</option>
                             <option value='High-Low'>High to Low</option>
@@ -194,7 +127,7 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                         <tr key={trans.hash}>
                             <td><a href={`https://etherscan.io/tx/${trans.hash}`}>{trans.hash.substring(2, 8)}...</a></td>
                             <td>{groupMethod(trans.functionName)}</td>
-                            <td>{convertTime(trans.timeStamp)}</td>
+                            <td>{convertTimeStamp(trans.timeStamp)}</td>
                             <td>{(trans.value / 1000000000000000000).toFixed(2)} ETH</td>
                             <td>{trans.isError === '0' ? 'Success' : 'Fail'}</td>
                             <td onClick={CopyOnClick(trans.from)} style={{ cursor: 'pointer' }}>

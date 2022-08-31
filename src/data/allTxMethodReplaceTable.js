@@ -1,4 +1,4 @@
-const methodTable = {
+const allTxMethodReplaceTable = {
     ethTransfer: { contain: '', replace: 'ETH Transfer' },
     otherErc20Transfer: { contain: 'transfer(address _to, uint256 _value)', replace: 'Other ERC20 Transfer' },
     deposit: { contain: 'deposit', replace: 'Deposit' },
@@ -14,4 +14,4 @@ const methodTable = {
     otherTransactions: { contain: 'Other Transactions', replace: 'Other Transactions' }
 }
 
-export default methodTable
+export default allTxMethodReplaceTable

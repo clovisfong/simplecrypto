@@ -1,11 +1,11 @@
-import sortOptions from "../../data/cryptoMethodTable"
+import cryptoSortOptions from "../../data/cryptoSortOptions"
 
 const CryptoMethodWeightage = ({ defaultTx, address }) => {
 
     const assignTxMethod = (txFrom, txTo) => {
         return (
-            txFrom === address.toLowerCase() && txTo !== address.toLowerCase() ? sortOptions.method[0].key :
-                txFrom !== address.toLowerCase() && txTo === address.toLowerCase() ? sortOptions.method[1].key : sortOptions.method[2].key
+            txFrom === address.toLowerCase() && txTo !== address.toLowerCase() ? cryptoSortOptions.method[0].key :
+                txFrom !== address.toLowerCase() && txTo === address.toLowerCase() ? cryptoSortOptions.method[1].key : cryptoSortOptions.method[2].key
         )
     }
 

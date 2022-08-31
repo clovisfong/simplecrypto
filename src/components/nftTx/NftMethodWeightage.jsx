@@ -1,12 +1,12 @@
-import sortOptions from "../../data/cryptoMethodTable"
+import nftSortOptions from "../../data/nftSortOptions"
 
 const NftMethodWeightage = ({ defaultTx, address }) => {
 
     const assignTxMethod = (txFrom, txTo) => {
         return (
-            txFrom === address.toLowerCase() && txTo !== address.toLowerCase() ? sortOptions.method[0].key :
-                txFrom === '0x0000000000000000000000000000000000000000' && txTo === address.toLowerCase() ? sortOptions.method[1].key :
-                    txFrom !== address.toLowerCase() && txTo === address.toLowerCase() ? sortOptions.method[2].key : sortOptions.method[3].key
+            txFrom === address.toLowerCase() && txTo !== address.toLowerCase() ? nftSortOptions.method[0].key :
+                txFrom === '0x0000000000000000000000000000000000000000' && txTo === address.toLowerCase() ? nftSortOptions.method[1].key :
+                    txFrom !== address.toLowerCase() && txTo === address.toLowerCase() ? nftSortOptions.method[2].key : nftSortOptions.method[3].key
         )
     }
 

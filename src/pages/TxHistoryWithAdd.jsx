@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import methodTable from "../data/methodTable"
+import allTxMethodReplaceTable from "../data/allTxMethodReplaceTable"
 
 const TxHistoryWithAdd = () => {
 
@@ -33,19 +33,19 @@ const TxHistoryWithAdd = () => {
 
     const groupMethod = (funcName) => {
         return (
-            funcName === methodTable.ethTransfer.contain ? methodTable.ethTransfer.replace :
-                funcName === methodTable.otherErc20Transfer.contain ? methodTable.otherErc20Transfer.replace :
-                    funcName.toLowerCase().includes(methodTable.deposit.contain) ? methodTable.deposit.replace :
-                        funcName.toLowerCase().includes(methodTable.multicall.contain) ? methodTable.multicall.replace :
-                            funcName.toLowerCase().includes(methodTable.swap.contain) ? methodTable.swap.replace :
-                                funcName.toLowerCase().includes(methodTable.mint.contain) ? methodTable.mint.replace :
-                                    funcName.toLowerCase().includes(methodTable.nftTransfer.contain) ? methodTable.nftTransfer.replace :
-                                        funcName === methodTable.nftPurchase.contain ? methodTable.nftPurchase.replace :
-                                            funcName.toLowerCase().includes(methodTable.cancelOrder.contain) ? methodTable.cancelOrder.replace :
-                                                funcName.toLowerCase().includes(methodTable.approval.contain) ? methodTable.approval.replace :
-                                                    funcName.toLowerCase().includes(methodTable.stake.contain) ? methodTable.stake.replace :
-                                                        funcName.toLowerCase().includes(methodTable.claim.contain) ? methodTable.claim.replace :
-                                                            methodTable.otherTransactions.replace
+            funcName === allTxMethodReplaceTable.ethTransfer.contain ? allTxMethodReplaceTable.ethTransfer.replace :
+                funcName === allTxMethodReplaceTable.otherErc20Transfer.contain ? allTxMethodReplaceTable.otherErc20Transfer.replace :
+                    funcName.toLowerCase().includes(allTxMethodReplaceTable.deposit.contain) ? allTxMethodReplaceTable.deposit.replace :
+                        funcName.toLowerCase().includes(allTxMethodReplaceTable.multicall.contain) ? allTxMethodReplaceTable.multicall.replace :
+                            funcName.toLowerCase().includes(allTxMethodReplaceTable.swap.contain) ? allTxMethodReplaceTable.swap.replace :
+                                funcName.toLowerCase().includes(allTxMethodReplaceTable.mint.contain) ? allTxMethodReplaceTable.mint.replace :
+                                    funcName.toLowerCase().includes(allTxMethodReplaceTable.nftTransfer.contain) ? allTxMethodReplaceTable.nftTransfer.replace :
+                                        funcName === allTxMethodReplaceTable.nftPurchase.contain ? allTxMethodReplaceTable.nftPurchase.replace :
+                                            funcName.toLowerCase().includes(allTxMethodReplaceTable.cancelOrder.contain) ? allTxMethodReplaceTable.cancelOrder.replace :
+                                                funcName.toLowerCase().includes(allTxMethodReplaceTable.approval.contain) ? allTxMethodReplaceTable.approval.replace :
+                                                    funcName.toLowerCase().includes(allTxMethodReplaceTable.stake.contain) ? allTxMethodReplaceTable.stake.replace :
+                                                        funcName.toLowerCase().includes(allTxMethodReplaceTable.claim.contain) ? allTxMethodReplaceTable.claim.replace :
+                                                            allTxMethodReplaceTable.otherTransactions.replace
 
         )
     }
