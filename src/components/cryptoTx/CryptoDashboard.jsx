@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import WalletTransactions from "../../pages/WalletTransactions"
 import CryptoDataList from "./CryptoDataList"
 import CryptoOverview from "./CryptoOverview"
 import NavBarTx from "../tools/NavBarTx"
+import WalletTransactions from "../../pages/WalletTransactions"
 
 
 const CryptoDashboard = () => {
