@@ -99,8 +99,6 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
 
 
-
-
     return (
         <div>
 

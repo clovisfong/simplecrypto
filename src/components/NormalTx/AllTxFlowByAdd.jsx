@@ -1,4 +1,4 @@
-const AllTxWalletByTxFreq = ({ defaultTx, address }) => {
+const AllTxFlowByAdd = ({ defaultTx, address }) => {
 
 
 
@@ -54,4 +54,4 @@ const AllTxWalletByTxFreq = ({ defaultTx, address }) => {
     )
 }
 
-export default AllTxWalletByTxFreq
+export default AllTxFlowByAdd
