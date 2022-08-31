@@ -5,14 +5,16 @@ import { useSearchParams } from "react-router-dom"
 import CopyOnClick from "../tools/CopyOnClick"
 import convertTimeStamp from "../tools/ConvertTimeStamp"
 import allTxSortOptions from "../../data/allTXSortOptions"
+import { useState } from "react"
 
 
 
 const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
     const [searchParams, setSearchParams] = useSearchParams(1);
+    const [pageStart, setPageStart] = useState(0)
 
-    const pageNum = searchParams.get('page')
+    const pageNum = Number(searchParams.get('page'))
 
 
     const handleSelectMethod = (event) => {
@@ -20,8 +22,10 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
         const selectedMethodsArr = event.map((item) => item.key)
         const methodDataArr = Object.values(allTxMethodReplaceTable)
         const methodsToFilter = methodDataArr.filter((method) => selectedMethodsArr.some((select) => select === method.replace)).map(method => method.contain)
+        setSearchParams({ page: 1 })
         if (methodsToFilter.length === 0) {
             updateWalletTx(defaultTx)
+
         } else {
             updateWalletTx(
                 defaultTx.filter((tx) => methodsToFilter.some(
@@ -82,27 +86,60 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
 
 
-    const totalPages = Math.ceil(walletTx.length / 10)
+    const totalPages = Math.ceil(walletTx.length / 20)
     const pageNumArr = []
 
     for (let i = 1; i <= totalPages; i++) {
         pageNumArr.push(i)
     }
+    const pageNumLength = pageNumArr.length >= 10 ? 10 : pageNumArr.length
 
-    const handlePage = (event) => {
 
-        setSearchParams({ page: event.target.value })
+
+    const handlePage = (event) => setSearchParams({ page: event.target.value })
+
+    const handleNext = () => {
+        if (pageNum < pageNumArr.length) {
+            setSearchParams({ page: pageNum + 1 })
+            if (pageNum >= 10 && pageNum % 5 === 0) {
+                if (pageNumArr.length - (pageStart + pageNumLength) >= 5) {
+                    setPageStart(pageStart + 5)
+                } else {
+                    setPageStart(pageStart + (pageNumArr.length - (pageStart + pageNumLength)))
+                }
+
+
+            }
+        }
+    }
+
+    const handlePrev = () => {
+        if (pageNum > 1) {
+            setSearchParams({ page: pageNum - 1 })
+            if ((pageNum - pageNumLength) >= 5 && (pageNum - pageNumLength) % 5 === 0) {
+                setPageStart(pageStart - 5)
+            } else if (pageNum < 5) {
+                setPageStart(1)
+            }
+        }
 
     }
 
 
 
-
     return (
         <div>
+            <button onClick={handlePrev}>Previous</button>
+            {pageNumArr.slice(pageStart, pageStart + pageNumLength).map((page) =>
 
-            {pageNumArr.map((page) =>
-                <button onClick={handlePage} value={page} key={page}>{page}</button>)}
+
+                <button onClick={handlePage} value={page} key={page}>{page}</button>
+
+
+            )}
+            <button onClick={handleNext}>Next</button>
+
+
             <table>
                 <thead>
                     <tr>
@@ -120,7 +157,7 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {walletTx.slice((pageNum * 10) - 10, pageNum * 10).map(trans =>
+                    {walletTx.slice((pageNum * 20) - 20, pageNum * 20).map(trans =>
                         <tr key={trans.hash}>
                             <td><a href={`https://etherscan.io/tx/${trans.hash}`}>{trans.hash.substring(2, 8)}...</a></td>
                             <td>{groupMethod(trans.functionName)}</td>

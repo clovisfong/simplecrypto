@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import NavBarBal from "../components/tools/NavBarBal"
 import NftBalance from "../components/nftBal/NftBalance"
+import NftBalHeader from "../components/headers/NftBalHeader"
 
 const NftBalPage = () => {
 
@@ -42,7 +43,7 @@ const NftBalPage = () => {
 
     return (
         <div>
-
+            <NftBalHeader defaultBal={defaultBal} />
             <NavBarBal />
             <NftBalance
                 walletNftBalance={walletNftBalance}
