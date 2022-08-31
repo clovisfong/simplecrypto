@@ -1,4 +1,4 @@
-import sortOptions from "../data/nftMethodTable"
+import sortOptions from "../../data/cryptoMethodTable"
 
 const NftMethodWeightage = ({ defaultTx, address }) => {
 

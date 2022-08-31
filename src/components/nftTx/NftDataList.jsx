@@ -1,6 +1,6 @@
-import MultiselectCheckBox from "./MultiselectCheckBox"
-import SingleSelect from "./SingleSelect"
-import sortOptions from "../data/nftMethodTable"
+import MultiselectCheckBox from "../MultiselectCheckBox"
+import SingleSelect from "../SingleSelect"
+import sortOptions from "../../data/cryptoMethodTable"
 
 
 

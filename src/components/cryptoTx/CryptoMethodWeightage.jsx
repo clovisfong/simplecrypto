@@ -1,4 +1,4 @@
-import sortOptions from "../data/cryptoMethodTable"
+import sortOptions from "../../data/cryptoMethodTable"
 
 const CryptoMethodWeightage = ({ defaultTx, address }) => {
 

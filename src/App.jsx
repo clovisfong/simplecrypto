@@ -2,15 +2,16 @@ import './App.css'
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
 import Home from './pages/Home'
 import WalletTransactions from './pages/WalletTransactions'
-import NftDashboard from './components/NftDashboard'
+import NftDashboard from './components/nftTx/NftDashboard'
 import AllTxDashboard from './components/normalTx/AllTxDashboard'
-import CryptoDashboard from './components/CryptoDashboard'
+import CryptoDashboard from './components/cryptoTx/CryptoDashboard'
 import WalletBalance from './pages/WalletBalance'
 import CryptoBalance from './components/CryptoBalance'
 import CryptoBalDashboard from './components/CryptoBalDashboard'
 import NftBalDashBoard from './components/NftBalDashboard'
 import { useEffect, useState } from 'react'
 import TxHistoryWithAdd from './pages/TxHistoryWithAdd'
+
 
 
 const deployLink = 'https://simplecrypto.vercel.app/'
