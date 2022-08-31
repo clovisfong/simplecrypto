@@ -2,19 +2,17 @@ import MultiselectCheckBox from "../tools/MultiselectCheckBox"
 import SingleSelect from "../tools/SingleSelect"
 import methodTable from "../../data/methodTable"
 import { useSearchParams } from "react-router-dom"
+import CopyOnClick from "../tools/CopyOnClick"
 
 
-const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
+const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
     const [searchParams, setSearchParams] = useSearchParams(1);
+
 
     const pageNum = searchParams.get('page')
 
 
-
-    const handleWalletAdd = (wallet) => () => {
-        navigator.clipboard.writeText(wallet)
-    }
 
     const convertTime = (timestamp) => {
         const num = Number(timestamp) * 1000
@@ -171,8 +169,6 @@ const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
     }
 
 
-
-
     return (
         <div>
             {pageNumArr.map((page) =>
@@ -201,18 +197,21 @@ const AllTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                             <td>{convertTime(trans.timeStamp)}</td>
                             <td>{(trans.value / 1000000000000000000).toFixed(2)} ETH</td>
                             <td>{trans.isError === '0' ? 'Success' : 'Fail'}</td>
-                            <td onClick={handleWalletAdd(trans.from)} style={{ cursor: 'pointer' }}>
+                            <td onClick={CopyOnClick(trans.from)} style={{ cursor: 'pointer' }}>
                                 {trans.from === address.toLowerCase() ? "My Wallet" : trans.from.substring(2, 8)}
                             </td>
-                            <td onClick={handleWalletAdd(trans.to)} style={{ cursor: 'pointer' }}>
+                            <td onClick={CopyOnClick(trans.to)} style={{ cursor: 'pointer' }}>
                                 {trans.to === address.toLowerCase() ? 'My Wallet' : trans.to.substring(2, 8)}</td>
                         </tr>
                     )}
                 </tbody>
             </table>
         </div>
-
     )
+
+
+
+
 }
 
-export default AllTxDataList
+export default NormalTxDataList

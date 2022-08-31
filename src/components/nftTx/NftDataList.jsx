@@ -1,7 +1,7 @@
 import MultiselectCheckBox from "../tools/MultiselectCheckBox"
 import SingleSelect from "../tools/SingleSelect"
 import sortOptions from "../../data/cryptoMethodTable"
-
+import CopyOnClick from "../tools/CopyOnClick"
 
 
 
@@ -24,9 +24,6 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
         return (formattedDate)
     }
 
-    const handleWalletAdd = (wallet) => () => {
-        navigator.clipboard.writeText(wallet)
-    }
 
 
 
@@ -108,10 +105,10 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
                                 <td>{convertTime(tx.timeStamp)}</td>
                                 <td>{assignTxMethod(tx.from, tx.to)}
                                 </td>
-                                <td onClick={handleWalletAdd(tx.from)} style={{ cursor: 'pointer' }}>
+                                <td onClick={CopyOnClick(tx.from)} style={{ cursor: 'pointer' }}>
                                     {tx.from === address.toLowerCase() ? "My Wallet" : tx.from.substring(2, 8)}
                                 </td>
-                                <td onClick={handleWalletAdd(tx.to)} style={{ cursor: 'pointer' }}>
+                                <td onClick={CopyOnClick(tx.to)} style={{ cursor: 'pointer' }}>
                                     {tx.to === address.toLowerCase() ? "My Wallet" : tx.to.substring(2, 8)}
                                 </td>
                             </tr>

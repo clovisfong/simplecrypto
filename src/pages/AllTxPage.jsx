@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import TxHeader from "../components/headers/TxHeader"
 import NavBarTx from "../components/tools/NavBarTx"
-import AllTxDataList from "../components/normalTx/AllTxDataList"
 import AllTxOverview from "../components/normalTx/AllTxOverview"
+import NormalTxDataList from "../components/normalTx/NormalTxDataList"
 
 const AllTxPage = () => {
 
@@ -36,7 +36,7 @@ const AllTxPage = () => {
             <TxHeader />
             <NavBarTx />
             <AllTxOverview defaultTx={defaultTx} address={address} />
-            <AllTxDataList walletTx={walletTx} updateWalletTx={updateWalletTx} defaultTx={defaultTx} address={address} />
+            <NormalTxDataList walletTx={walletTx} updateWalletTx={updateWalletTx} defaultTx={defaultTx} address={address} />
 
         </div>
     )
