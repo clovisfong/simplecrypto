@@ -1,14 +1,37 @@
+import MultiselectCheckBox from "../tools/MultiselectCheckBox"
 
 
-const NftBalance = ({ walletNftBalance }) => {
+const NftBalance = ({ walletNftBalance, defaultBal, setWalletNftBalance }) => {
 
+
+    const tokenNamesData = defaultBal.map((token) => token?.name)
+    const uniqueTokenNames = [...new Set(tokenNamesData)] //remove duplicates in array
+    const uniqueTokenNamesObj = uniqueTokenNames.map((token) => {
+        return {
+            key: token
+        }
+    })
+
+
+
+    const handleTokens = (event) => {
+        const selectedTokens = event.map((token) => token.key)
+
+        if (selectedTokens.length === 0) {
+            setWalletNftBalance(defaultBal)
+        } else {
+            setWalletNftBalance(defaultBal.filter((tx) =>
+                selectedTokens.some(
+                    (token) => token === tx?.name)))
+        }
+    }
 
     return (
         <div>
             <table>
                 <thead>
                     <tr>
-                        <th>Tokens</th>
+                        <th>Tokens<MultiselectCheckBox handleClick={handleTokens} sortOptions={uniqueTokenNamesObj} /></th>
                         <th>ID</th>
                         <th>Link</th>
                     </tr>

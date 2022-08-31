@@ -6,6 +6,7 @@ import NftBalance from "../components/nftBal/NftBalance"
 const NftBalPage = () => {
 
     const [walletNftBalance, setWalletNftBalance] = useState([])
+    const [defaultBal, setDefaultBal] = useState([])
 
 
     const { address } = useParams()
@@ -23,7 +24,17 @@ const NftBalPage = () => {
                         token.nft_data.forEach((data) =>
                             conciseNftInfo.push({ ['name']: token.contract_name, ['data']: data, ['contract_address']: token.contract_address }))))
 
-                setWalletNftBalance(conciseNftInfo)
+                const updateNames = conciseNftInfo.map((token) => {
+                    if (token.name === null) {
+                        return { ...token, name: 'Cannot be found' }
+                    }
+                    return token
+
+                })
+
+                setWalletNftBalance(updateNames)
+                setDefaultBal(updateNames)
+
             })
     }, [])
 
@@ -33,7 +44,10 @@ const NftBalPage = () => {
         <div>
 
             <NavBarBal />
-            <NftBalance walletNftBalance={walletNftBalance} />
+            <NftBalance
+                walletNftBalance={walletNftBalance}
+                defaultBal={defaultBal}
+                setWalletNftBalance={setWalletNftBalance} />
         </div>
     )
 }
