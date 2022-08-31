@@ -3,10 +3,7 @@ import cryptoBalSortOptions from "../../data/cryptoBalSortOptions"
 const CryptoBalance = ({ walletBalance, defaultBal, updateWalletBalance }) => {
 
 
-
     const quantifiableTokens = walletBalance.filter((token) => (token.balance / 1000000000000000000) > 0.0099 ? token.balance : false)
-
-    console.log('thus', defaultBal.map((tx) => tx.quote_rate))
 
 
     const handleType = (event) => {
@@ -18,14 +15,13 @@ const CryptoBalance = ({ walletBalance, defaultBal, updateWalletBalance }) => {
         }
     }
 
-    const handleValue = (event) => {
-        if (event[0].key === cryptoBalSortOptions.value[0].key) {
-            const sortArrByLowest = defaultBal.sort((a, b) => Number(a?.quote_rate) - Number(b?.quote_rate))
-            console.log(sortArrByLowest)
+    const handleGeneral = (event, select, data) => {
+        if (event[0].key === cryptoBalSortOptions[select][0].key) {
+            const sortArrByLowest = walletBalance.sort((a, b) => Number(a?.[data]) - Number(b?.[data]))
             updateWalletBalance([...sortArrByLowest])
 
-        } else if (event[0].key === cryptoBalSortOptions.value[1].key) {
-            const sortArrByHighest = defaultBal.sort((a, b) => Number(b?.quote_rate) - Number(a?.quote_rate))
+        } else if (event[0].key === cryptoBalSortOptions[select][1].key) {
+            const sortArrByHighest = walletBalance.sort((a, b) => Number(b?.[data]) - Number(a?.[data]))
             updateWalletBalance([...sortArrByHighest])
 
         } else {
@@ -45,8 +41,8 @@ const CryptoBalance = ({ walletBalance, defaultBal, updateWalletBalance }) => {
                     <tr>
                         <th>Tokens</th>
                         <th>Type<SingleSelect handleClick={handleType} sortOptions={cryptoBalSortOptions.type} /></th>
-                        <th>Quantity</th>
-                        <th>Total Value<SingleSelect handleClick={handleValue} sortOptions={cryptoBalSortOptions.value} /></th>
+                        <th>Quantity<SingleSelect handleClick={(event) => handleGeneral(event, 'quantity', 'balance')} sortOptions={cryptoBalSortOptions.quantity} /></th>
+                        <th>Total Value<SingleSelect handleClick={(event) => handleGeneral(event, 'value', 'quote_rate')} sortOptions={cryptoBalSortOptions.value} /></th>
                     </tr>
                 </thead>
 
