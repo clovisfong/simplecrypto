@@ -1,5 +1,6 @@
 import nftSortOptions from "../../data/nftSortOptions"
 import TxMethodWeightage from "../tools/TxMethodWeightage"
+import { Grid, Typography } from '@mui/material';
 
 const NftMethodWeightage = ({ defaultTx, address }) => {
 
@@ -12,12 +13,21 @@ const NftMethodWeightage = ({ defaultTx, address }) => {
     }
 
     return (
-        <div>
-            <h4>NFT Method Weightage</h4>
+        <Grid
+            item xs={5}
+            sx={{
+                backgroundColor: '#F4F5F7',
+                p: '2.5rem',
+                borderRadius: '0.75rem',
+                mb: 3
+
+
+            }}>
+            <Typography variant="h5" >Top 5 Transacted Wallets</Typography>
             <TxMethodWeightage
                 defaultTx={defaultTx}
                 assignTxMethod={assignTxMethod} />
-        </div>
+        </Grid>
     )
 }
 

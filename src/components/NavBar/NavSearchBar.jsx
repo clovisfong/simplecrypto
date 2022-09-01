@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { Button, Box, TextField } from '@mui/material';
 
 
-const SearchBar = () => {
+const NavSearchBar = () => {
 
     const [input, setInput] = useState('')
 
@@ -22,22 +22,35 @@ const SearchBar = () => {
 
     return (
         <>
-            <TextField
-                fullWidth id="search-wallet-add"
-                label="Search wallet address "
-                onChange={handleChange}
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
 
-            />
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+
+            }}>
+                <TextField
+                    id="search-wallet-add"
+                    label="Search wallet address "
+                    onChange={handleChange}
+                    size='small'
+                    sx={{
+                        fontSize: '3rem',
+                        mr: '0.5rem'
+
+                    }}
+
+
+                />
+
                 <Button
                     variant="contained"
-                    sx={{ mt: 3 }}
                     onClick={handleClick}>Search Wallet</Button>
+
             </Box>
 
         </>
     )
 }
 
-export default SearchBar
+export default NavSearchBar
 

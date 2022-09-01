@@ -1,3 +1,4 @@
+import { Box, Grid, Typography } from '@mui/material';
 const TxCount = ({ defaultTx }) => {
 
     const numOfTxPerToken = {}
@@ -13,7 +14,12 @@ const TxCount = ({ defaultTx }) => {
     const displayTopFiveNft =
         topFiveTransactedNft.map((token, index) => {
             return (
-                <li key={index}> {token.name}  -  {token.count}</li>
+                <Grid container spacing={0} key={index} >
+                    <Grid item xs={6}>{token.name} </Grid>
+                    <Grid item xs={6}>{token.count}</Grid>
+                </Grid>
+
+
             )
         })
 
@@ -21,9 +27,16 @@ const TxCount = ({ defaultTx }) => {
 
 
     return (
-        <ul>
-            {displayTopFiveNft}
-        </ul>
+        <Box>
+            <Grid container spacing={0}>
+                <Grid item xs={6}><Typography variant="h6" sx={{ mt: 2 }}>Collection Name</Typography></Grid>
+                <Grid item xs={6}> <Typography variant="h6" sx={{ mt: 2 }}>Count</Typography></Grid>
+            </Grid >
+            <Grid container spacing={0}>
+
+                {displayTopFiveNft}
+            </Grid>
+        </Box>
 
     )
 }

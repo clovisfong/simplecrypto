@@ -1,18 +1,28 @@
 import TxFlowByAdd from "../tools/TxFlowByAdd"
+import { Grid, Typography } from '@mui/material';
 
 const AllTxFlowByAdd = ({ defaultTx, address }) => {
 
 
 
     return (
-        <div>
-            <h4>Top 5 Transacted Wallet for Normal Transactions</h4>
+        <Grid
+            item xs={12}
+            sx={{
+                backgroundColor: '#F4F5F7',
+                p: '2.5rem',
+                borderRadius: '0.75rem',
+                mt: 3
+
+
+            }}>
+            <Typography variant="h5">Top 5 Transacted Wallet for Normal Transactions</Typography>
             <TxFlowByAdd
                 defaultTx={defaultTx}
                 address={address} />
 
 
-        </div>
+        </Grid>
     )
 }
 

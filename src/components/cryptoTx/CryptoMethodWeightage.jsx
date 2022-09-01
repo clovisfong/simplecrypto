@@ -1,5 +1,7 @@
 import cryptoSortOptions from "../../data/cryptoSortOptions"
 import TxMethodWeightage from "../tools/TxMethodWeightage"
+import { Grid, Typography } from '@mui/material';
+
 
 const CryptoMethodWeightage = ({ defaultTx, address }) => {
 
@@ -11,12 +13,21 @@ const CryptoMethodWeightage = ({ defaultTx, address }) => {
     }
 
     return (
-        <div>
-            <h4>Crypto Method Weightage</h4>
+        <Grid
+            item xs={4}
+            sx={{
+                backgroundColor: '#F4F5F7',
+                p: '2.5rem',
+                borderRadius: '0.75rem',
+                mb: 3
+
+
+            }}>
+            <Typography variant="h5" >Crypto Method Weightage</Typography>
             <TxMethodWeightage
                 defaultTx={defaultTx}
                 assignTxMethod={assignTxMethod} />
-        </div>
+        </Grid>
     )
 }
 

@@ -2,7 +2,16 @@ import MultiselectCheckBox from "./MultiselectCheckBox"
 import SingleSelect from "./SingleSelect"
 import convertTimeStamp from "./ConvertTimeStamp"
 import CopyOnClick from "./CopyOnClick"
+import { useSearchParams } from "react-router-dom"
+import { useState } from "react"
+import PageTracker from "./PageTracker"
 const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, earlyTime, lateTime, method, sortTime, sortMethod, idOrValue }) => {
+
+
+    const [searchParams, setSearchParams] = useSearchParams(1);
+    const [pageStart, setPageStart] = useState(0)
+
+    const pageNum = Number(searchParams.get('page'))
 
     const tokenNamesData = defaultTx.map((tx) => tx.tokenName)
     const uniqueTokenNames = [...new Set(tokenNamesData)] //remove duplicates in array
@@ -15,7 +24,7 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
 
     const handleSelect = (event) => {
         const selectedTokens = event.map((token) => token.key)
-
+        setSearchParams({ page: 1 })
         if (selectedTokens.length === 0) {
             updateState(defaultTx)
         } else {
@@ -27,7 +36,7 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
 
 
     const handleTime = (event) => {
-
+        setSearchParams({ page: 1 })
         if (event[0].key === earlyTime) {
             const sortArrByEarliest = dataTx.sort((a, b) => a?.timeStamp - b?.timeStamp)
             updateState([...sortArrByEarliest])
@@ -42,6 +51,7 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
     }
 
     const handleMethod = (event) => {
+        setSearchParams({ page: 1 })
         if (event[0].key !== method) { //array num diff from NFTData
             updateState(defaultTx.filter((tx) =>
                 assignTxMethod(tx.from, tx.to) === event[0].key))
@@ -51,7 +61,7 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
     }
 
 
-    const tableData = dataTx?.map(tx => {
+    const tableData = dataTx?.slice((pageNum * 20) - 20, pageNum * 20)?.map(tx => {
         return (
             <tr key={tx.hash + tx.tokenID + tx.tokenName}>
                 <td><a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a></td>
@@ -72,8 +82,17 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
     })
 
 
+    const totalPages = Math.ceil(defaultTx.length / 20)
+    console.log(totalPages)
+
     return (
         <div>
+            <PageTracker
+                setSearchParams={setSearchParams}
+                pageStart={pageStart}
+                setPageStart={setPageStart}
+                pageNum={pageNum}
+                totalPages={totalPages} />
             <table>
                 <thead>
                     <tr>

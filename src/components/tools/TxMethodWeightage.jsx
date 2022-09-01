@@ -1,3 +1,4 @@
+import { Box, Grid, Typography } from '@mui/material';
 const TxMethodWeightage = ({ defaultTx, assignTxMethod, }) => {
 
 
@@ -14,14 +15,25 @@ const TxMethodWeightage = ({ defaultTx, assignTxMethod, }) => {
     const methodWeightage =
         arrOfMethodCount.map((method) => {
             return (
-                <li key={method.name}>{method.name}  -  {method.count}</li>
+
+                <Grid container spacing={0} key={method.name} >
+                    <Grid item xs={8}>{method.name} </Grid>
+                    <Grid item xs={4}>{method.count}</Grid>
+                </Grid>
             )
         })
 
     return (
-        <ul>
-            {methodWeightage}
-        </ul>
+        <Box>
+            <Grid container spacing={0}>
+                <Grid item xs={8}><Typography variant="h6" sx={{ mt: 2 }}>Method</Typography></Grid>
+                <Grid item xs={4}> <Typography variant="h6" sx={{ mt: 2 }}>Count</Typography></Grid>
+            </Grid >
+            <Grid container spacing={0}>
+
+                {methodWeightage}
+            </Grid>
+        </Box>
 
     )
 }

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { Box, Grid, Typography } from '@mui/material';
 
 const AllTxTotalValueByAdd = ({ defaultTx, address }) => {
 
@@ -24,10 +25,23 @@ const AllTxTotalValueByAdd = ({ defaultTx, address }) => {
     const displaytopFiveFromAdd = (topFiveAdd) =>
         topFiveAdd.map((token, index) => {
             return (
-                <li key={index}><Link to={`/wallet-transactions/${address}/transaction-history/${token.name}`}>
-                    {token.name}</Link>  - {token.value} ETH
+                // <li key={index}><Link to={`/wallet-transactions/${address}/transaction-history/${token.name}`}>
+                //     {token.name.substring(2, 8)}</Link>  - {token.value} ETH
 
-                </li>
+                // </li>
+                <Box key={index}>
+                    <Grid container spacing={0} >
+                        <Grid item xs={6}>
+                            <Link to={`/wallet-transactions/${address}/transaction-history/${token.name}`}>
+                                {token.name.substring(2, 8)}</Link>
+                        </Grid>
+                        <Grid item xs={3}> <Typography variant="body2">{token.value} ETH</Typography></Grid>
+
+
+
+                    </Grid>
+
+                </Box>
             )
         })
 
@@ -35,19 +49,26 @@ const AllTxTotalValueByAdd = ({ defaultTx, address }) => {
 
 
     return (
-        <div>
-            <h4>Top 5 Transacted Wallet</h4>
-            <ul>
-                Inflow From
-                {topFiveTransactedAdd('to', 'from')}
-            </ul>
-            <ul>
-                Outflow To
-                {topFiveTransactedAdd('from', 'to')}
-            </ul>
+        <Grid
+            item xs={6}
+            sx={{
+                backgroundColor: '#F4F5F7',
+                p: '2.5rem',
+                borderRadius: '0.75rem'
 
 
-        </div>
+            }}>
+            <Typography variant="h5" >Top 5 Transacted Wallets</Typography>
+
+            <Typography variant="h6" sx={{ mt: 3 }}>Outflow To</Typography>
+            {topFiveTransactedAdd('to', 'from')}
+
+            <Typography variant="h6" sx={{ mt: 3 }}>Outflow To</Typography>
+            {topFiveTransactedAdd('from', 'to')}
+
+
+
+        </Grid>
     )
 }
 

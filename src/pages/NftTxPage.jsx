@@ -4,6 +4,8 @@ import TxHeader from "../components/headers/TxHeader"
 import NavBarTx from "../components/tools/NavBarTx"
 import NftDataList from "../components/nftTx/NftDataList"
 import NftOverview from "../components/nftTx/NftOverview"
+import { Container, Grid } from '@mui/material';
+import NavBar from "../components/NavBar/NavBar"
 
 const NftTxPage = () => {
 
@@ -29,13 +31,18 @@ const NftTxPage = () => {
     }
 
     return (
-        <div>
-            <TxHeader />
-            <NavBarTx />
-            <NftOverview defaultTx={defaultTx} address={address} />
-            <NftDataList nftTx={nftTx} updateNftTx={updateNftTx} defaultTx={defaultTx} address={address} />
+        <>
+            <NavBar />
+            <Container>
+                <Grid container spacing={0}>
+                    <TxHeader />
+                </Grid>
+                <NavBarTx />
 
-        </div>
+                <NftOverview defaultTx={defaultTx} address={address} />
+                <NftDataList nftTx={nftTx} updateNftTx={updateNftTx} defaultTx={defaultTx} address={address} />
+            </Container>
+        </>
     )
 }
 

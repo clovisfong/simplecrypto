@@ -4,6 +4,8 @@ import TxHeader from "../components/headers/TxHeader"
 import NavBarTx from "../components/tools/NavBarTx"
 import AllTxOverview from "../components/normalTx/AllTxOverview"
 import NormalTxDataList from "../components/normalTx/NormalTxDataList"
+import NavBar from "../components/NavBar/NavBar"
+import { Container, Grid } from '@mui/material';
 
 const AllTxPage = () => {
 
@@ -32,13 +34,18 @@ const AllTxPage = () => {
 
 
     return (
-        <div>
-            <TxHeader />
-            <NavBarTx />
-            <AllTxOverview defaultTx={defaultTx} address={address} />
-            <NormalTxDataList walletTx={walletTx} updateWalletTx={updateWalletTx} defaultTx={defaultTx} address={address} />
+        <>
+            <NavBar />
+            <Container>
+                <Grid container spacing={0}>
+                    <TxHeader />
+                </Grid>
+                <NavBarTx />
+                <AllTxOverview defaultTx={defaultTx} address={address} />
+                <NormalTxDataList walletTx={walletTx} updateWalletTx={updateWalletTx} defaultTx={defaultTx} address={address} />
 
-        </div>
+            </Container>
+        </>
     )
 }
 

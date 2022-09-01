@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { Grid, Button, Typography } from '@mui/material';
 
 const wallettest = '0xCDc7ba99391F3BE7E5Dc0e49cC8361B537cfC29b'
 
@@ -36,14 +37,29 @@ const TxHeader = () => {
     }
 
     return (
-        <div>
-            <h1>My transactions</h1>
-            <h3>Wallet ETH Balance:  {ethBal} ETH </h3>
-            <button onClick={handleSwitchPage}>View Tokens</button>
+        <Grid
+            item xs={6}
+            sx={{
+                backgroundColor: '#F4F5F7',
+                p: '2.5rem',
+                borderRadius: '0.75rem'
 
 
+            }}>
 
-        </div>
+            <Typography variant="h5"
+            >ERC20 Wallet Balance:  {ethBal} ETH </Typography>
+            <Button
+                variant="contained"
+                onClick={handleSwitchPage}
+                sx={{ mt: 3 }}
+            >View Tokens
+
+            </Button>
+
+        </Grid>
+
+
 
 
     )

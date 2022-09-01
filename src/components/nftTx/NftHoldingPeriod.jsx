@@ -1,3 +1,4 @@
+import { Box, Grid, Typography } from '@mui/material';
 const NftHoldingPeriod = ({ defaultTx, address }) => {
 
     const today = Date.now() / 1000
@@ -42,8 +43,14 @@ const NftHoldingPeriod = ({ defaultTx, address }) => {
     const topFiveHoldingPeriod =
         sortHighToLow.slice(0, 5).map((token) => {
             return (
-                <li key={token.name + token.id}>
-                    {token.name} - {displayTimeDifference(token.holding_period)} - {token.status}</li>
+                // <li key={token.name + token.id}>
+                //     {token.name} - {displayTimeDifference(token.holding_period)} - {token.status}</li>
+
+                <Grid container spacing={0} key={token.name + token.id} >
+                    <Grid item xs={5}>{token.name} </Grid>
+                    <Grid item xs={5}>{displayTimeDifference(token.holding_period)}</Grid>
+                    <Grid item xs={2}>{token.status}</Grid>
+                </Grid>
             )
         })
 
@@ -52,13 +59,31 @@ const NftHoldingPeriod = ({ defaultTx, address }) => {
 
 
     return (
-        <div>
-            <h4>Top 5 NFT holding period</h4>
-            <ul>
-                {topFiveHoldingPeriod}
-            </ul>
+        <Grid
+            item xs={5}
+            sx={{
+                backgroundColor: '#F4F5F7',
+                p: '2.5rem',
+                borderRadius: '0.75rem'
 
-        </div>
+
+            }}>
+            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 NFT holding period</Typography>
+
+
+            <Box>
+                <Grid container spacing={0}>
+                    <Grid item xs={5}><Typography variant="h6" sx={{ mt: 2 }}>Collection Name</Typography></Grid>
+                    <Grid item xs={5}> <Typography variant="h6" sx={{ mt: 2 }}>Duration</Typography></Grid>
+                    <Grid item xs={2}> <Typography variant="h6" sx={{ mt: 2 }}>Status</Typography></Grid>
+                </Grid >
+                <Grid container spacing={0}>
+
+                    {topFiveHoldingPeriod}
+                </Grid>
+            </Box>
+
+        </Grid>
     )
 
 }

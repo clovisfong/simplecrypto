@@ -6,6 +6,8 @@ import CopyOnClick from "../tools/CopyOnClick"
 import convertTimeStamp from "../tools/ConvertTimeStamp"
 import allTxSortOptions from "../../data/allTXSortOptions"
 import { useState } from "react"
+import PageTracker from "../tools/PageTracker"
+
 
 
 
@@ -50,6 +52,7 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
 
     const handleFilter = (event, header, type) => {
+        setSearchParams({ page: 1 })
 
         if (event[0].key === allTxSortOptions[header][0].key) {
             const sortArrByEarliest = walletTx.sort((a, b) => a?.[type] - b?.[type])
@@ -84,97 +87,18 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
         )
     }
 
-
-
     const totalPages = Math.ceil(walletTx.length / 20)
-    const pageNumArr = []
-
-    for (let i = 1; i <= totalPages; i++) {
-        pageNumArr.push(i)
-    }
-    const pageNumLength = pageNumArr.length >= 10 ? 10 : pageNumArr.length
-
-
-
-    const handlePage = (event) => {
-
-        setSearchParams({ page: event.target.value })
-        console.log('event', event.target.value)
-        if (event.target.value == pageStart + pageNumLength) {
-            if (pageNumArr.length - event.target.value >= 5) {
-                setPageStart(pageStart + 5)
-            } else {
-                setPageStart(pageStart + (pageNumArr.length - event.target.value))
-            }
-        }
-        if (event.target.value - 1 === pageStart) {
-            if (pageStart >= 5) {
-                setPageStart(pageStart - 5)
-            } else {
-                setPageStart(0)
-            }
-        }
-
-    }
-
-
-
-    // console.log('page length', pageStart + pageNumLength)
-    console.log('pagestart', pageStart)
-
-
-
-    const handleNext = () => {
-        if (pageNum < pageNumArr.length) {
-            setSearchParams({ page: pageNum + 1 })
-            slidePageTrackerForward()
-        }
-    }
-
-    const slidePageTrackerForward = () => {
-        if (pageNum > 5 && pageNum % 5 === 4) {
-            if (pageNumArr.length - pageNum >= 5) {
-                setPageStart(pageStart + 5)
-            } else {
-                setPageStart(pageStart + (pageNumArr.length - pageNum - 1))
-            }
-        }
-    }
-
-    const handlePrev = () => {
-        if (pageNum > 1) {
-            setSearchParams({ page: pageNum - 1 })
-            slidePageTrackerBack()
-        }
-    }
-
-    const slidePageTrackerBack = () => {
-        if (pageNum - 2 === pageStart) {
-            if (pageStart >= 5) {
-                setPageStart(pageStart - 5)
-            } else {
-                setPageStart(0)
-            }
-        }
-    }
-
-
 
 
 
     return (
         <div>
-            <button onClick={handlePrev}>Previous</button>
-            {pageNumArr.slice(pageStart, pageStart + pageNumLength).map((page) =>
-
-
-                <button onClick={handlePage} value={page} key={page}>{page}</button>
-
-
-            )}
-            <button onClick={handleNext}>Next</button>
-
-
+            <PageTracker
+                setSearchParams={setSearchParams}
+                pageStart={pageStart}
+                setPageStart={setPageStart}
+                pageNum={pageNum}
+                totalPages={totalPages} />
             <table>
                 <thead>
                     <tr>
