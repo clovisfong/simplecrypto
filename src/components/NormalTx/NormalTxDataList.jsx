@@ -96,19 +96,47 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
 
 
-    const handlePage = (event) => setSearchParams({ page: event.target.value })
+    const handlePage = (event) => {
+
+        setSearchParams({ page: event.target.value })
+        console.log('event', event.target.value)
+        if (event.target.value == pageStart + pageNumLength) {
+            if (pageNumArr.length - event.target.value >= 5) {
+                setPageStart(pageStart + 5)
+            } else {
+                setPageStart(pageStart + (pageNumArr.length - event.target.value))
+            }
+        }
+        if (event.target.value - 1 === pageStart) {
+            if (pageStart >= 5) {
+                setPageStart(pageStart - 5)
+            } else {
+                setPageStart(0)
+            }
+        }
+
+    }
+
+
+
+    // console.log('page length', pageStart + pageNumLength)
+    console.log('pagestart', pageStart)
+
+
 
     const handleNext = () => {
         if (pageNum < pageNumArr.length) {
             setSearchParams({ page: pageNum + 1 })
-            if (pageNum >= 10 && pageNum % 5 === 0) {
-                if (pageNumArr.length - (pageStart + pageNumLength) >= 5) {
-                    setPageStart(pageStart + 5)
-                } else {
-                    setPageStart(pageStart + (pageNumArr.length - (pageStart + pageNumLength)))
-                }
+            slidePageTrackerForward()
+        }
+    }
 
-
+    const slidePageTrackerForward = () => {
+        if (pageNum > 5 && pageNum % 5 === 4) {
+            if (pageNumArr.length - pageNum >= 5) {
+                setPageStart(pageStart + 5)
+            } else {
+                setPageStart(pageStart + (pageNumArr.length - pageNum - 1))
             }
         }
     }
@@ -116,14 +144,21 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
     const handlePrev = () => {
         if (pageNum > 1) {
             setSearchParams({ page: pageNum - 1 })
-            if ((pageNum - pageNumLength) >= 5 && (pageNum - pageNumLength) % 5 === 0) {
+            slidePageTrackerBack()
+        }
+    }
+
+    const slidePageTrackerBack = () => {
+        if (pageNum - 2 === pageStart) {
+            if (pageStart >= 5) {
                 setPageStart(pageStart - 5)
-            } else if (pageNum < 5) {
-                setPageStart(1)
+            } else {
+                setPageStart(0)
             }
         }
-
     }
+
+
 
 
 
