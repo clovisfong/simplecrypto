@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { Grid, Typography, Button } from '@mui/material';
+import { Grid, Typography, Button, Divider } from '@mui/material';
 
 const NavBarTx = () => {
 
@@ -14,20 +14,26 @@ const NavBarTx = () => {
 
 
     return (
-        <Grid container spacing={0}
-            sx={{
+        <>
+            <Grid container spacing={0}
+                sx={{
+                    mt: 5,
+                    mb: 5
+
+                }}
+            >
+                <Grid item xs={1}><Button variant="contained" onClick={handleClick}>All</Button></Grid>
+                <Grid item xs={1}><Button variant="contained" onClick={handleClick}>NFT</Button></Grid>
+                <Grid item xs={1}><Button variant="contained" onClick={handleClick}>Crypto</Button></Grid>
+
+            </Grid>
+            <Divider sx={{
                 mt: 5,
                 mb: 5
+            }}>
+            </Divider>
 
-            }}
-        >
-            <Grid item xs={1}><Button variant="contained" onClick={handleClick}>All</Button></Grid>
-            <Grid item xs={1}><Button variant="contained" onClick={handleClick}>NFT</Button></Grid>
-            <Grid item xs={1}><Button variant="contained" onClick={handleClick}>Crypto</Button></Grid>
-        </Grid>
-
-
-
+        </>
 
     )
 }

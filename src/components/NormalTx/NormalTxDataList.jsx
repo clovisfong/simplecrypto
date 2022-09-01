@@ -7,6 +7,14 @@ import convertTimeStamp from "../tools/ConvertTimeStamp"
 import allTxSortOptions from "../../data/allTXSortOptions"
 import { useState } from "react"
 import PageTracker from "../tools/PageTracker"
+import { Container, Box, Grid, Typography } from '@mui/material';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 
 
@@ -92,14 +100,15 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
 
     return (
-        <div>
+        <Box >
             <PageTracker
                 setSearchParams={setSearchParams}
                 pageStart={pageStart}
                 setPageStart={setPageStart}
                 pageNum={pageNum}
                 totalPages={totalPages} />
-            <table>
+
+            {/* <table>
                 <thead>
                     <tr>
                         <th>Hash</th>
@@ -107,11 +116,7 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                         <th>Time<SingleSelect handleClick={(e) => handleFilter(e, 'time', 'timeStamp')} sortOptions={allTxSortOptions.time} /></th>
                         <th>Value<SingleSelect handleClick={(e) => handleFilter(e, 'value', 'value')} sortOptions={allTxSortOptions.value} /></th>
                         <th>Status<SingleSelect handleClick={(e) => handleFilter(e, 'status', 'isError')} sortOptions={allTxSortOptions.status} /></th>
-                        <th>From<select onChange={(e) => console.log(e.target.value)}>
-                            <option value='Low-High'>Low to High</option>
-                            <option value='High-Low'>High to Low</option>
-
-                        </select></th>
+                        <th>From</th>
                         <th>To</th>
                     </tr>
                 </thead>
@@ -131,8 +136,67 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                         </tr>
                     )}
                 </tbody>
-            </table>
-        </div>
+            </table> */}
+            <MultiselectCheckBox handleClick={handleSelectMethod} sortOptions={allTxSortOptions.method} />
+            <TableContainer component={Paper} sx={{ borderRadius: 0.5 }}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Hash</TableCell>
+                            <TableCell align="right">Method</TableCell>
+                            <TableCell align="right">Time<SingleSelect handleClick={(e) => handleFilter(e, 'time', 'timeStamp')} sortOptions={allTxSortOptions.time} /></TableCell>
+                            <TableCell align="right">Value<SingleSelect handleClick={(e) => handleFilter(e, 'value', 'value')} sortOptions={allTxSortOptions.value} /></TableCell>
+                            <TableCell align="right">Status<SingleSelect handleClick={(e) => handleFilter(e, 'status', 'isError')} sortOptions={allTxSortOptions.status} /></TableCell>
+                            <TableCell align="right">From</TableCell>
+                            <TableCell align="right">To</TableCell>
+
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {walletTx.slice((pageNum * 20) - 20, pageNum * 20).map(trans =>
+                            <TableRow
+                                key={trans.hash}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    <a href={`https://etherscan.io/tx/${trans.hash}`}>{trans.hash.substring(2, 8)}...</a>
+                                </TableCell>
+                                <TableCell align="right">{groupMethod(trans.functionName)}</TableCell>
+                                <TableCell align="right">{convertTimeStamp(trans.timeStamp)}</TableCell>
+                                <TableCell align="right">{(trans.value / 1000000000000000000).toFixed(2)} ETH</TableCell>
+                                <TableCell align="right">{trans.isError === '0' ?
+                                    <Typography sx={{
+                                        backgroundColor: '#92E0A3',
+                                        fontSize: '0.75rem',
+                                        fontWeight: 'regular',
+                                        borderRadius: 2,
+                                        pt: 1,
+                                        pb: 1,
+                                        textAlign: 'center'
+                                    }} >Success</Typography> :
+                                    <Typography sx={{
+                                        backgroundColor: '#F68383',
+                                        fontSize: '0.75rem',
+                                        fontWeight: 'regular',
+                                        borderRadius: 5,
+                                        pt: 1,
+                                        pb: 1,
+                                        textAlign: 'center'
+                                    }}
+
+                                    >Fail</Typography>}</TableCell>
+                                <TableCell align="right" onClick={CopyOnClick(trans.from)} style={{ cursor: 'pointer' }}>
+                                    {trans.from === address.toLowerCase() ? "My Wallet" : trans.from.substring(2, 8)}</TableCell>
+                                <TableCell align="right" onClick={CopyOnClick(trans.to)} style={{ cursor: 'pointer' }}>
+                                    {trans.to === address.toLowerCase() ? 'My Wallet' : trans.to.substring(2, 8)}</TableCell>
+
+
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Box>
     )
 
 

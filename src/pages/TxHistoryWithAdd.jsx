@@ -2,7 +2,15 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import allTxMethodReplaceTable from "../data/allTxMethodReplaceTable"
 import convertTimeStamp from "../components/tools/ConvertTimeStamp"
-
+import NavBar from "../components/NavBar/NavBar"
+import { Grid, Box, Container, Button, Typography } from '@mui/material';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 const TxHistoryWithAdd = () => {
 
     const [walletTx, setWalletTx] = useState([])
@@ -46,7 +54,7 @@ const TxHistoryWithAdd = () => {
 
 
     const handleSwitchPage = () => {
-        navigateToTransactions(`/wallet-transactions/${address}/all`)
+        navigateToTransactions(`/wallet-transactions/${address}/all?page=1`)
     }
 
 
@@ -55,59 +63,123 @@ const TxHistoryWithAdd = () => {
 
 
     return (
-        <div>
-            <h3>Transactions History</h3>
-            <button onClick={handleSwitchPage}>Back to Transactions</button>
-            <h4>Transacted With: {wallet}</h4>
-            <h4>Total Inflow: {totalInflow}</h4>
+        <>
+            <NavBar />
+            <Container>
+                <Grid container spacing={0}>
+                    <Grid
+                        item xs={6}
+                        sx={{
+                            backgroundColor: '#F4F5F7',
+                            p: '2.5rem',
+                            borderRadius: '0.75rem'
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Hash</th>
-                        <th>Method</th>
-                        <th>Time</th>
-                        <th>Value</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {inflowTx.map(tx =>
-                        <tr key={tx.hash}>
-                            <td><a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a></td>
-                            <td>{groupMethod(tx.functionName)}</td>
-                            <td>{convertTimeStamp(tx.timeStamp)}</td>
-                            <td>{(tx.value / 1000000000000000000).toFixed(2)} ETH</td>
-                            <td>{tx.isError === '0' ? 'Success' : 'Fail'}</td>
-                        </tr>
-                    )}
 
-                </tbody>
-            </table>
-            <h4>Total Outflow: {totalOutflow}</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Hash</th>
-                        <th>Method</th>
-                        <th>Time</th>
-                        <th>Value</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {outflowTx.map(tx =>
-                        <tr key={tx.hash}>
-                            <td><a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a></td>
-                            <td>{groupMethod(tx.functionName)}</td>
-                            <td>{convertTimeStamp(tx.timeStamp)}</td>
-                            <td>{(tx.value / 1000000000000000000).toFixed(2)} ETH</td>
-                            <td>{tx.isError === '0' ? 'Success' : 'Fail'}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        </div>
+                        }}>
+                        <Typography variant="h5">Transactions History </Typography>
+                        <Typography variant="h6">Transacted With: {wallet}</Typography>
+                        <Button
+                            variant="contained"
+                            sx={{ mt: 3 }}
+                            onClick={handleSwitchPage}
+                        >Back to Transactions
+                        </Button>
+
+
+                    </Grid>
+                </Grid>
+
+                <Box sx={{
+                    backgroundColor: '#F4F5F7',
+                    p: '2rem',
+                    borderRadius: '0.75rem',
+                    mt: 5,
+                    mb: 3
+
+
+                }}>
+                    <Typography variant="h5">Total Inflow: {totalInflow}</Typography>
+                </Box>
+
+
+                <TableContainer component={Paper} sx={{ borderRadius: 0.5 }}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Hash</TableCell>
+                                <TableCell align="right">Method</TableCell>
+                                <TableCell align="right">Time</TableCell>
+                                <TableCell align="right">Value</TableCell>
+                                <TableCell align="right">Status</TableCell>
+
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {inflowTx.map((tx) =>
+                                <TableRow
+                                    key={tx.hash}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        <a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a>
+                                    </TableCell>
+                                    <TableCell align="right">{groupMethod(tx.functionName)}</TableCell>
+                                    <TableCell align="right">{convertTimeStamp(tx.timeStamp)}</TableCell>
+                                    <TableCell align="right">{(tx.value / 1000000000000000000).toFixed(2)} ETH</TableCell>
+                                    <TableCell align="right">{tx.isError === '0' ? 'Success' : 'Fail'}</TableCell>
+
+
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
+                <Box sx={{
+                    backgroundColor: '#F4F5F7',
+                    p: '2rem',
+                    borderRadius: '0.75rem',
+                    mt: 5,
+                    mb: 3
+                }}>
+                    <Typography variant="h5">Total Outflow: {totalOutflow}</Typography>
+                </Box>
+
+
+                <TableContainer component={Paper} sx={{ borderRadius: 0.5 }}>
+                    <Table sx={{ minWidth: 500 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Hash</TableCell>
+                                <TableCell align="right">Method</TableCell>
+                                <TableCell align="right">Time</TableCell>
+                                <TableCell align="right">Value</TableCell>
+                                <TableCell align="right">Status</TableCell>
+
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {outflowTx.map((tx) =>
+                                <TableRow
+                                    key={tx.hash}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        <a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a>
+                                    </TableCell>
+                                    <TableCell align="right">{groupMethod(tx.functionName)}</TableCell>
+                                    <TableCell align="right">{convertTimeStamp(tx.timeStamp)}</TableCell>
+                                    <TableCell align="right">{(tx.value / 1000000000000000000).toFixed(2)} ETH</TableCell>
+                                    <TableCell align="right">{tx.isError === '0' ? 'Success' : 'Fail'}</TableCell>
+
+
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Container>
+        </>
     )
 }
 

@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom"
+import { Grid, Button, Typography } from '@mui/material';
 
 const BalHeader = ({ walletBalance }) => {
 
@@ -10,19 +11,32 @@ const BalHeader = ({ walletBalance }) => {
     const switchToTxPage = useNavigate()
 
     const handlePageSwitch = () => {
-        switchToTxPage(`/wallet-transactions/${address}/crypto`)
+        switchToTxPage(`/wallet-transactions/${address}/crypto?page=1`)
     }
 
     return (
-        <div>
-            <h1>Wallet Balance</h1>
-            <h3>Wallet Balance:  ${totalVal}</h3>
-            <button onClick={handlePageSwitch}>View Transactions</button>
+        <Grid container spacing={0}>
+            <Grid
+                item xs={6}
+                sx={{
+                    backgroundColor: '#F4F5F7',
+                    p: '2.5rem',
+                    borderRadius: '0.75rem'
 
 
+                }}>
+                <Typography variant="h5">Crypto Holdings </Typography>
+                <Typography variant="h6">Wallet Balance:  ${totalVal}</Typography>
 
 
-        </div>
+                <Button
+                    variant="contained"
+                    sx={{ mt: 3 }}
+                    onClick={handlePageSwitch}>View Transactions</Button>
+
+
+            </Grid>
+        </Grid>
     )
 }
 

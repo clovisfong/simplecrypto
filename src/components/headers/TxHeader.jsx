@@ -33,32 +33,32 @@ const TxHeader = () => {
 
 
     const handleSwitchPage = () => {
-        switchToBalPage(`/wallet-balance/${address}/crypto`)
+        switchToBalPage(`/wallet-balance/${address}/crypto?page=1`)
     }
 
     return (
-        <Grid
-            item xs={6}
-            sx={{
-                backgroundColor: '#F4F5F7',
-                p: '2.5rem',
-                borderRadius: '0.75rem'
+        <Grid container spacing={0}>
+            <Grid
+                item xs={6}
+                sx={{
+                    backgroundColor: '#F4F5F7',
+                    p: '2.5rem',
+                    borderRadius: '0.75rem'
 
 
-            }}>
+                }}>
 
-            <Typography variant="h5"
-            >ERC20 Wallet Balance:  {ethBal} ETH </Typography>
-            <Button
-                variant="contained"
-                onClick={handleSwitchPage}
-                sx={{ mt: 3 }}
-            >View Tokens
+                <Typography variant="h5">ERC20 Wallet Balance:  {ethBal} ETH </Typography>
+                <Button
+                    variant="contained"
+                    onClick={handleSwitchPage}
+                    sx={{ mt: 3 }}
+                >View Tokens
 
-            </Button>
+                </Button>
 
+            </Grid>
         </Grid>
-
 
 
 

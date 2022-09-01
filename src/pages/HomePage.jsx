@@ -11,12 +11,12 @@ const HomePage = () => {
             <Container maxWidth="sm">
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                     <img
-                        src='src/images/SimpleCrypto.png'
+                        src="https://i.imgur.com/RuIV5n4.png"
                         alt='Simple Crypto'
                         style={{
                             maxWidth: '30em',
                             marginTop: '15em',
-                            marginBottom: '-2em'
+
                         }} />
                 </Box>
                 <SearchBar />

@@ -1,12 +1,19 @@
 import SearchBar from "../tools/SearchBar"
 import Container from '@mui/material/Container';
-import { Box } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import NavSearchBar from "./NavSearchBar";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
 
+    const switchToHome = useNavigate()
+
+    const handlePageSwitch = () => {
+        switchToHome('/')
+    }
+    <a href="https://imgur.com/RuIV5n4"><img src="https://i.imgur.com/RuIV5n4.png" title="source: imgur.com" /></a>
     return (
-        <div>
+        <Container>
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -20,10 +27,12 @@ const NavBar = () => {
             }}  >
                 <Box>
                     <img
-                        src=''
+                        src="https://i.imgur.com/RuIV5n4.png"
                         alt='Simple Crypto'
+                        onClick={handlePageSwitch}
                         style={{
-                            maxWidth: '10em',
+                            maxWidth: '14em',
+                            cursor: 'pointer'
 
                         }} />
                 </Box>
@@ -31,7 +40,7 @@ const NavBar = () => {
             </Box>
 
 
-        </div>
+        </Container>
 
 
     )
