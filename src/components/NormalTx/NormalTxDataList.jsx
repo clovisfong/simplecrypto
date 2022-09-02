@@ -120,13 +120,19 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
     return (
         <Box >
-            <PageTracker
-                setSearchParams={setSearchParams}
-                pageStart={pageStart}
-                setPageStart={setPageStart}
-                pageNum={pageNum}
-                totalPages={totalPages} />
-
+            <Grid container spacing={0} sx={{ mb: 4 }}>
+                <Grid item xs={9}>
+                    <PageTracker
+                        setSearchParams={setSearchParams}
+                        pageStart={pageStart}
+                        setPageStart={setPageStart}
+                        pageNum={pageNum}
+                        totalPages={totalPages} />
+                </Grid>
+                <Grid item xs={3}>
+                    <MultiselectCheckBox handleClick={handleSelectMethod} sortOptions={allTxSortOptions.method} />
+                </Grid>
+            </Grid>
             {/* <table>
                 <thead>
                     <tr>
@@ -156,18 +162,18 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                     )}
                 </tbody>
             </table> */}
-            <MultiselectCheckBox handleClick={handleSelectMethod} sortOptions={allTxSortOptions.method} />
+
             <TableContainer component={Paper} sx={{ borderRadius: 0.5 }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Hash</TableCell>
-                            <TableCell align="right">Method</TableCell>
-                            <TableCell align="right">Time<SingleSelect handleClick={(e) => handleFilter(e, 'time', 'timeStamp')} sortOptions={allTxSortOptions.time} /></TableCell>
-                            <TableCell align="right">Value<SingleSelect handleClick={(e) => handleFilter(e, 'value', 'value')} sortOptions={allTxSortOptions.value} /></TableCell>
-                            <TableCell align="right">Status<SingleSelect handleClick={(e) => handleFilter(e, 'status', 'isError')} sortOptions={allTxSortOptions.status} /></TableCell>
-                            <TableCell align="right">From</TableCell>
-                            <TableCell align="right">To</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Hash</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>Method</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}><Box sx={{ display: 'flex', justifyContent: 'end' }} >Time<SingleSelect handleClick={(e) => handleFilter(e, 'time', 'timeStamp')} sortOptions={allTxSortOptions.time} /></Box></TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}><Box sx={{ display: 'flex', justifyContent: 'end' }} >Value<SingleSelect handleClick={(e) => handleFilter(e, 'value', 'value')} sortOptions={allTxSortOptions.value} /></Box></TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}><Box sx={{ display: 'flex', justifyContent: 'end' }} >Status<SingleSelect handleClick={(e) => handleFilter(e, 'status', 'isError')} sortOptions={allTxSortOptions.status} /></Box></TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>From</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>To</TableCell>
 
                         </TableRow>
                     </TableHead>

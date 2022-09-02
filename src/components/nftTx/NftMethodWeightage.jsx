@@ -23,7 +23,7 @@ const NftMethodWeightage = ({ defaultTx, address }) => {
 
 
             }}>
-            <Typography variant="h5" >Method By Transactions Count</Typography>
+            <Typography variant="h5" sx={{ mb: 2 }} >Method By Transactions Count</Typography>
             <TxMethodWeightage
                 defaultTx={defaultTx}
                 assignTxMethod={assignTxMethod} />

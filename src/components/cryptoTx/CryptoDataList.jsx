@@ -1,6 +1,7 @@
 import cryptoSortOptions from "../../data/cryptoSortOptions"
 import TxDataTable from "../tools/TxDataTable"
 
+
 const CryptoDataList = ({ cryptoTx, updateCryptoTx, defaultTx, address }) => {
 
 

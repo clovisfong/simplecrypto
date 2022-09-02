@@ -60,7 +60,7 @@ const AllTxTotalValueByAdd = ({ defaultTx, address }) => {
             }}>
             <Typography variant="h5" >Top 5 Transacted Addresses By Total Value</Typography>
 
-            <Typography variant="h6" sx={{ mt: 3 }}>Outflow To</Typography>
+            <Typography variant="h6" sx={{ mt: 3 }}>Inflow From</Typography>
             {topFiveTransactedAdd('to', 'from')}
 
             <Typography variant="h6" sx={{ mt: 3 }}>Outflow To</Typography>

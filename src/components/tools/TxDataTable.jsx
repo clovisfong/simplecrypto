@@ -162,17 +162,24 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
 
 
 
-    const totalPages = Math.ceil(defaultTx.length / 20)
+    const totalPages = Math.ceil(dataTx?.length / 20)
 
 
     return (
-        <div>
-            <PageTracker
-                setSearchParams={setSearchParams}
-                pageStart={pageStart}
-                setPageStart={setPageStart}
-                pageNum={pageNum}
-                totalPages={totalPages} />
+        <Box>
+            <Grid container spacing={0} sx={{ mb: 4 }}>
+                <Grid item xs={9}>
+                    <PageTracker
+                        setSearchParams={setSearchParams}
+                        pageStart={pageStart}
+                        setPageStart={setPageStart}
+                        pageNum={pageNum}
+                        totalPages={totalPages} />
+                </Grid>
+                <Grid item xs={3}>
+                    <MultiselectCheckBox handleClick={handleSelect} sortOptions={uniqueTokenNamesObj} />
+                </Grid>
+            </Grid>
             {/* <table>
                 <thead>
                     <tr>
@@ -190,18 +197,17 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
                 </tbody>
             </table> */}
 
-            <MultiselectCheckBox handleClick={handleSelect} sortOptions={uniqueTokenNamesObj} />
             <TableContainer component={Paper} sx={{ borderRadius: 0.5 }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Hash</TableCell>
-                            <TableCell align="right">Token</TableCell>
-                            <TableCell align="right">{idOrValue === 'tokenID' ? 'ID' : 'Value'}</TableCell>
-                            <TableCell align="right">Time<SingleSelect handleClick={handleTime} sortOptions={sortTime} /></TableCell>
-                            <TableCell align="right">Method<SingleSelect handleClick={handleMethod} sortOptions={sortMethod} /></TableCell>
-                            <TableCell align="right">From</TableCell>
-                            <TableCell align="right">To</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Hash</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>Token</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>{idOrValue === 'tokenID' ? 'ID' : 'Value'}</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}><Box sx={{ display: 'flex', justifyContent: 'end' }} >Time<SingleSelect handleClick={handleTime} sortOptions={sortTime} /></Box></TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}><Box sx={{ display: 'flex', justifyContent: 'end' }} >Method<SingleSelect handleClick={handleMethod} sortOptions={sortMethod} /></Box></TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>From</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>To</TableCell>
 
                         </TableRow>
                     </TableHead>
@@ -210,7 +216,7 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
                     </TableBody>
                 </Table>
             </TableContainer>
-        </div>
+        </Box>
     )
 }
 

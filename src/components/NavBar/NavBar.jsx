@@ -18,11 +18,9 @@ const NavBar = () => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                pl: '5rem',
-                pr: '5rem',
                 pt: '1rem',
                 pb: '1rem',
-                mb: '4rem'
+                mb: '2rem'
 
             }}  >
                 <Box>

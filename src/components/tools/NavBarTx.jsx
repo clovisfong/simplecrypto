@@ -1,16 +1,21 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { Grid, Typography, Button, Divider } from '@mui/material';
+import { useState } from "react";
 
 const NavBarTx = () => {
+
 
     const { address } = useParams()
     const walletAdd = address
     const switchPage = useNavigate()
 
     const handleClick = (event) => {
-        switchPage(`/wallet-transactions/${walletAdd}/${event.target.innerText.toLowerCase()}?page=1`)
-    }
 
+        const cat = event.target.innerText.toLowerCase()
+        switchPage(`/wallet-transactions/${walletAdd}/${cat}?page=1`)
+
+
+    }
 
 
     return (

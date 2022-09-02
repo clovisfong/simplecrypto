@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import PageTracker from "../tools/PageTracker";
+import { Box, Grid } from '@mui/material';
 // import Table from '@mui/material/Table';
 // import TableBody from '@mui/material/TableBody';
 // import TableCell from '@mui/material/TableCell';
@@ -45,17 +46,25 @@ const NftBalance = ({ walletNftBalance, defaultBal, setWalletNftBalance }) => {
     const totalPages = Math.ceil(walletNftBalance.length / 20)
 
     return (
-        <div>
-            <PageTracker
-                setSearchParams={setSearchParams}
-                pageStart={pageStart}
-                setPageStart={setPageStart}
-                pageNum={pageNum}
-                totalPages={totalPages} />
+        <Box>
+            <Grid container spacing={0} sx={{ mb: 4 }}>
+                <Grid item xs={9}>
+                    <PageTracker
+                        setSearchParams={setSearchParams}
+                        pageStart={pageStart}
+                        setPageStart={setPageStart}
+                        pageNum={pageNum}
+                        totalPages={totalPages} />
+
+                </Grid>
+                <Grid item xs={3}>
+                    <MultiselectCheckBox handleClick={handleTokens} sortOptions={uniqueTokenNamesObj} />
+                </Grid>
+            </Grid>
             <table>
                 <thead>
                     <tr>
-                        <th>Tokens<MultiselectCheckBox handleClick={handleTokens} sortOptions={uniqueTokenNamesObj} /></th>
+                        <th>Tokens</th>
                         <th>ID</th>
                         <th>Link</th>
                     </tr>
@@ -98,7 +107,7 @@ const NftBalance = ({ walletNftBalance, defaultBal, setWalletNftBalance }) => {
                 </TableBody>
             </Table>
         </TableContainer> */}
-        </div>
+        </Box>
     )
 }
 

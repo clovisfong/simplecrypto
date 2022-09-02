@@ -106,11 +106,11 @@ const TxHistoryWithAdd = () => {
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Hash</TableCell>
-                                <TableCell align="right">Method</TableCell>
-                                <TableCell align="right">Time</TableCell>
-                                <TableCell align="right">Value</TableCell>
-                                <TableCell align="right">Status</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }}>Hash</TableCell>
+                                <TableCell align="right" sx={{ fontWeight: 'bold' }}>Method</TableCell>
+                                <TableCell align="right" sx={{ fontWeight: 'bold' }}>Time</TableCell>
+                                <TableCell align="right" sx={{ fontWeight: 'bold' }}>Value</TableCell>
+                                <TableCell align="right" sx={{ fontWeight: 'bold' }}>Status</TableCell>
 
                             </TableRow>
                         </TableHead>

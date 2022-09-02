@@ -3,6 +3,7 @@ import TxDataTable from "../tools/TxDataTable"
 
 
 
+
 const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
 
 

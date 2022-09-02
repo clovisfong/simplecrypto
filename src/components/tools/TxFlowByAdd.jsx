@@ -4,11 +4,11 @@ import { Box, Grid, Typography } from '@mui/material';
 const TxFlowByAdd = ({ defaultTx, address }) => {
 
 
-    const fromAddresses = defaultTx.filter((tx) => ((tx.to === address.toLowerCase() && tx.from !== '0x0000000000000000000000000000000000000000') && tx.from))
-        .map((tx) => tx.from)
+    const fromAddresses = defaultTx?.filter((tx) => ((tx?.to === address.toLowerCase() && tx?.from !== '0x0000000000000000000000000000000000000000') && tx.from))
+        .map((tx) => tx?.from)
 
-    const toAddresses = defaultTx.filter((tx) => ((tx.from === address.toLowerCase() && tx.to !== '0x0000000000000000000000000000000000000000') && tx.to))
-        .map((tx) => tx.to)
+    const toAddresses = defaultTx?.filter((tx) => ((tx?.from === address.toLowerCase() && tx?.to !== '0x0000000000000000000000000000000000000000') && tx.to))
+        .map((tx) => tx?.to)
 
 
     const txPerAdd = {}

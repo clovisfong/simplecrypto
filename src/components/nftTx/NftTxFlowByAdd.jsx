@@ -14,7 +14,7 @@ const NftTxFlowByAdd = ({ defaultTx, address }) => {
 
 
             }}>
-            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 Addresses By Transactions Count</Typography>
+            <Typography variant="h5" sx={{ mb: 2 }}>Top 5 Addresses By Transactions Count</Typography>
 
             <TxFlowByAdd
                 defaultTx={defaultTx}

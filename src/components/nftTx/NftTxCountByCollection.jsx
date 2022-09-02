@@ -18,7 +18,7 @@ const NftTxCountByCollection = ({ defaultTx }) => {
             }}>
 
 
-            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 NFT Collections By Transactions Count</Typography>
+            <Typography variant="h5" sx={{ mb: 2 }}>Top 5 NFT Collections By Transactions Count</Typography>
             <TxCount defaultTx={defaultTx} />
 
         </Grid>

@@ -5,7 +5,7 @@ const allTxSortOptions = {
         { key: allTxMethodReplaceTable.ethTransfer.replace },
         { key: allTxMethodReplaceTable.otherErc20Transfer.replace },
         { key: allTxMethodReplaceTable.deposit.replace },
-        { key: allTxMethodReplaceTable.multicall.replace },
+        // { key: allTxMethodReplaceTable.multicall.replace },
         { key: allTxMethodReplaceTable.swap.replace },
         { key: allTxMethodReplaceTable.mint.replace },
         { key: allTxMethodReplaceTable.nftTransfer.replace },
