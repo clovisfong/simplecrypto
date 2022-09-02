@@ -67,13 +67,17 @@ const PageTracker = ({ setSearchParams, pageStart, setPageStart, pageNum, totalP
     }
 
 
+
     return (
         <Grid container sx={{ mb: 4 }}>
             <Button onClick={handlePrev}>Previous</Button>
             {pageNumArr.slice(pageStart, pageStart + pageNumLength).map((page) =>
 
 
-                <Button onClick={handlePage} value={page} key={page}>{page}</Button>
+                <Button sx={{
+                    backgroundColor: page === pageNum ? '#286E5E' : null,
+                    color: page === pageNum ? 'white' : '#286E5E',
+                }} onClick={handlePage} value={page} key={page}>{page}</Button>
 
 
             )}

@@ -28,11 +28,11 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
 
 
     const handleSelectMethod = (event) => {
-
+        setSearchParams({ page: 1 })
         const selectedMethodsArr = event.map((item) => item.key)
         const methodDataArr = Object.values(allTxMethodReplaceTable)
         const methodsToFilter = methodDataArr.filter((method) => selectedMethodsArr.some((select) => select === method.replace)).map(method => method.contain)
-        setSearchParams({ page: 1 })
+
         if (methodsToFilter.length === 0) {
             updateWalletTx(defaultTx)
 
@@ -98,6 +98,25 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
     const totalPages = Math.ceil(walletTx.length / 20)
 
 
+    const green = {
+        backgroundColor: '#92E0A3',
+        fontSize: '0.75rem',
+        fontWeight: 'regular',
+        borderRadius: 2,
+        pt: 1,
+        pb: 1,
+        textAlign: 'center'
+    }
+
+    const red = {
+        backgroundColor: '#F68383',
+        fontSize: '0.75rem',
+        fontWeight: 'regular',
+        borderRadius: 5,
+        pt: 1,
+        pb: 1,
+        textAlign: 'center'
+    }
 
     return (
         <Box >
@@ -165,26 +184,8 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                                 <TableCell align="right">{convertTimeStamp(trans.timeStamp)}</TableCell>
                                 <TableCell align="right">{(trans.value / 1000000000000000000).toFixed(2)} ETH</TableCell>
                                 <TableCell align="right">{trans.isError === '0' ?
-                                    <Typography sx={{
-                                        backgroundColor: '#92E0A3',
-                                        fontSize: '0.75rem',
-                                        fontWeight: 'regular',
-                                        borderRadius: 2,
-                                        pt: 1,
-                                        pb: 1,
-                                        textAlign: 'center'
-                                    }} >Success</Typography> :
-                                    <Typography sx={{
-                                        backgroundColor: '#F68383',
-                                        fontSize: '0.75rem',
-                                        fontWeight: 'regular',
-                                        borderRadius: 5,
-                                        pt: 1,
-                                        pb: 1,
-                                        textAlign: 'center'
-                                    }}
-
-                                    >Fail</Typography>}</TableCell>
+                                    <Typography sx={green} >Success</Typography> :
+                                    <Typography sx={red} >Fail</Typography>}</TableCell>
                                 <TableCell align="right" onClick={CopyOnClick(trans.from)} style={{ cursor: 'pointer' }}>
                                     {trans.from === address.toLowerCase() ? "My Wallet" : trans.from.substring(2, 8)}</TableCell>
                                 <TableCell align="right" onClick={CopyOnClick(trans.to)} style={{ cursor: 'pointer' }}>

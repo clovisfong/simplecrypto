@@ -16,7 +16,7 @@ const AllTxFlowByAdd = ({ defaultTx, address }) => {
 
 
             }}>
-            <Typography variant="h5">Top 5 Transacted Wallet for Normal Transactions</Typography>
+            <Typography variant="h5">Top 5 Addresses By Transactions Count</Typography>
             <TxFlowByAdd
                 defaultTx={defaultTx}
                 address={address} />

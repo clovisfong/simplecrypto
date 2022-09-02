@@ -68,7 +68,7 @@ const NftHoldingPeriod = ({ defaultTx, address }) => {
 
 
             }}>
-            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 NFT holding period</Typography>
+            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 NFT Holding Period</Typography>
 
 
             <Box>

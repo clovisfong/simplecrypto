@@ -15,7 +15,7 @@ const CryptoTxFlowByAdd = ({ defaultTx, address }) => {
 
             }}>
 
-            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 Transacted Wallet For Cryptos</Typography>
+            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 Addresses By Transactions Count</Typography>
 
             <TxFlowByAdd
                 defaultTx={defaultTx}

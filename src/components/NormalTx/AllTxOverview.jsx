@@ -6,10 +6,12 @@ const AllTxOverview = ({ defaultTx, address }) => {
 
     return (
         <Grid container spacing={0} sx={{ mb: 7 }}>
-            <Box sx={{ mr: 3 }}>
-                <AllTxTotalFlow defaultTx={defaultTx} address={address} />
-                <AllTxFlowByAdd defaultTx={defaultTx} address={address} />
-            </Box>
+            <Grid item xs={6}>
+                <Box sx={{ mr: 3 }}>
+                    <AllTxTotalFlow defaultTx={defaultTx} address={address} />
+                    <AllTxFlowByAdd defaultTx={defaultTx} address={address} />
+                </Box>
+            </Grid>
             <AllTxTotalValueByAdd defaultTx={defaultTx} address={address} />
 
 

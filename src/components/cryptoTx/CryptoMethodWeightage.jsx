@@ -23,7 +23,7 @@ const CryptoMethodWeightage = ({ defaultTx, address }) => {
 
 
             }}>
-            <Typography variant="h5" >Crypto Method Weightage</Typography>
+            <Typography variant="h5" >Method By Transactions Count</Typography>
             <TxMethodWeightage
                 defaultTx={defaultTx}
                 assignTxMethod={assignTxMethod} />

@@ -17,7 +17,7 @@ const CryptoTxCountByToken = ({ defaultTx }) => {
 
 
             }}>
-            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 Crypto by Transaction Count</Typography>
+            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 Crypto By Transactions Count</Typography>
 
             <TxCount defaultTx={defaultTx} />
 
