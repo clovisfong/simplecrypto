@@ -12,6 +12,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Container, Box, Grid, Typography } from '@mui/material';
+
 const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, earlyTime, lateTime, method, sortTime, sortMethod, idOrValue }) => {
 
 
@@ -97,7 +99,56 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
                 <TableCell align="right">{tx.tokenName}</TableCell>
                 <TableCell align="right">{idOrValue === 'tokenID' ? (tx[idOrValue]) : (tx[idOrValue] / 1000000000000000000).toFixed(2) + ' ' + tx.tokenSymbol}</TableCell>
                 <TableCell align="right">{convertTimeStamp(tx.timeStamp)}</TableCell>
-                <TableCell align="right">{assignTxMethod(tx.from, tx.to)}</TableCell>
+                <TableCell align="right">{
+
+                    assignTxMethod(tx.from, tx.to) === 'Purchase/Transfer In' ?
+                        <Typography sx={{
+                            backgroundColor: '#92E0A3',
+                            fontSize: '0.75rem',
+                            fontWeight: 'regular',
+                            borderRadius: 2,
+                            pt: 1,
+                            pb: 1,
+                            textAlign: 'center'
+                        }} >{assignTxMethod(tx.from, tx.to)}</Typography> :
+
+                        assignTxMethod(tx.from, tx.to) === 'Receive/Purchase' ?
+                            <Typography sx={{
+                                backgroundColor: '#92E0A3',
+                                fontSize: '0.75rem',
+                                fontWeight: 'regular',
+                                borderRadius: 2,
+                                pt: 1,
+                                pb: 1,
+                                textAlign: 'center'
+                            }} >{assignTxMethod(tx.from, tx.to)}</Typography> :
+
+                            assignTxMethod(tx.from, tx.to) === 'Sale/Transfer Out' ?
+                                <Typography sx={{
+                                    backgroundColor: '#F68383',
+                                    fontSize: '0.75rem',
+                                    fontWeight: 'regular',
+                                    borderRadius: 2,
+                                    pt: 1,
+                                    pb: 1,
+                                    textAlign: 'center'
+                                }} >{assignTxMethod(tx.from, tx.to)}</Typography> :
+
+                                assignTxMethod(tx.from, tx.to) === 'Mint' ?
+                                    <Typography sx={{
+                                        backgroundColor: '#F1C88A',
+                                        fontSize: '0.75rem',
+                                        fontWeight: 'regular',
+                                        borderRadius: 5,
+                                        pt: 1,
+                                        pb: 1,
+                                        textAlign: 'center'
+                                    }}
+
+                                    >{assignTxMethod(tx.from, tx.to)}</Typography> : null
+
+
+                }</TableCell>
                 <TableCell align="right" onClick={CopyOnClick(tx.from)} style={{ cursor: 'pointer' }}>{tx.from === address.toLowerCase() ? "My Wallet" : tx.from.substring(2, 8)}</TableCell>
                 <TableCell align="right" onClick={CopyOnClick(tx.to)} style={{ cursor: 'pointer' }}>{tx.to === address.toLowerCase() ? "My Wallet" : tx.to.substring(2, 8)}</TableCell>
 

@@ -50,7 +50,7 @@ const CryptoBalance = ({ walletBalance, defaultBal, updateWalletBalance }) => {
 
     }
 
-    const totalPages = Math.ceil(walletBalance.length / 20)
+    const totalPages = Math.ceil(quantifiableTokens.length / 20)
 
 
     return (
