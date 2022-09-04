@@ -2,6 +2,9 @@ import SearchBar from "../components/tools/SearchBar"
 import Container from '@mui/material/Container';
 import { Box } from '@mui/material';
 
+
+
+
 const HomePage = () => {
 
 

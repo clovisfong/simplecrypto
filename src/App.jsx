@@ -13,7 +13,7 @@ import CryptoBalPage from './pages/CryptoBalPage'
 
 
 
-
+const wallettest = '0xCDc7ba99391F3BE7E5Dc0e49cC8361B537cfC29b'
 const deployLink = 'https://simplecrypto.vercel.app/'
 function App() {
 
