@@ -5,16 +5,17 @@ const NftTxFlowByAdd = ({ defaultTx, address }) => {
 
     return (
         <Grid
-            item xs={6}
+            item xs={12}
             sx={{
                 backgroundColor: '#F4F5F7',
-                p: '2.5rem',
-                borderRadius: '0.75rem',
-                mr: 3
+                p: '2rem',
+                pl: '3rem',
+                pr: '3rem',
+                borderRadius: '0.75rem'
 
 
             }}>
-            <Typography variant="h5" sx={{ mb: 2 }}>Top 5 Addresses By Transactions Count</Typography>
+            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 Addresses By Transactions Count</Typography>
 
             <TxFlowByAdd
                 defaultTx={defaultTx}

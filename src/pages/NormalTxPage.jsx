@@ -2,12 +2,12 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import TxHeader from "../components/headers/TxHeader"
 import NavBarTx from "../components/tools/NavBarTx"
-import AllTxOverview from "../components/normalTx/AllTxOverview"
+import NormalTxOverview from "../components/normalTx/NormalTxOverview"
 import NormalTxDataList from "../components/normalTx/NormalTxDataList"
 import NavBar from "../components/NavBar/NavBar"
-import { Container, Grid } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 
-const AllTxPage = () => {
+const NormalTxPage = () => {
 
     const [walletTx, setWalletTx] = useState([])
     const [defaultTx, setDefaultTx] = useState([])
@@ -34,19 +34,16 @@ const AllTxPage = () => {
 
 
     return (
-        <>
+        <Container>
             <NavBar />
-            <Container>
-                <Grid container spacing={0}>
-                    <TxHeader />
-                </Grid>
-                <NavBarTx />
-                <AllTxOverview defaultTx={defaultTx} address={address} />
-                <NormalTxDataList walletTx={walletTx} updateWalletTx={updateWalletTx} defaultTx={defaultTx} address={address} />
+            <TxHeader />
+            <NavBarTx />
+            <NormalTxOverview defaultTx={defaultTx} address={address} />
+            <NormalTxDataList walletTx={walletTx} updateWalletTx={updateWalletTx} defaultTx={defaultTx} address={address} />
+            <Box sx={{ m: '10rem' }}> </Box>
+        </Container>
 
-            </Container>
-        </>
     )
 }
 
-export default AllTxPage
+export default NormalTxPage

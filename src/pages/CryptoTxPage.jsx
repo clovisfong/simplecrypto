@@ -4,7 +4,7 @@ import CryptoDataList from "../components/cryptoTx/CryptoDataList"
 import CryptoOverview from "../components/cryptoTx/CryptoOverview"
 import NavBarTx from "../components/tools/NavBarTx"
 import TxHeader from "../components/headers/TxHeader"
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Box } from '@mui/material';
 import NavBar from "../components/NavBar/NavBar"
 
 
@@ -33,17 +33,16 @@ const CryptoTxPage = () => {
 
 
     return (
-        <>
+
+        <Container>
             <NavBar />
-            <Container>
-                <Grid container spacing={0}>
-                    <TxHeader />
-                </Grid>
-                <NavBarTx />
-                <CryptoOverview defaultTx={defaultTx} address={address} />
-                <CryptoDataList cryptoTx={cryptoTx} updateCryptoTx={updateCryptoTx} defaultTx={defaultTx} address={address} />
-            </Container>
-        </>
+            <TxHeader />
+            <NavBarTx />
+            <CryptoOverview defaultTx={defaultTx} address={address} />
+            <CryptoDataList cryptoTx={cryptoTx} updateCryptoTx={updateCryptoTx} defaultTx={defaultTx} address={address} />
+            <Box sx={{ m: '10rem' }}> </Box>
+        </Container>
+
     )
 }
 

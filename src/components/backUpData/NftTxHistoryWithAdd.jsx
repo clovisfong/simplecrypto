@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import convertTimeStamp from "../components/tools/ConvertTimeStamp"
+import convertTimeStamp from "../tools/ConvertTimeStamp"
 //CAN"T FETCH URL
 
 const NftTxHistoryWithAdd = ({ defaultTx }) => {

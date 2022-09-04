@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import BalHeader from "../components/headers/BalHeader"
 import NavBarBal from "../components/tools/NavBarBal"
 import CryptoBalance from '../components/cryptoBal/CryptoBalance'
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Box } from '@mui/material';
 import NavBar from "../components/NavBar/NavBar"
 
 
@@ -31,18 +31,18 @@ const CryptoBalPage = () => {
 
 
     return (
-        <>
+
+        <Container>
             <NavBar />
-            <Container>
-                <Grid container spacing={0}>
-                    <BalHeader walletBalance={walletBalance} />
-                </Grid>
-                <NavBarBal />
-                <CryptoBalance walletBalance={walletBalance} defaultBal={defaultBal} updateWalletBalance={updateWalletBalance} />
 
-            </Container>
+            <BalHeader walletBalance={walletBalance} />
 
-        </>
+            <NavBarBal />
+            <CryptoBalance walletBalance={walletBalance} defaultBal={defaultBal} updateWalletBalance={updateWalletBalance} />
+            <Box sx={{ m: '10rem' }}> </Box>
+        </Container>
+
+
 
     )
 }

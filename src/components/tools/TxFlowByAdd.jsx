@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom"
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography, Link } from '@mui/material';
 
 const TxFlowByAdd = ({ defaultTx, address }) => {
 
@@ -44,59 +43,40 @@ const TxFlowByAdd = ({ defaultTx, address }) => {
             if (defaultTx[0]?.isError === undefined) {
                 if (defaultTx[0]?.value === undefined) {
                     return (
-                        <Box key={index}>
-                            <Grid container spacing={0} >
-                                <Grid item xs={4}> {token.name.substring(2, 8)}
-
-                                    {/* <Link to={`/wallet-transactions/${address}/nft-transaction-history/${token.name}`}>
-                                    {token.name.substring(2, 8)}</Link> */}
-                                </Grid>
-                                <Grid item xs={3}> <Typography variant="body2">{token.count}</Typography></Grid>
-                                <Grid item xs={3}><Typography variant="body2">{NumOfTxPerFromAdd[token.name] || 0}</Typography></Grid>
-                                <Grid item xs={2}> <Typography variant="body2">{NumOfTxPerToAdd[token.name] || 0} </Typography></Grid>
-
-
-                            </Grid>
-
-                        </Box>
+                        <Grid container key={index}>
+                            <Grid item xs={4}> {token.name.substring(2, 8)}</Grid>
+                            <Grid item xs={3}> <Typography variant="body2">{NumOfTxPerToAdd[token.name] || 0} </Typography></Grid>
+                            <Grid item xs={3}><Typography variant="body2">{NumOfTxPerFromAdd[token.name] || 0}</Typography></Grid>
+                            <Grid item xs={1}> <Typography variant="body2">{token.count}</Typography></Grid>
+                        </Grid>
 
                     )
                 } else {
 
                     return (
-                        <Box key={index}>
-                            <Grid container spacing={0} >
-                                <Grid item xs={4}>{token.name.substring(2, 8)}</Grid>
-                                <Grid item xs={3}> <Typography variant="body2">{token.count}</Typography></Grid>
-                                <Grid item xs={3}><Typography variant="body2">{NumOfTxPerFromAdd[token.name] || 0}</Typography></Grid>
-                                <Grid item xs={2}> <Typography variant="body2">{NumOfTxPerToAdd[token.name] || 0} </Typography></Grid>
 
+                        <Grid container key={index} >
+                            <Grid item xs={4}>{token.name.substring(2, 8)}</Grid>
+                            <Grid item xs={3}> <Typography variant="body2">{NumOfTxPerToAdd[token.name] || 0} </Typography></Grid>
+                            <Grid item xs={3}><Typography variant="body2">{NumOfTxPerFromAdd[token.name] || 0}</Typography></Grid>
+                            <Grid item xs={1}> <Typography variant="body2">{token.count}</Typography></Grid>
+                        </Grid>
 
-                            </Grid>
-                        </Box>
                     )
                 }
             } else {
                 return (
-                    // <li key={index}>
-                    //     <Link to={`/wallet-transactions/${address}/transaction-history/${token.name}`}>
-                    //         {token.name}</Link>
-                    //     - Total {token.count} - Outflow {NumOfTxPerFromAdd[token.name] || 0}
-                    //     - Inflow {NumOfTxPerToAdd[token.name] || 0}  </li>
-                    <Box key={index}>
-                        <Grid container spacing={0} >
-                            <Grid item xs={4}>
-                                <Link to={`/wallet-transactions/${address}/transaction-history/${token.name}`}>
-                                    {token.name.substring(2, 8)}</Link>
-                            </Grid>
-                            <Grid item xs={3}> <Typography variant="body2">{token.count}</Typography></Grid>
-                            <Grid item xs={3}><Typography variant="body2">{NumOfTxPerFromAdd[token.name] || 0}</Typography></Grid>
-                            <Grid item xs={2}> <Typography variant="body2">{NumOfTxPerToAdd[token.name] || 0} </Typography></Grid>
-
-
+                    <Grid container key={index} >
+                        <Grid item xs={4}>
+                            <Link href={`/wallet-transactions/${address}/transaction-history/${token.name}`} underline="none">
+                                {token.name.substring(2, 8)}</Link>
                         </Grid>
+                        <Grid item xs={3}> <Typography variant="body2">{NumOfTxPerToAdd[token.name] || 0} </Typography></Grid>
+                        <Grid item xs={3}><Typography variant="body2">{NumOfTxPerFromAdd[token.name] || 0}</Typography></Grid>
+                        <Grid item xs={1}> <Typography variant="body2">{token.count}</Typography></Grid>
+                    </Grid>
 
-                    </Box>
+
                 )
             }
         })
@@ -104,11 +84,11 @@ const TxFlowByAdd = ({ defaultTx, address }) => {
 
     return (
         <Box>
-            <Grid container spacing={0} sx={{ mt: 2 }} >
+            <Grid container  >
                 <Grid item xs={4} ></Grid>
-                <Grid item xs={3}> <Typography variant="h6">Total</Typography></Grid>
-                <Grid item xs={3}> <Typography variant="h6">OutFlow</Typography></Grid>
-                <Grid item xs={2}> <Typography variant="h6">Inflow</Typography></Grid>
+                <Grid item xs={3} > <Typography variant="h6">Inflow</Typography></Grid>
+                <Grid item xs={3} > <Typography variant="h6">OutFlow</Typography></Grid>
+                <Grid item xs={1} > <Typography variant="h6">Total</Typography></Grid>
             </Grid>
             {displaytopFiveAdd}
 

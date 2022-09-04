@@ -13,7 +13,7 @@ const SearchBar = () => {
 
     const handleClick = () => {
         if (input.substring(0, 2) === '0x')
-            navigateToWalletTx(`/wallet-transactions/${input}/all?page=1`)
+            navigateToWalletTx(`/wallet-transactions/${input}/transactions?page=1`)
     }
 
     const handleChange = (event) => {
@@ -28,10 +28,14 @@ const SearchBar = () => {
                 onChange={handleChange}
 
             />
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                mt: '2rem'
+            }}>
                 <Button
                     variant="contained"
-                    sx={{ mt: 3 }}
+
                     onClick={handleClick}>Search Wallet</Button>
             </Box>
 

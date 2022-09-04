@@ -1,5 +1,6 @@
 import cryptoSortOptions from "../../data/cryptoSortOptions"
 import TxDataTable from "../tools/TxDataTable"
+import { Box, Container, Grid } from '@mui/material';
 
 
 const CryptoDataList = ({ cryptoTx, updateCryptoTx, defaultTx, address }) => {
@@ -15,7 +16,7 @@ const CryptoDataList = ({ cryptoTx, updateCryptoTx, defaultTx, address }) => {
 
 
     return (
-        <div>
+        <Box>
             <TxDataTable
                 dataTx={cryptoTx}
                 updateState={updateCryptoTx}
@@ -29,7 +30,7 @@ const CryptoDataList = ({ cryptoTx, updateCryptoTx, defaultTx, address }) => {
                 sortMethod={cryptoSortOptions.method}
                 idOrValue={'value'}
             />
-        </div>
+        </Box>
     )
 }
 

@@ -6,10 +6,12 @@ const CryptoTxFlowByAdd = ({ defaultTx, address }) => {
 
     return (
         <Grid
-            item xs={6}
+            item xs={12}
             sx={{
                 backgroundColor: '#F4F5F7',
-                p: '2.5rem',
+                p: '2rem',
+                pl: '3rem',
+                pr: '3rem',
                 borderRadius: '0.75rem'
 
 

@@ -1,5 +1,5 @@
 import { Grid, Typography } from '@mui/material';
-const AllTxTotalFlow = ({ defaultTx, address }) => {
+const NormalTxTotalFlow = ({ defaultTx, address }) => {
 
 
     const totalEthFlow = (flow) => {
@@ -14,18 +14,17 @@ const AllTxTotalFlow = ({ defaultTx, address }) => {
             item xs={12}
             sx={{
                 backgroundColor: '#F4F5F7',
-                p: '2.5rem',
+                p: '2rem',
+                pl: '3rem',
+                pr: '3rem',
                 borderRadius: '0.75rem'
-
-
             }}>
             <Typography variant="h5" sx={{ mb: 3 }}>Total Successful Transactions Flow</Typography>
-
-            <Typography variant="body1">Total Outflow: {totalEthFlow('from')} ETH</Typography>
             <Typography variant="body1">Total Inflow: {totalEthFlow('to')} ETH</Typography>
+            <Typography variant="body1">Total Outflow: {totalEthFlow('from')} ETH</Typography>
 
         </Grid >
     )
 }
 
-export default AllTxTotalFlow
+export default NormalTxTotalFlow

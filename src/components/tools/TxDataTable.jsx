@@ -1,5 +1,4 @@
 import MultiselectCheckBox from "./MultiselectCheckBox"
-import SingleSelect from "./SingleSelect"
 import convertTimeStamp from "./ConvertTimeStamp"
 import CopyOnClick from "./CopyOnClick"
 import { useSearchParams } from "react-router-dom"
@@ -12,7 +11,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Container, Box, Grid, Typography } from '@mui/material';
+import { Container, Box, Grid, Typography, Link } from '@mui/material';
+import DropDownMenu from "./DropDownMenu"
 
 const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, earlyTime, lateTime, method, sortTime, sortMethod, idOrValue }) => {
 
@@ -44,13 +44,13 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
     }
 
 
-    const handleTime = (event) => {
+    const handleTime = (item) => {
         setSearchParams({ page: 1 })
-        if (event[0].key === earlyTime) {
+        if (item === earlyTime) {
             const sortArrByEarliest = dataTx.sort((a, b) => a?.timeStamp - b?.timeStamp)
             updateState([...sortArrByEarliest])
 
-        } else if (event[0].key === lateTime) {
+        } else if (item === lateTime) {
             const sortArrByLatest = dataTx.sort((a, b) => b?.timeStamp - a?.timeStamp)
             updateState([...sortArrByLatest])
         } else {
@@ -59,11 +59,11 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
         }
     }
 
-    const handleMethod = (event) => {
+    const handleMethod = (item) => {
         setSearchParams({ page: 1 })
-        if (event[0].key !== method) { //array num diff from NFTData
+        if (item !== method) { //array num diff from NFTData
             updateState(defaultTx.filter((tx) =>
-                assignTxMethod(tx.from, tx.to) === event[0].key))
+                assignTxMethod(tx.from, tx.to) === item))
         } else {
             updateState(defaultTx)
         }
@@ -72,34 +72,18 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
 
     const tableData = dataTx?.slice((pageNum * 20) - 20, pageNum * 20)?.map(tx => {
         return (
-            // <tr key={tx.hash + tx.tokenID + tx.tokenName}>
-            //     <td><a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a></td>
-            //     <td>{tx.tokenName}</td>
-            //     <td>{idOrValue === 'tokenID' ? (tx[idOrValue]) : (tx[idOrValue] / 1000000000000000000).toFixed(2) + ' ' + tx.tokenSymbol}</td>
-            //     <td>{convertTimeStamp(tx.timeStamp)}</td>
-            //     <td>
-            //         {assignTxMethod(tx.from, tx.to)}
-            //     </td>
-            //     <td onClick={CopyOnClick(tx.from)} style={{ cursor: 'pointer' }}>
-            //         {tx.from === address.toLowerCase() ? "My Wallet" : tx.from.substring(2, 8)}
-            //     </td>
-            //     <td onClick={CopyOnClick(tx.to)} style={{ cursor: 'pointer' }}>
-            //         {tx.to === address.toLowerCase() ? "My Wallet" : tx.to.substring(2, 8)}
-            //     </td>
-            // </tr>
-
 
             <TableRow
                 key={tx.hash + tx.tokenID + tx.tokenName}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                 <TableCell component="th" scope="row">
-                    <a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a>
+                    <Link href={`https://etherscan.io/tx/${tx.hash}`} underline="none">{tx.hash.substring(2, 8)}...</Link>
                 </TableCell>
-                <TableCell align="right">{tx.tokenName}</TableCell>
-                <TableCell align="right">{idOrValue === 'tokenID' ? (tx[idOrValue]) : (tx[idOrValue] / 1000000000000000000).toFixed(2) + ' ' + tx.tokenSymbol}</TableCell>
-                <TableCell align="right">{convertTimeStamp(tx.timeStamp)}</TableCell>
-                <TableCell align="right">{
+                <TableCell align="center">{tx.tokenName}</TableCell>
+                <TableCell align="center">{idOrValue === 'tokenID' ? (tx[idOrValue]) : (tx[idOrValue] / 1000000000000000000).toFixed(2) + ' ' + tx.tokenSymbol}</TableCell>
+                <TableCell align="center">{convertTimeStamp(tx.timeStamp)}</TableCell>
+                <TableCell align="center">{
 
                     assignTxMethod(tx.from, tx.to) === 'Purchase/Transfer In' ?
                         <Typography sx={{
@@ -107,9 +91,11 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
                             fontSize: '0.75rem',
                             fontWeight: 'regular',
                             borderRadius: 2,
-                            pt: 1,
-                            pb: 1,
-                            textAlign: 'center'
+                            p: '0.5rem',
+                            pr: '1rem',
+                            pl: '1rem',
+                            textAlign: 'center',
+                            display: 'inline-flex',
                         }} >{assignTxMethod(tx.from, tx.to)}</Typography> :
 
                         assignTxMethod(tx.from, tx.to) === 'Receive/Purchase' ?
@@ -118,9 +104,11 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
                                 fontSize: '0.75rem',
                                 fontWeight: 'regular',
                                 borderRadius: 2,
-                                pt: 1,
-                                pb: 1,
-                                textAlign: 'center'
+                                p: '0.5rem',
+                                pr: '1rem',
+                                pl: '1rem',
+                                textAlign: 'center',
+                                display: 'inline-flex',
                             }} >{assignTxMethod(tx.from, tx.to)}</Typography> :
 
                             assignTxMethod(tx.from, tx.to) === 'Sale/Transfer Out' ?
@@ -129,9 +117,11 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
                                     fontSize: '0.75rem',
                                     fontWeight: 'regular',
                                     borderRadius: 2,
-                                    pt: 1,
-                                    pb: 1,
-                                    textAlign: 'center'
+                                    p: '0.5rem',
+                                    pr: '1rem',
+                                    pl: '1rem',
+                                    textAlign: 'center',
+                                    display: 'inline-flex',
                                 }} >{assignTxMethod(tx.from, tx.to)}</Typography> :
 
                                 assignTxMethod(tx.from, tx.to) === 'Mint' ?
@@ -139,18 +129,20 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
                                         backgroundColor: '#F1C88A',
                                         fontSize: '0.75rem',
                                         fontWeight: 'regular',
-                                        borderRadius: 5,
-                                        pt: 1,
-                                        pb: 1,
-                                        textAlign: 'center'
+                                        borderRadius: 2,
+                                        p: '0.5rem',
+                                        pr: '1rem',
+                                        pl: '1rem',
+                                        textAlign: 'center',
+                                        display: 'inline-flex',
                                     }}
 
                                     >{assignTxMethod(tx.from, tx.to)}</Typography> : null
 
 
                 }</TableCell>
-                <TableCell align="right" onClick={CopyOnClick(tx.from)} style={{ cursor: 'pointer' }}>{tx.from === address.toLowerCase() ? "My Wallet" : tx.from.substring(2, 8)}</TableCell>
-                <TableCell align="right" onClick={CopyOnClick(tx.to)} style={{ cursor: 'pointer' }}>{tx.to === address.toLowerCase() ? "My Wallet" : tx.to.substring(2, 8)}</TableCell>
+                <TableCell align="center" onClick={CopyOnClick(tx.from)} style={{ cursor: 'pointer' }}>{tx.from === address.toLowerCase() ? "Wallet" : tx.from.substring(2, 8)}</TableCell>
+                <TableCell align="center" onClick={CopyOnClick(tx.to)} style={{ cursor: 'pointer' }}>{tx.to === address.toLowerCase() ? "Wallet" : tx.to.substring(2, 8)}</TableCell>
 
 
             </TableRow>
@@ -176,38 +168,35 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
                         pageNum={pageNum}
                         totalPages={totalPages} />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={12} md={3}>
+                    <Typography variant="body1" sx={{
+                        textAlign: { xs: 'left', md: 'right' },
+                        mt: { xs: '1rem', md: '0' },
+                        mb: '0.5rem'
+                    }}>Number of transactions: {dataTx?.length} </Typography>
                     <MultiselectCheckBox handleClick={handleSelect} sortOptions={uniqueTokenNamesObj} />
                 </Grid>
             </Grid>
-            {/* <table>
-                <thead>
-                    <tr>
-                        <th>Hash</th>
-                        <th>Token<MultiselectCheckBox handleClick={handleSelect} sortOptions={uniqueTokenNamesObj} /></th>
-                        <th>{idOrValue === 'tokenID' ? 'ID' : 'Value'}</th>
-                        <th>Time<SingleSelect handleClick={handleTime} sortOptions={sortTime} /></th>
-                        <th>Method<SingleSelect handleClick={handleMethod} sortOptions={sortMethod} /></th>
-                        <th>From</th>
-                        <th>To</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableData}
-                </tbody>
-            </table> */}
 
             <TableContainer component={Paper} sx={{ borderRadius: 0.5 }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell sx={{ fontWeight: 'bold' }}>Hash</TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>Token</TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>{idOrValue === 'tokenID' ? 'ID' : 'Value'}</TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 'bold' }}><Box sx={{ display: 'flex', justifyContent: 'end' }} >Time<SingleSelect handleClick={handleTime} sortOptions={sortTime} /></Box></TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 'bold' }}><Box sx={{ display: 'flex', justifyContent: 'end' }} >Method<SingleSelect handleClick={handleMethod} sortOptions={sortMethod} /></Box></TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>From</TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 'bold' }}>To</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Token</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>{idOrValue === 'tokenID' ? 'ID' : 'Value'}</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+                                <Box sx={{ display: 'flex', justifyContent: 'center' }} >Time
+                                    <DropDownMenu handleData={handleTime} sortOptions={sortTime} />
+                                </Box>
+                            </TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+                                <Box sx={{ display: 'flex', justifyContent: 'center' }} >Method
+                                    <DropDownMenu handleData={handleMethod} sortOptions={sortMethod} />
+                                </Box>
+                            </TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>From</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>To</TableCell>
 
                         </TableRow>
                     </TableHead>

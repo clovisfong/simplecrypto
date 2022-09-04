@@ -1,7 +1,7 @@
 import TxFlowByAdd from "../tools/TxFlowByAdd"
 import { Grid, Typography } from '@mui/material';
 
-const AllTxFlowByAdd = ({ defaultTx, address }) => {
+const NormalTxFlowByAdd = ({ defaultTx, address }) => {
 
 
 
@@ -10,13 +10,14 @@ const AllTxFlowByAdd = ({ defaultTx, address }) => {
             item xs={12}
             sx={{
                 backgroundColor: '#F4F5F7',
-                p: '2.5rem',
+                p: '2rem',
+                pl: '3rem',
+                pr: '3rem',
                 borderRadius: '0.75rem',
-                mt: 3
 
 
             }}>
-            <Typography variant="h5">Top 5 Addresses By Transactions Count</Typography>
+            <Typography variant="h5" sx={{ mb: 3 }}>Top 5 Addresses By Transactions Count</Typography>
             <TxFlowByAdd
                 defaultTx={defaultTx}
                 address={address} />
@@ -26,4 +27,4 @@ const AllTxFlowByAdd = ({ defaultTx, address }) => {
     )
 }
 
-export default AllTxFlowByAdd
+export default NormalTxFlowByAdd

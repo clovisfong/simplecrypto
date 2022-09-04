@@ -6,10 +6,18 @@ import { Grid } from '@mui/material';
 const NftOverview = ({ defaultTx, address }) => {
 
     return (
-        <Grid container spacing={0} sx={{ mb: 7 }}>
+        <Grid container spacing={0}
+            sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', md: '2fr 3fr' },
+                columnGap: '2rem',
+                rowGap: '2rem',
+                mb: 7
+            }}
+        >
             <NftTxCountByCollection defaultTx={defaultTx} />
-            <NftMethodWeightage defaultTx={defaultTx} address={address} />
             <NftTxFlowByAdd defaultTx={defaultTx} address={address} />
+            <NftMethodWeightage defaultTx={defaultTx} address={address} />
             <NftHoldingPeriod defaultTx={defaultTx} address={address} />
         </Grid>
     )

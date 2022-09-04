@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { Grid, Button, Typography } from '@mui/material';
+import { Box, Grid, Button, Typography } from '@mui/material';
 
 const wallettest = '0xCDc7ba99391F3BE7E5Dc0e49cC8361B537cfC29b'
 
@@ -37,28 +37,63 @@ const TxHeader = () => {
     }
 
     return (
-        <Grid container spacing={0}>
-            <Grid
-                item xs={6}
+        <Grid container
+            sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
+                columnGap: '2rem'
+            }}
+        >
+            <Grid item
                 sx={{
                     backgroundColor: '#F4F5F7',
-                    p: '2.5rem',
-                    borderRadius: '0.75rem'
+                    p: '2rem',
+                    pl: '3rem',
+                    pr: '3rem',
+                    borderRadius: '0.75rem',
+                }} >
 
 
-                }}>
+                <Typography variant="h4">Wallet Transactions </Typography>
+                <Typography variant="h5" sx={{ color: '#28292C', mb: '2rem' }}>ETH Balance:  {ethBal == 'NaN' ? 0 : ethBal} </Typography>
 
-                <Typography variant="h5">ERC20 Wallet Balance:  {ethBal} ETH </Typography>
                 <Button
                     variant="contained"
                     onClick={handleSwitchPage}
-                    sx={{ mt: 3 }}
+
                 >View Tokens
 
                 </Button>
 
             </Grid>
+
+
+            <Grid item
+                sx={{
+                    backgroundColor: '#F4F5F7',
+                    p: '2rem',
+                    pt: '1rem',
+                    borderRadius: '0.75rem',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    display: { xs: 'none', sm: 'grid' }
+                }}>
+                <Box >
+                    <Typography sx={{
+                        backgroundColor: '#38393C',
+                        color: '#F3E9DF',
+                        p: '0.5rem',
+                        pr: '0.75rem',
+                        pl: '0.75rem',
+                        borderRadius: '1rem',
+                        fontSize: '0.75rem',
+                        fontWeight: 'normal '
+                    }}>Ads</Typography>
+                </Box>
+            </Grid>
         </Grid>
+
+
 
 
 

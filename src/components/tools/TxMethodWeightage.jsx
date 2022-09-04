@@ -17,8 +17,8 @@ const TxMethodWeightage = ({ defaultTx, assignTxMethod, }) => {
             return (
 
                 <Grid container spacing={0} key={method.name} >
-                    <Grid item xs={8}>{method.name} </Grid>
-                    <Grid item xs={4}>{method.count}</Grid>
+                    <Grid item xs={7} md={9}>{method.name} </Grid>
+                    <Grid item xs={5} md={3}>{method.count}</Grid>
                 </Grid>
             )
         })
@@ -26,8 +26,8 @@ const TxMethodWeightage = ({ defaultTx, assignTxMethod, }) => {
     return (
         <Box>
             <Grid container spacing={0}>
-                <Grid item xs={8}><Typography variant="h6" sx={{ mt: 2 }}>Method</Typography></Grid>
-                <Grid item xs={4}> <Typography variant="h6" sx={{ mt: 2 }}>Count</Typography></Grid>
+                <Grid item xs={7} md={9}><Typography variant="h6" >Method</Typography></Grid>
+                <Grid item xs={5} md={3}> <Typography variant="h6" >Count</Typography></Grid>
             </Grid >
             <Grid container spacing={0}>
 

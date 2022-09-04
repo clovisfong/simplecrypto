@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import allTxMethodReplaceTable from "../data/allTxMethodReplaceTable"
 import convertTimeStamp from "../components/tools/ConvertTimeStamp"
 import NavBar from "../components/NavBar/NavBar"
-import { Grid, Box, Container, Button, Typography } from '@mui/material';
+import { Grid, Box, Container, Button, Typography, Divider, Link } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -54,7 +54,7 @@ const TxHistoryWithAdd = () => {
 
 
     const handleSwitchPage = () => {
-        navigateToTransactions(`/wallet-transactions/${address}/all?page=1`)
+        navigateToTransactions(`/wallet-transactions/${address}/transactions?page=1`)
     }
 
 
@@ -62,124 +62,189 @@ const TxHistoryWithAdd = () => {
     const totalOutflow = (outflowTx.reduce((acc, tx) => acc + Number(tx.value), 0) / 1000000000000000000).toFixed(2)
 
 
+
+    const green = {
+        backgroundColor: '#92E0A3',
+        fontSize: '0.75rem',
+        fontWeight: 'regular',
+        borderRadius: 2,
+        p: '0.5rem',
+        pr: '1rem',
+        pl: '1rem',
+        textAlign: 'center',
+        display: 'inline-flex',
+    }
+
+    const red = {
+        backgroundColor: '#F68383',
+        fontSize: '0.75rem',
+        fontWeight: 'regular',
+        borderRadius: 2,
+        p: '0.5rem',
+        pr: '1rem',
+        pl: '1rem',
+        textAlign: 'center',
+        display: 'inline-flex',
+    }
+
+
     return (
-        <>
+
+        <Container>
             <NavBar />
-            <Container>
-                <Grid container spacing={0}>
-                    <Grid
-                        item xs={6}
-                        sx={{
-                            backgroundColor: '#F4F5F7',
-                            p: '2.5rem',
-                            borderRadius: '0.75rem'
+            <Grid container
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
+                    columnGap: '2rem'
+                }}
+            >
+                <Grid item
+                    sx={{
+                        backgroundColor: '#F4F5F7',
+                        p: '2rem',
+                        pl: '3rem',
+                        pr: '3rem',
+                        borderRadius: '0.75rem',
+                    }} >
 
-
-                        }}>
-                        <Typography variant="h5">Transactions History </Typography>
-                        <Typography variant="h6">Transacted With: {wallet}</Typography>
-                        <Button
-                            variant="contained"
-                            sx={{ mt: 3 }}
-                            onClick={handleSwitchPage}
-                        >Back to Transactions
-                        </Button>
-
-
-                    </Grid>
+                    <Typography variant="h5">Transaction History </Typography>
+                    <Typography variant="h6" sx={{ mb: '2rem' }}>Transacted With: {wallet}</Typography>
+                    <Button
+                        variant="contained"
+                        onClick={handleSwitchPage}
+                    >Back to Transactions
+                    </Button>
                 </Grid>
 
-                <Box sx={{
-                    backgroundColor: '#F4F5F7',
-                    p: '2rem',
-                    borderRadius: '0.75rem',
-                    mt: 5,
-                    mb: 3
+                <Grid item
+                    sx={{
+                        backgroundColor: '#F4F5F7',
+                        p: '2rem',
+                        pt: '1rem',
+                        borderRadius: '0.75rem',
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        display: { xs: 'none', sm: 'grid' }
+                    }}>
+                    <Box >
+                        <Typography sx={{
+                            backgroundColor: '#38393C',
+                            color: '#F3E9DF',
+                            p: '0.5rem',
+                            pr: '0.75rem',
+                            pl: '0.75rem',
+                            borderRadius: '1rem',
+                            fontSize: '0.75rem',
+                            fontWeight: 'normal '
+                        }}>Ads</Typography>
+                    </Box>
+                </Grid>
+
+            </Grid>
 
 
-                }}>
-                    <Typography variant="h5">Total Inflow: {totalInflow}</Typography>
-                </Box>
+
+            <Divider sx={{
+                mt: '3rem',
+            }}>
+            </Divider>
+            <Box sx={{
+                backgroundColor: '#F4F5F7',
+                p: '2rem',
+                borderRadius: '0.75rem',
+                mt: '3rem',
+                mb: '2rem'
 
 
-                <TableContainer component={Paper} sx={{ borderRadius: 0.5 }}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell sx={{ fontWeight: 'bold' }}>Hash</TableCell>
-                                <TableCell align="right" sx={{ fontWeight: 'bold' }}>Method</TableCell>
-                                <TableCell align="right" sx={{ fontWeight: 'bold' }}>Time</TableCell>
-                                <TableCell align="right" sx={{ fontWeight: 'bold' }}>Value</TableCell>
-                                <TableCell align="right" sx={{ fontWeight: 'bold' }}>Status</TableCell>
+            }}>
+                <Typography variant="h5">Total Inflow: {totalInflow} ETH</Typography>
+            </Box>
+
+
+            <TableContainer component={Paper} sx={{ borderRadius: 0.5 }}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Hash</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Method</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Time</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Value</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Status</TableCell>
+
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {inflowTx.map((tx) =>
+                            <TableRow
+                                key={tx.hash}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    <Link href={`https://etherscan.io/tx/${tx.hash}`} underline="none">{tx.hash.substring(2, 8)}...</Link>
+                                </TableCell>
+                                <TableCell align="center">{groupMethod(tx.functionName)}</TableCell>
+                                <TableCell align="center">{convertTimeStamp(tx.timeStamp)}</TableCell>
+                                <TableCell align="center">{(tx.value / 1000000000000000000).toFixed(2)} ETH</TableCell>
+                                <TableCell align="center">{tx.isError === '0' ?
+                                    <Typography sx={green} >Success</Typography> :
+                                    <Typography sx={red} >Fail</Typography>}</TableCell>
+
 
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {inflowTx.map((tx) =>
-                                <TableRow
-                                    key={tx.hash}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell component="th" scope="row">
-                                        <a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a>
-                                    </TableCell>
-                                    <TableCell align="right">{groupMethod(tx.functionName)}</TableCell>
-                                    <TableCell align="right">{convertTimeStamp(tx.timeStamp)}</TableCell>
-                                    <TableCell align="right">{(tx.value / 1000000000000000000).toFixed(2)} ETH</TableCell>
-                                    <TableCell align="right">{tx.isError === '0' ? 'Success' : 'Fail'}</TableCell>
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
+            <Box sx={{
+                backgroundColor: '#F4F5F7',
+                p: '2rem',
+                borderRadius: '0.75rem',
+                mt: '3rem',
+                mb: '2rem'
+            }}>
+                <Typography variant="h5" >Total Outflow: {totalOutflow} ETH</Typography>
+            </Box>
 
 
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+            <TableContainer component={Paper} sx={{ borderRadius: 0.5 }}>
+                <Table sx={{ minWidth: 500 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Hash</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Method</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Time</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Value</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Status</TableCell>
 
-                <Box sx={{
-                    backgroundColor: '#F4F5F7',
-                    p: '2rem',
-                    borderRadius: '0.75rem',
-                    mt: 5,
-                    mb: 3
-                }}>
-                    <Typography variant="h5">Total Outflow: {totalOutflow}</Typography>
-                </Box>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {outflowTx.map((tx) =>
+                            <TableRow
+                                key={tx.hash}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    <a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a>
+                                </TableCell>
+                                <TableCell align="center">{groupMethod(tx.functionName)}</TableCell>
+                                <TableCell align="center">{convertTimeStamp(tx.timeStamp)}</TableCell>
+                                <TableCell align="center">{(tx.value / 1000000000000000000).toFixed(2)} ETH</TableCell>
+                                <TableCell align="center">{tx.isError === '0' ?
+                                    <Typography sx={green} >Success</Typography> :
+                                    <Typography sx={red} >Fail</Typography>}</TableCell>
 
-
-                <TableContainer component={Paper} sx={{ borderRadius: 0.5 }}>
-                    <Table sx={{ minWidth: 500 }} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Hash</TableCell>
-                                <TableCell align="right">Method</TableCell>
-                                <TableCell align="right">Time</TableCell>
-                                <TableCell align="right">Value</TableCell>
-                                <TableCell align="right">Status</TableCell>
 
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {outflowTx.map((tx) =>
-                                <TableRow
-                                    key={tx.hash}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell component="th" scope="row">
-                                        <a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a>
-                                    </TableCell>
-                                    <TableCell align="right">{groupMethod(tx.functionName)}</TableCell>
-                                    <TableCell align="right">{convertTimeStamp(tx.timeStamp)}</TableCell>
-                                    <TableCell align="right">{(tx.value / 1000000000000000000).toFixed(2)} ETH</TableCell>
-                                    <TableCell align="right">{tx.isError === '0' ? 'Success' : 'Fail'}</TableCell>
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Box sx={{ m: '10rem' }}> </Box>
+        </Container>
 
-
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Container>
-        </>
     )
 }
 

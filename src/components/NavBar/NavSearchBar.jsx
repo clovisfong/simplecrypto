@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 import { Button, Box, TextField } from '@mui/material';
 
 
+
 const NavSearchBar = () => {
 
     const [input, setInput] = useState('')
@@ -13,7 +14,7 @@ const NavSearchBar = () => {
 
     const handleClick = () => {
         if (input.substring(0, 2) === '0x')
-            navigateToWalletTx(`/wallet-transactions/${input}/all?page=1`)
+            navigateToWalletTx(`/wallet-transactions/${input}/transactions?page=1`)
     }
 
     const handleChange = (event) => {
@@ -23,12 +24,13 @@ const NavSearchBar = () => {
     return (
         <>
             <Box sx={{
-                display: 'flex',
+                display: { xs: 'none', sm: 'flex' },
                 alignItems: 'center',
 
 
             }}>
                 <TextField
+
                     id="search-wallet-add"
                     label="Search wallet address "
                     onChange={handleChange}

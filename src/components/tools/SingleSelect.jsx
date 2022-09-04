@@ -1,22 +1,47 @@
 import Multiselect from "multiselect-react-dropdown"
-import { Popover } from "react-tiny-popover"
 import { useState } from "react"
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { Button, Popover, Box } from '@mui/material';
 
 const SingleSelect = ({ handleClick, sortOptions }) => {
 
-    const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null);
 
+    const handlePop = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     return (
         <>
+            <Button aria-describedby={id} variant="contained" onClick={handlePop}>
+                +
+            </Button>
             <Popover
-                isOpen={isPopoverOpen}
-                positions={['bottom']} // if you'd like, you can limit the positions
-                padding={0} // adjust padding here!
-                align={'start'}
-                reposition={false} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
-                onClickOutside={() => setIsPopoverOpen(false)} // handle click events outside of the popover/target here!
-                content={() => ( // you can also provide a render function that injects some useful stuff!
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+
+                }}
+
+            >
+                <Box sx={{
+                    p: '3rem'
+                }}>
                     <Multiselect
                         displayValue="key"
                         // onKeyPressFn={function noRefCheck() { }}
@@ -28,37 +53,30 @@ const SingleSelect = ({ handleClick, sortOptions }) => {
                         style={{
                             searchBox: {
                                 width: '10rem',
-                                background: 'white'
+                                background: 'pink',
+                                fontSize: '0.5rem',
+                                border: 'none'
                             },
                             optionContainer: {
                                 width: '6rem'
 
                             },
                             color: 'white',
+
                         }}
                         singleSelect
                     />
-                )}
-                containerStyle={{
-                    backgroundColor: 'lightgrey',
-                    width: '10rem',
-                    height: '10rem',
-                    borderRadius: '0.5rem',
-                    padding: '1rem',
-                    display: 'flex',
-
-
-                }}
-
-            >
-                <div onClick={() => setIsPopoverOpen(!isPopoverOpen)}>+</div>
+                </Box>
             </Popover>
 
-
-
-
         </>
+
+
+
     )
 }
 
 export default SingleSelect
+
+
+

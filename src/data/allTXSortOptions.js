@@ -16,7 +16,7 @@ const allTxSortOptions = {
         { key: allTxMethodReplaceTable.claim.replace },
         { key: allTxMethodReplaceTable.otherTransactions.replace }
     ],
-    time: [{ key: 'Earliest' }, { key: 'Latest' }, { key: 'Default' }],
+    time: [{ key: 'Earliest' }, { key: 'Latest' }],
     value: [{ key: 'Low-High' }, { key: 'High-Low' }, { key: 'Default' }],
     status: [{ key: 'Success' }, { key: 'Fail' }, { key: 'Default' }],
 }

@@ -1,5 +1,6 @@
 import nftSortOptions from "../../data/nftSortOptions"
 import TxDataTable from "../tools/TxDataTable"
+import { Box, Container, Grid } from '@mui/material';
 
 
 
@@ -18,7 +19,7 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
 
 
     return (
-        <div>
+        <Box>
             <TxDataTable
                 dataTx={nftTx}
                 updateState={updateNftTx}
@@ -32,7 +33,7 @@ const NftDataList = ({ nftTx, updateNftTx, defaultTx, address }) => {
                 sortMethod={nftSortOptions.method}
                 idOrValue={'tokenID'}
             />
-        </div>
+        </Box>
     )
 }
 

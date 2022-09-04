@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import NavBarBal from "../components/tools/NavBarBal"
 import NftBalance from "../components/nftBal/NftBalance"
 import NftBalHeader from "../components/headers/NftBalHeader"
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Box } from '@mui/material';
 import NavBar from "../components/NavBar/NavBar"
 
 const NftBalPage = () => {
@@ -44,20 +44,18 @@ const NftBalPage = () => {
 
 
     return (
-        <>
-            <NavBar />
-            <Container>
-                <Grid container spacing={0}>
 
-                    <NftBalHeader defaultBal={defaultBal} />
-                </Grid>
-                <NavBarBal />
-                <NftBalance
-                    walletNftBalance={walletNftBalance}
-                    defaultBal={defaultBal}
-                    setWalletNftBalance={setWalletNftBalance} />
-            </Container>
-        </>
+        <Container>
+            <NavBar />
+            <NftBalHeader defaultBal={defaultBal} />
+            <NavBarBal />
+            <NftBalance
+                walletNftBalance={walletNftBalance}
+                defaultBal={defaultBal}
+                setWalletNftBalance={setWalletNftBalance} />
+            <Box sx={{ m: '10rem' }}> </Box>
+        </Container>
+
     )
 }
 

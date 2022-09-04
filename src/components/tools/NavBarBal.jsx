@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { Grid, Typography, Button, Divider } from '@mui/material';
+import { Box, Grid, Typography, Button, Divider } from '@mui/material';
 const NavBarBal = () => {
 
     const { address } = useParams()
@@ -13,21 +13,24 @@ const NavBarBal = () => {
     return (
         <>
 
-            <Grid container spacing={0}
+            <Box
                 sx={{
                     mt: 5,
-                    mb: 5
 
-                }}
-            >
-                <Grid item xs={1}><Button variant="contained" onClick={handleClick}>Crypto</Button></Grid>
-                <Grid item xs={1}><Button variant="contained" onClick={handleClick}>NFT</Button></Grid>
-            </Grid>
+                    display: 'inline-flex',
+                    gap: '3rem'
+
+
+                }}>
+                <Button variant="contained" onClick={handleClick}>Crypto</Button>
+                <Button variant="contained" onClick={handleClick}>NFT</Button>
+            </Box>
             <Divider sx={{
-                mt: 5,
+                mt: 3,
                 mb: 5
             }}>
             </Divider>
+
         </>
 
     )

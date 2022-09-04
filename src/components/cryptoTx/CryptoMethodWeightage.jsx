@@ -14,16 +14,17 @@ const CryptoMethodWeightage = ({ defaultTx, address }) => {
 
     return (
         <Grid
-            item xs={4}
+            item xs={12}
             sx={{
                 backgroundColor: '#F4F5F7',
-                p: '2.5rem',
-                borderRadius: '0.75rem',
-                mb: 3
+                p: '2rem',
+                pl: '3rem',
+                pr: '3rem',
+                borderRadius: '0.75rem'
 
 
             }}>
-            <Typography variant="h5" >Method By Transactions Count</Typography>
+            <Typography variant="h5" sx={{ mb: 3 }} >Method By Transactions Count</Typography>
             <TxMethodWeightage
                 defaultTx={defaultTx}
                 assignTxMethod={assignTxMethod} />

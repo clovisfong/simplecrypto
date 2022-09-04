@@ -60,22 +60,23 @@ const NftHoldingPeriod = ({ defaultTx, address }) => {
 
     return (
         <Grid
-            item xs={5}
+            item xs={12}
             sx={{
                 backgroundColor: '#F4F5F7',
-                p: '2.5rem',
+                p: '2rem',
+                pl: '3rem',
+                pr: '3rem',
                 borderRadius: '0.75rem'
-
-
             }}>
+
             <Typography variant="h5" sx={{ mb: 3 }}>Top 5 NFT Holding Period</Typography>
 
 
             <Box>
                 <Grid container spacing={0}>
-                    <Grid item xs={5}><Typography variant="h6" sx={{ mt: 2 }}>Collection Name</Typography></Grid>
-                    <Grid item xs={5}> <Typography variant="h6" sx={{ mt: 2 }}>Duration</Typography></Grid>
-                    <Grid item xs={2}> <Typography variant="h6" sx={{ mt: 2 }}>Status</Typography></Grid>
+                    <Grid item xs={5}><Typography variant="h6" >Collection Name</Typography></Grid>
+                    <Grid item xs={5}> <Typography variant="h6" >Duration</Typography></Grid>
+                    <Grid item xs={2}> <Typography variant="h6" >Status</Typography></Grid>
                 </Grid >
                 <Grid container spacing={0}>
 
