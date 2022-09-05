@@ -2,7 +2,7 @@ import NormalTxTotalFlow from "./NormalTxTotalFlow"
 import NormalTxTotalValueByAdd from "./NormalTxTotalValueByAdd"
 import NormalTxFlowByAdd from "./NormalTxFlowByAdd"
 import { Box, Grid } from '@mui/material';
-const NormalTxOverview = ({ defaultTx, address }) => {
+const NormTxOverview = ({ defaultTx, address }) => {
 
     return (
         <Grid container
@@ -32,4 +32,4 @@ const NormalTxOverview = ({ defaultTx, address }) => {
     )
 }
 
-export default NormalTxOverview
+export default NormTxOverview

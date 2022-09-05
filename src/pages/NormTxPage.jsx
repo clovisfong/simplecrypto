@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom"
 import NavBar from "../components/NavBar/NavBar"
 import TxHeader from "../components/headers/TxHeader"
 import NavBarTx from "../components/tools/NavBarTx"
-// import NormalTxOverview from "../components/normalTx/NormalTxOverview"
+import NormTxOverview from "../components/normalTx/NormTxOverview"
+
 import NormalTxDataList from "../components/normalTx/NormalTxDataList"
 import { Box, Container, Grid } from '@mui/material';
 
 
-const NormalTxPage = () => {
+const NormTxPage = () => {
 
     const [walletTx, setWalletTx] = useState([])
     const [defaultTx, setDefaultTx] = useState([])
@@ -39,7 +40,7 @@ const NormalTxPage = () => {
             <NavBar />
             <TxHeader />
             <NavBarTx />
-            {/* <NormalTxOverview defaultTx={defaultTx} address={address} /> */}
+            <NormTxOverview defaultTx={defaultTx} address={address} />
             <NormalTxDataList walletTx={walletTx} updateWalletTx={updateWalletTx} defaultTx={defaultTx} address={address} />
             <Box sx={{ m: '10rem' }}> </Box>
         </Container>
@@ -47,4 +48,4 @@ const NormalTxPage = () => {
     )
 }
 
-export default NormalTxPage
+export default NormTxPage
