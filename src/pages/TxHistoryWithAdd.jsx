@@ -226,7 +226,7 @@ const TxHistoryWithAdd = () => {
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    <a href={`https://etherscan.io/tx/${tx.hash}`}>{tx.hash.substring(2, 8)}...</a>
+                                    <Link href={`https://etherscan.io/tx/${tx.hash}`} underline="none">{tx.hash.substring(2, 8)}...</Link>
                                 </TableCell>
                                 <TableCell align="center">{groupMethod(tx.functionName)}</TableCell>
                                 <TableCell align="center">{convertTimeStamp(tx.timeStamp)}</TableCell>
