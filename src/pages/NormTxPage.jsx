@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom"
 import NavBar from "../components/NavBar/NavBar"
 import TxHeader from "../components/headers/TxHeader"
 import NavBarTx from "../components/tools/NavBarTx"
-import NormTxOverview from "../components/normalTx/NormTxOverview"
+import NormTxOverview from "../components/NormalTx/NormTxOverview"
 
-import NormalTxDataList from "../components/normalTx/NormalTxDataList"
+import NormalTxDataList from "../components/NormalTx/NormalTxDataList"
 import { Box, Container, Grid } from '@mui/material';
 
 
@@ -23,8 +23,8 @@ const NormTxPage = () => {
             .then((response) => response.json())
             .then((data) => {
                 return (
-                    setWalletTx(data?.result),
-                    setDefaultTx(data?.result)
+                    setWalletTx(data.result),
+                    setDefaultTx(data.result)
                 )
             })
     }, [])
