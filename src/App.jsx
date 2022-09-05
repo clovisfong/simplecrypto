@@ -20,7 +20,6 @@ function App() {
 
   return (
     <BrowserRouter>
-
       <Routes>
         <Route path='/home' element={<HomePage />} />
         <Route index element={<HomePage />} />
@@ -31,10 +30,7 @@ function App() {
         <Route path='/wallet-balance/:address/crypto' element={<CryptoBalPage />} />
         <Route path='/wallet-balance/:address/nft' element={<NftBalPage />} />
         <Route path='/wallet-transactions/:address/transaction-history/:wallet' element={< TxHistoryWithAdd />} />
-
-
       </Routes>
-
     </BrowserRouter>
   )
 }

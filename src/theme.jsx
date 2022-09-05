@@ -38,10 +38,7 @@ const theme = createTheme({
                     fontSize: '0.7rem',
                     pt: '0.6rem',
                     pb: '0.6rem',
-
-
                 }
-
             },
             variants: [
                 {
