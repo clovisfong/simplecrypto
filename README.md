@@ -11,9 +11,9 @@ Simple Crypto is an app that allow users to search up wallet address to get an o
  
 Interpreting blockchain data can be intimidating especially when users are new to Web3.
 
-This app serves to meet three objectives: 
-- Make data simple to understand
-- Provide informative wallet insights 
+This app aims to meet three objectives: 
+- Provide insightful wallet findings 
+- Make data simple to understand and navigate
 - Provide easy access points to external sources of information
 
 <br>
@@ -26,26 +26,26 @@ This app serves to meet three objectives:
 
 There are 4 types of pages in total:
 
-Home page 
-- Search bar requires to input wallet address (eg. 0x...) to be directed to Wallet Transaction page
+**Home page** 
+- Search bar requires wallet address (eg. 0x...) to be directed to Wallet Transaction page
 
 <br> 
 
-Wallet Transaction page 
+**Wallet Transaction page** 
 - An overview of transaction insights and data (Transactions, NFT and Crypto) 
 - Sort and search options to filter data and page tracker to navigate
-- Embedded links on transaction hash and wallet addresses that points to external sources and Transaction History page respectively
+- Embedded links on transaction hash and wallet addresses that point to external sources and Transaction History page respectively
 
 <br>
 
-Wallet Balance page 
+**Wallet Balance page** 
 - An overview of wallet holdings (Crypto and NFT)
-- Sort options to filter data and page tracker to navigate
-- Access points on NFTs that link to images on Opensea marketplace 
+- Sort and search options to filter data and page tracker to navigate
+- Access points on NFTs that link to respective images on Opensea marketplace 
 
 <br>
 
-Transaction History page 
+**Transaction History page** 
 - Breakdown of transaction flows with a specific address
 
 <br> 
@@ -57,7 +57,7 @@ https://simplecrypto.vercel.app/
 
 ## Brief
 
-This is a demo crypto wallet tracker created for project purposes. It is built using React (Javascript Library) and styled with Material UI library within a one week time frame.
+This is a demo crypto wallet tracker created for project purposes. It is built using React (Javascript Library) and styled with Material UI library within one week project timeline.
 
 <br>
 
@@ -102,9 +102,10 @@ Data are retrieved from two key sources of APIs:
 
 <br>
 
-Application of **array methods** (map, filter, some, reduce, forEach, sort, slice) to manipulate data and provide value to end users. One such example is multiselect checkbox filtering. 
+1. Application of **array methods** (map, filter, some, reduce, forEach, sort, slice) to manipulate data and provide value to end users. 
+<br>
 
-
+One such example is multiselect checkbox filtering. 
 <pre>
 const handleSelectMethod = (event) => {
         setSearchParams({ page: 1 })
@@ -139,7 +140,7 @@ const handleSelectMethod = (event) => {
 
 <br><br>
 
-Create components, **pass props and lift state** as well as the application of **hooks** (useState, useEffect, useParams, useSearchParams, useNavigate). 
+2. Create components, **pass props** and **lift state** as well as the application of **hooks** (useState, useEffect, useParams, useSearchParams, useNavigate). 
 
 <br>
 
@@ -184,7 +185,8 @@ useEffect(() => {
     }, [])
 </pre>
   
-Experimenting Material UI library for CSS using **theme provider and grid layout** to style data. 
+<br><br>
+3. Experimenting Material UI library for CSS using **theme provider and grid layout** to style data. 
 
 <pre>
 const theme = createTheme({
@@ -238,9 +240,7 @@ const theme = createTheme({
         ...
 </pre>
 
-<pre>
-     
-</pre>
+
 
 <br>
 
