@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
-import NormTxPage from './pages/NormTxPage'
+import NormalTxPage from './pages/NormalTxPage'
 import NftTxPage from './pages/NftTxPage'
 import CryptoTxPage from './pages/CryptoTxPage'
 import BalHeader from './components/headers/BalHeader'
@@ -24,7 +24,7 @@ function App() {
       <Routes>
         <Route path='/home' element={<HomePage />} />
         <Route index element={<HomePage />} />
-        <Route path='/wallet-transactions/:address/transactions' element={<NormTxPage />} />
+        <Route path='/wallet-transactions/:address/transactions' element={<NormalTxPage />} />
         <Route path='/wallet-transactions/:address/nft' element={<NftTxPage />} />
         <Route path='/wallet-transactions/:address/crypto' element={<CryptoTxPage />} />
         <Route path='/wallet-balance/:address/' element={<BalHeader />} />
