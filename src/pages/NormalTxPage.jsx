@@ -7,6 +7,7 @@ import NormalTxDataList from "../components/normalTx/NormalTxDataList"
 import NavBar from "../components/NavBar/NavBar"
 import { Box, Container, Grid } from '@mui/material';
 
+
 const NormalTxPage = () => {
 
     const [walletTx, setWalletTx] = useState([])

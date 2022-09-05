@@ -44,7 +44,6 @@ const BalHeader = ({ walletBalance }) => {
                     p: '2rem',
                     pt: '1rem',
                     borderRadius: '0.75rem',
-                    display: 'flex',
                     justifyContent: 'flex-end',
                     display: { xs: 'none', sm: 'grid' }
                 }}>
