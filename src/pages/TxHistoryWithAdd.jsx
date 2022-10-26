@@ -174,9 +174,9 @@ const TxHistoryWithAdd = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {inflowTx.map((tx) =>
+                        {inflowTx.map((tx, i) =>
                             <TableRow
-                                key={tx.hash}
+                                key={tx.hash + i}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
@@ -220,9 +220,9 @@ const TxHistoryWithAdd = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {outflowTx.map((tx) =>
+                        {outflowTx.map((tx, i) =>
                             <TableRow
-                                key={tx.hash}
+                                key={tx.hash + i}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">

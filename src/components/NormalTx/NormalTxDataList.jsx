@@ -227,9 +227,9 @@ const NormalTxDataList = ({ walletTx, updateWalletTx, defaultTx, address }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {walletTx.slice((pageNum * 20) - 20, pageNum * 20).map(trans =>
+                        {walletTx.slice((pageNum * 20) - 20, pageNum * 20).map((trans, i) =>
                             <TableRow
-                                key={trans.hash}
+                                key={trans.hash + i}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">

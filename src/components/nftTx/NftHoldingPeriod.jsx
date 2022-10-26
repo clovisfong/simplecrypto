@@ -41,12 +41,12 @@ const NftHoldingPeriod = ({ defaultTx, address }) => {
 
 
     const topFiveHoldingPeriod =
-        sortHighToLow.slice(0, 5).map((token) => {
+        sortHighToLow.slice(0, 5).map((token, i) => {
             return (
                 // <li key={token.name + token.id}>
                 //     {token.name} - {displayTimeDifference(token.holding_period)} - {token.status}</li>
 
-                <Grid container spacing={0} key={token.name + token.id} >
+                <Grid container spacing={0} sx={{ display: 'flex', mb: { xs: '1rem', sm: '0rem' } }} key={token.name + token.id + i} >
                     <Grid item xs={5}>{token.name} </Grid>
                     <Grid item xs={5}>{displayTimeDifference(token.holding_period)}</Grid>
                     <Grid item xs={2}>{token.status}</Grid>
@@ -64,8 +64,8 @@ const NftHoldingPeriod = ({ defaultTx, address }) => {
             sx={{
                 backgroundColor: '#F4F5F7',
                 p: '2rem',
-                pl: '3rem',
-                pr: '3rem',
+                pl: { xs: '2rem', sm: '3rem' },
+                pr: { xs: '2rem', sm: '3rem' },
                 borderRadius: '0.75rem'
             }}>
 
@@ -74,14 +74,12 @@ const NftHoldingPeriod = ({ defaultTx, address }) => {
 
             <Box>
                 <Grid container spacing={0}>
-                    <Grid item xs={5}><Typography variant="h6" >Collection Name</Typography></Grid>
+                    <Grid item xs={5}><Typography variant="h6" >Collection</Typography></Grid>
                     <Grid item xs={5}> <Typography variant="h6" >Duration</Typography></Grid>
                     <Grid item xs={2}> <Typography variant="h6" >Status</Typography></Grid>
                 </Grid >
-                <Grid container spacing={0}>
+                {topFiveHoldingPeriod}
 
-                    {topFiveHoldingPeriod}
-                </Grid>
             </Box>
 
         </Grid>

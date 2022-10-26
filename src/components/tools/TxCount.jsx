@@ -14,7 +14,7 @@ const TxCount = ({ defaultTx }) => {
     const displayTopFiveNft =
         topFiveTransactedNft.map((token, index) => {
             return (
-                <Grid container spacing={0} key={index} >
+                <Grid container key={index} >
                     <Grid item xs={7} md={9}>{token.name} </Grid>
                     <Grid item xs={5} md={3}>{token.count}</Grid>
                 </Grid>
@@ -27,16 +27,16 @@ const TxCount = ({ defaultTx }) => {
 
 
     return (
-        <Box>
-            <Grid container spacing={0}>
+        <>
+            <Grid container >
                 <Grid item xs={7} md={9}><Typography variant="h6" >Collection Name</Typography></Grid>
                 <Grid item xs={5} md={3}> <Typography variant="h6">Count</Typography></Grid>
             </Grid >
-            <Grid container spacing={0}>
 
-                {displayTopFiveNft}
-            </Grid>
-        </Box>
+
+            {displayTopFiveNft}
+
+        </>
 
     )
 }

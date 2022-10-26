@@ -24,7 +24,7 @@ const SearchBar = () => {
         <>
             <TextField
                 fullWidth id="search-wallet-add"
-                label="Search wallet address "
+                placeholder='Search wallet address'
                 onChange={handleChange}
 
             />

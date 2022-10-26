@@ -26,7 +26,7 @@ const NavBarTx = () => {
                     mt: 5,
 
                     display: 'inline-flex',
-                    gap: '3rem'
+                    gap: { xs: '2rem', sm: '3rem' }
 
 
                 }}>

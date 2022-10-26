@@ -70,11 +70,11 @@ const TxDataTable = ({ dataTx, updateState, defaultTx, address, assignTxMethod, 
     }
 
 
-    const tableData = dataTx?.slice((pageNum * 20) - 20, pageNum * 20)?.map(tx => {
+    const tableData = dataTx?.slice((pageNum * 20) - 20, pageNum * 20)?.map((tx, i) => {
         return (
 
             <TableRow
-                key={tx.hash + tx.tokenID + tx.tokenName}
+                key={tx.hash + tx.tokenID + tx.tokenName + i}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                 <TableCell component="th" scope="row">

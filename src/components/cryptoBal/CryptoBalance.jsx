@@ -165,9 +165,9 @@ const CryptoBalance = ({ walletBalance, defaultBal, updateWalletBalance }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {quantifiableTokens.slice((pageNum * 20) - 20, pageNum * 20).map((token) =>
+                        {quantifiableTokens.slice((pageNum * 20) - 20, pageNum * 20).map((token, i) =>
                             <TableRow
-                                key={token.contract_name + token.contract_address}
+                                key={token.contract_name + token.contract_address + i}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">

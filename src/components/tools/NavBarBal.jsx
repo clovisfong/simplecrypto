@@ -23,7 +23,7 @@ const NavBarBal = () => {
 
                 }}>
                 <Button variant="contained" onClick={handleClick}>Crypto</Button>
-                <Button variant="contained" onClick={handleClick}>NFT</Button>
+                {/* <Button variant="contained" onClick={handleClick}>NFT</Button> */}
             </Box>
             <Divider sx={{
                 mt: 3,

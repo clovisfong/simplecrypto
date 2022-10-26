@@ -15,7 +15,7 @@ const HomePage = () => {
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'center',
-                mt: '14rem',
+                mt: '10rem',
                 mb: '1rem'
             }}>
                 <img

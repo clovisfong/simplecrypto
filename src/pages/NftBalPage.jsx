@@ -19,6 +19,7 @@ const NftBalPage = () => {
         fetch(nftBalUrl)
             .then((response) => response.json())
             .then((data) => {
+                console.log(data)
                 const nftData = data.data.items.filter((token) => token.type === 'nft')
                 const conciseNftInfo = []
                 nftData.forEach((token) => (

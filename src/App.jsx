@@ -28,7 +28,7 @@ function App() {
         <Route path='/wallet-transactions/:address/crypto' element={<CryptoTxPage />} />
         <Route path='/wallet-balance/:address/' element={<BalHeader />} />
         <Route path='/wallet-balance/:address/crypto' element={<CryptoBalPage />} />
-        <Route path='/wallet-balance/:address/nft' element={<NftBalPage />} />
+        {/* <Route path='/wallet-balance/:address/nft' element={<NftBalPage />} /> */}
         <Route path='/wallet-transactions/:address/transaction-history/:wallet' element={< TxHistoryWithAdd />} />
       </Routes>
     </BrowserRouter>

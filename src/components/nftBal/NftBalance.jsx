@@ -79,9 +79,9 @@ const NftBalance = ({ walletNftBalance, defaultBal, setWalletNftBalance }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {walletNftBalance.slice((pageNum * 20) - 20, pageNum * 20).map((token) =>
+                        {walletNftBalance.slice((pageNum * 20) - 20, pageNum * 20).map((token, i) =>
                             <TableRow
-                                key={token.name + token.data.token_id}
+                                key={token.name + token.data.token_id + i}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">

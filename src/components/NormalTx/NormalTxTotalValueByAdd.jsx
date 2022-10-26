@@ -46,7 +46,7 @@ const NormalTxTotalValueByAdd = ({ defaultTx, address }) => {
 
         <Grid sx={{
             backgroundColor: '#F4F5F7',
-            p: '2.5rem',
+            p: { xs: '2rem', sm: '2.5rem' },
             borderRadius: '0.75rem'
 
         }}
