@@ -38,7 +38,7 @@ const HomePage = () => {
                 <SearchBar />
             </Container>
             <Box sx={{ pr: '3rem', pl: '3rem', pt: '5rem', pb: '5rem', mt: '5rem', background: '#F4F5F7', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="h5" sx={{ mb: 4, mt: 3, textAlign: 'center', width: { xs: '100%', sm: '80%', md: '50%' } }}>Simple Crypto is a crypto wallet tracker that provides an insightful overview of wallet transactions and asset holdings in the Ethereum blockchain.</Typography>
+                <Typography variant="h5" sx={{ mb: 4, mt: 3, textAlign: 'center', width: { xs: '100%', sm: '80%', md: '50%' } }}>Simple Crypto is a crypto wallet tracker that provides insightful overview of wallet transactions and asset holdings in the Ethereum blockchain.</Typography>
                 <Button variant="contained"
                     onClick={handleClick}>Generate Test Address</Button>
                 <Typography variant="body2" sx={{ mt: '2rem', cursor: 'pointer', ":hover": { textDecoration: 'underline' } }} onClick={CopyOnClick(testAdd)} >{testAdd}</Typography>
